@@ -43,8 +43,9 @@ export default function SignBridgeDemo({ lang }: { lang: Lang }) {
       const [, res] = await Promise.all([client.load(), withTimeout(fetch('/signbridge/samples.json'), 15000)]);
       if (!res.ok) throw new Error(`samples HTTP ${res.status}`);
       const raw = (await res.json()) as Sample[];
-      const results: TimedPrediction[] = [];
-      for (const s of raw) results.push(await client.predict(Float32Array.from(s.px, (v) => v / 255)));
+      const results = await Promise.all(
+        raw.map((s) => client.predict(Float32Array.from(s.px, (v) => v / 255))),
+      );
       setSamples(raw.map((s) => ({ ...s, src: sampleToDataUrl(s.px) })));
       setPreds(results);
       setStatus('ready');
