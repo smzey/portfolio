@@ -2,7 +2,7 @@
  * Passbook world (see .impeccable/surfaces/ direction contract).
  * Navy cover around mint guilloche security paper, carbon-blue ink,
  * one vermilion stamp red, a guilloche green for live signals.
- * Light = paper by day; dark = the same book under a desk lamp at night:
+ * Light (default for everyone) = paper by day; dark (only when the visitor picks it) = the same book under a desk lamp:
  * the cover goes deep navy and the pages dim, but they stay mint paper.
  */
 :root {
@@ -40,30 +40,6 @@
   --emerald-soft: rgba(47, 107, 87, 0.14);
   --miss: var(--stamp);
   --focus-ring: var(--focus);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) {
-    color-scheme: light;
-    --cover: #0a1722;
-    --cover-deep: #06111a;
-    --cover-ink: #e4edf3;
-    --cover-dim: #a9c0cf;
-    --paper: #bccdc0;
-    --paper-2: #b1c3b5;
-    --paper-3: #a6baab;
-    --ink: #16213a;
-    --ink-2: #364659;
-    --rule: #8aa592;
-    --rule-strong: #5d7766;
-    --stamp: #8f221d;
-    --stamp-ink: #ffffff;
-    --live: #d6c9b6;
-    --guilloche: #245545;
-    --guilloche-img: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='24' viewBox='0 0 160 24'%3E%3Cpolyline points='0,12.00 4,13.55 8,14.94 12,16.05 16,16.76 20,17.00 24,16.76 28,16.05 32,14.94 36,13.55 40,12.00 44,10.45 48,9.06 52,7.95 56,7.24 60,7.00 64,7.24 68,7.95 72,9.06 76,10.45 80,12.00 84,13.55 88,14.94 92,16.05 96,16.76 100,17.00 104,16.76 108,16.05 112,14.94 116,13.55 120,12.00 124,10.45 128,9.06 132,7.95 136,7.24 140,7.00 144,7.24 148,7.95 152,9.06 156,10.45 160,12.00' fill='none' stroke='%231b2740' stroke-opacity='0.12' stroke-width='0.7'/%3E%3Cpolyline points='0,16.33 4,15.35 8,14.03 12,12.52 16,10.96 20,9.50 24,8.28 28,7.43 32,7.03 36,7.11 40,7.67 44,8.65 48,9.97 52,11.48 56,13.04 60,14.50 64,15.72 68,16.57 72,16.97 76,16.89 80,16.33 84,15.35 88,14.03 92,12.52 96,10.96 100,9.50 104,8.28 108,7.43 112,7.03 116,7.11 120,7.67 124,8.65 128,9.97 132,11.48 136,13.04 140,14.50 144,15.72 148,16.57 152,16.97 156,16.89 160,16.33' fill='none' stroke='%231b2740' stroke-opacity='0.12' stroke-width='0.7'/%3E%3Cpolyline points='0,7.67 4,7.11 8,7.03 12,7.43 16,8.28 20,9.50 24,10.96 28,12.52 32,14.03 36,15.35 40,16.33 44,16.89 48,16.97 52,16.57 56,15.72 60,14.50 64,13.04 68,11.48 72,9.97 76,8.65 80,7.67 84,7.11 88,7.03 92,7.43 96,8.28 100,9.50 104,10.96 108,12.52 112,14.03 116,15.35 120,16.33 124,16.89 128,16.97 132,16.57 136,15.72 140,14.50 144,13.04 148,11.48 152,9.97 156,8.65 160,7.67' fill='none' stroke='%231b2740' stroke-opacity='0.12' stroke-width='0.7'/%3E%3C/svg%3E");
-    --focus: #8f221d;
-    --emerald-soft: rgba(36, 85, 69, 0.14);
-  }
 }
 
 :root[data-theme='dark'] {

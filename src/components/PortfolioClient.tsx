@@ -43,7 +43,7 @@ export default function PortfolioClient() {
     } catch {
       /* storage blocked */
     }
-    setTheme(resolveTheme(storedTheme, window.matchMedia('(prefers-color-scheme: dark)').matches));
+    setTheme(resolveTheme(storedTheme));
     setLang(resolveLang(storedLang));
     const params = new URLSearchParams(window.location.search);
     setLens(normalizeLens(params.get('lens')));
