@@ -64,6 +64,28 @@ export function mapCameraError(err: unknown): CamState {
   return name === 'NotAllowedError' || name === 'SecurityError' ? 'denied' : 'unavailable';
 }
 
+export interface StreamLike {
+  getTracks(): { stop(): void }[];
+}
+
+export function stopStream(stream: StreamLike | null | undefined): void {
+  stream?.getTracks().forEach((t) => t.stop());
+}
+
+/** Attaches `stream` to `video` unless cancelled or unmounted; stops all tracks and returns false otherwise. */
+export function attachStream<V extends { srcObject: unknown }>(
+  video: V | null,
+  stream: StreamLike,
+  cancelled: boolean,
+): video is V {
+  if (cancelled || !video) {
+    stopStream(stream);
+    return false;
+  }
+  (video as { srcObject: StreamLike | null }).srcObject = stream;
+  return true;
+}
+
 let trackerPromise: Promise<HandsCtor> | null = null;
 
 /** Injects the pinned MediaPipe Hands script once; rejects with 'tracker-failed' on error or timeout. */

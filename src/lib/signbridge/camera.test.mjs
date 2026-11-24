@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { cropBox, toModelInput, mapCameraError } from './camera.ts';
+import { cropBox, toModelInput, mapCameraError, attachStream, stopStream } from './camera.ts';
 
 const close = (a, b) => Math.abs(a - b) < 1e-9;
 
@@ -37,4 +37,33 @@ test('mapCameraError maps permission errors to denied and others to unavailable'
   assert.equal(mapCameraError({ name: 'NotFoundError' }), 'unavailable');
   assert.equal(mapCameraError(new Error('boom')), 'unavailable');
   assert.equal(mapCameraError(undefined), 'unavailable');
+});
+
+test('attachStream stops all tracks when video element is missing or cancelled', () => {
+  const mkStream = () => {
+    const stopped = [false, false];
+    return {
+      stopped,
+      getTracks: () => stopped.map((_, i) => ({ stop: () => { stopped[i] = true; } })),
+    };
+  };
+
+  const s1 = mkStream();
+  assert.equal(attachStream(null, s1, false), false);
+  assert.deepEqual(s1.stopped, [true, true]);
+
+  const video = { srcObject: null };
+  const s2 = mkStream();
+  assert.equal(attachStream(video, s2, true), false);
+  assert.equal(video.srcObject, null);
+  assert.deepEqual(s2.stopped, [true, true]);
+
+  const s3 = mkStream();
+  assert.equal(attachStream(video, s3, false), true);
+  assert.equal(video.srcObject, s3);
+  assert.deepEqual(s3.stopped, [false, false]);
+
+  stopStream(s3);
+  assert.deepEqual(s3.stopped, [true, true]);
+  assert.doesNotThrow(() => stopStream(null));
 });

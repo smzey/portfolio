@@ -4,10 +4,12 @@ import { useEffect, useRef, useState } from 'react';
 import type { Lang } from '@/data/portfolio';
 import { withTimeout, type SignBridgeClient, type TimedPrediction } from '@/lib/signbridge/client';
 import {
+  attachStream,
   cropBox,
   handsLocateFile,
   loadHandTracker,
   mapCameraError,
+  stopStream,
   toModelInput,
   type CamState,
   type HandsInstance,
@@ -62,10 +64,8 @@ export default function SignBridgeWebcam({
         if (!cancelled) setState(mapCameraError(err));
         return;
       }
-      if (cancelled) return stream.getTracks().forEach((t) => t.stop());
       const video = videoRef.current;
-      if (!video) return;
-      video.srcObject = stream;
+      if (!attachStream(video, stream, cancelled)) return;
       await video.play().catch(() => {});
 
       try {
@@ -102,7 +102,7 @@ export default function SignBridgeWebcam({
         await withTimeout(hands.initialize(), TRACKER_INIT_TIMEOUT_MS);
       } catch {
         // No tracker → no use for the camera: release it now so the camera light turns off.
-        stream.getTracks().forEach((t) => t.stop());
+        stopStream(stream);
         if (!cancelled) setState('tracker-failed');
         return;
       }
@@ -121,7 +121,7 @@ export default function SignBridgeWebcam({
           } catch {
             // A few bad frames are normal; a run of them means the tracker is broken.
             if (++failures >= MAX_SEND_FAILURES) {
-              stream?.getTracks().forEach((t) => t.stop());
+              stopStream(stream);
               if (!cancelled) setState('tracker-failed');
               return;
             }
@@ -136,7 +136,7 @@ export default function SignBridgeWebcam({
     return () => {
       cancelled = true;
       cancelAnimationFrame(raf);
-      stream?.getTracks().forEach((t) => t.stop());
+      stopStream(stream);
       void hands?.close().catch(() => {});
     };
   }, [client]);
