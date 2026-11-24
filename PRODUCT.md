@@ -18,10 +18,11 @@ The personal engineering portfolio of **Phanu Sawet (ภาณุ สาเว�
 
 ## Positioning
 
-**Privacy-first edge AI: he builds AI that runs on the device and never leaks data.** This is the one claim the site is built around. The proof is specific to him:
+**Privacy-first edge AI: he builds AI that runs on the device and never leaks data.** This is the one claim the site is built around. The on-device proof is specific to him:
 - **Jaidee:** a local LLM (Ollama) for conversation, with clinical scoring (PHQ-9 / GAD-7) and crisis detection kept in a deterministic rule engine. Nothing leaves the machine.
 - **SignBridge:** an ASL fingerspelling CNN running in the visitor's browser (int8, 416 KB, Web Worker). It is live on the site and makes zero server calls.
-- **Anya:** a Thai medicine-label reader for blind users.
+
+Supporting proof, not on-device: **Anya** (Thai medicine-label reader for blind users) and **Cockpit** use cloud APIs (Gemini Vision / Gemini + Whisper). Never present them as on-device; the ledger marks their cloud use.
 
 Supporting traits: honest, tested engineering (358 automated tests on KhaiDee v2; refusing fabricated accuracy claims) and teaching (Head TA for AIoT across cohorts). These support the main claim; they are not separate claims.
 
