@@ -51,3 +51,14 @@ test('every ledger line carries its first-commit month (YYYY-MM)', async () => {
   const { PROJECTS } = await import('./portfolio.ts');
   for (const p of PROJECTS) assert.match(p.ledger.opened ?? '', /^20\d\d-(0[1-9]|1[0-2])$/, p.id);
 });
+
+test('AIoT TA role ended in Oct 2026 (not "present") on the site and the web CV', async () => {
+  const { EXPERIENCES, PROFILE } = await import('./portfolio.ts');
+  const { readFileSync } = await import('node:fs');
+  const aiot = EXPERIENCES.find((e) => /AIoT/.test(e.role.en));
+  assert.equal(aiot.period, 'SEP 2026 – OCT 2026');
+  for (const h of aiot.highlights) assert.doesNotMatch(h.en + h.th, /Present|ปัจจุบัน/);
+  assert.match(PROFILE.intro.en, /former Head Teaching Assistant/);
+  const cv = readFileSync(new URL('../app/cv/page.tsx', import.meta.url), 'utf8');
+  assert.doesNotMatch(cv, /Sep 2026 – Present|Oct 2026 – Present/);
+});

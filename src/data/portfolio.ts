@@ -84,8 +84,8 @@ export const PROFILE = {
     th: 'AI ที่ทำงานบนเครื่องของคุณ และข้อมูลไม่เคยออกจากเครื่อง',
   },
   intro: {
-    en: 'Chiang Mai University (CAMT) student and Head Teaching Assistant for AIoT. I build on-device AI and full-stack systems, and I publish the misses with the scores.',
-    th: 'นักศึกษา CAMT มหาวิทยาลัยเชียงใหม่ และ Head TA วิชา AIoT สร้าง On-Device AI และระบบ Full-Stack พร้อมแสดงผลที่ผิดควบคู่กับคะแนนเสมอ',
+    en: 'Chiang Mai University (CAMT) student and former Head Teaching Assistant for AIoT. I build on-device AI and full-stack systems, and I publish the misses with the scores.',
+    th: 'นักศึกษา CAMT มหาวิทยาลัยเชียงใหม่ และอดีต Head TA วิชา AIoT สร้าง On-Device AI และระบบ Full-Stack พร้อมแสดงผลที่ผิดควบคู่กับคะแนนเสมอ',
   },
   heroTitle: {
     en: 'Full-Stack & On-Device AI Engineer.',
@@ -416,7 +416,7 @@ export const PROJECTS: ProjectCaseStudy[] = [
 export const EXPERIENCES: ExperienceItem[] = [
   {
     id: 'ta-aiot-lifelong',
-    period: 'SEP 2026 – PRESENT',
+    period: 'SEP 2026 – OCT 2026',
     role: {
       en: 'Head Teaching Assistant (Gen 1) & Teaching Assistant (Gen 2–3) — AIoT Event',
       th: 'หัวหน้าผู้ช่วยสอน (รุ่น 1) และผู้ช่วยสอน (รุ่น 2–3) — โครงการ AIoT',
@@ -425,8 +425,8 @@ export const EXPERIENCES: ExperienceItem[] = [
     location: 'Chiang Mai, Thailand · On-site',
     highlights: [
       {
-        en: 'Served as Head Teaching Assistant for the 1st Generation cohort (Sep 2026) and continued teaching across the 2nd and 3rd Generation AIoT cohorts (Oct 2026 – Present).',
-        th: 'ดำรงตำแหน่งหัวหน้าผู้ช่วยสอน (Head TA) สำหรับโครงการ AIoT รุ่นที่ 1 (ก.ย. 2569) และผู้ช่วยสอนต่อเนื่องในรุ่นที่ 2 และ 3 (ต.ค. 2569 – ปัจจุบัน)',
+        en: 'Served as Head Teaching Assistant for the 1st Generation cohort (Sep 2026) and taught the 2nd and 3rd Generation AIoT cohorts (Oct 2026).',
+        th: 'ดำรงตำแหน่งหัวหน้าผู้ช่วยสอน (Head TA) สำหรับโครงการ AIoT รุ่นที่ 1 (ก.ย. 2569) และผู้ช่วยสอนรุ่นที่ 2 และ 3 (ต.ค. 2569)',
       },
       {
         en: 'Facilitated hands-on AIoT and edge computer-vision workshops (Python, YOLOv8 object detection, environment setup, and real-time lab troubleshooting).',
