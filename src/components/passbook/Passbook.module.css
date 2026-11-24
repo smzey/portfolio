@@ -93,9 +93,8 @@
 /* ---------- Paper ---------- */
 .paper {
   background-color: var(--paper);
-  background-image:
-    repeating-linear-gradient(115deg, transparent 0 7px, var(--guilloche-a) 7px 8px),
-    repeating-linear-gradient(65deg, transparent 0 9px, var(--guilloche-b) 9px 10px);
+  background-image: var(--guilloche-img);
+  background-size: 160px 24px;
   color: var(--ink);
 }
 
@@ -167,8 +166,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: auto;
-  padding-top: 6px;
 }
 
 .btn {
@@ -461,12 +458,14 @@
 
 .hand span {
   position: absolute;
-  right: 3px;
-  bottom: 1px;
+  right: 0;
+  bottom: 0;
   font-size: 12px;
   font-weight: 700;
-  color: #fff;
-  text-shadow: 0 0 3px #000, 0 0 2px #000;
+  line-height: 1;
+  padding: 3px 4px;
+  background: var(--ink);
+  color: var(--paper);
 }
 
 .hand:hover {
@@ -813,11 +812,42 @@
     position: static;
     align-self: flex-start;
   }
+  /* Phone ledger: each entry stacks; the proof and cloud figures share one line under the name. */
+  .ledger thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+  }
+  .ledger tr {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 14px;
+    border-bottom: 1px solid var(--rule);
+    padding-block: 12px;
+  }
+  .ledger td {
+    display: block;
+    border-bottom: 0;
+    padding: 0;
+  }
   .ledger .colNo {
     display: none;
   }
-  .entryName {
-    font-size: 16px;
+  .ledger tr > td:nth-child(2) {
+    grid-column: 1 / -1;
+    margin-bottom: 6px;
+  }
+  .ledger td.num {
+    text-align: left;
+  }
+  .ledger tr > td:last-child {
+    text-align: right;
+    align-self: start;
+  }
+  .printed {
+    padding-inline: 8px;
   }
 }
 

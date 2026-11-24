@@ -14,6 +14,14 @@ export default function HolderPage({ lang, onCopyEmail }: { lang: Lang; onCopyEm
       </div>
       <p className={styles.thesis}>{PROFILE.thesis[lang]}</p>
       <p className={styles.intro}>{PROFILE.intro[lang]}</p>
+      <div className={styles.actions}>
+        <a className={styles.btn} href={PROFILE.cvUrl} download>
+          {UI.downloadCv[lang]}
+        </a>
+        <button type="button" className={`${styles.btn} ${styles.btnGhost}`} onClick={onCopyEmail}>
+          {UI.copyEmail[lang]}
+        </button>
+      </div>
       <dl className={styles.details}>
         <dt>{UI.detailType[lang]}</dt>
         <dd>{PROFILE.heroTitle[lang].replace(/\.$/, '')}</dd>
@@ -24,14 +32,6 @@ export default function HolderPage({ lang, onCopyEmail }: { lang: Lang; onCopyEm
         <dt>{UI.detailGpa[lang]}</dt>
         <dd>{EDUCATION.gpa}</dd>
       </dl>
-      <div className={styles.actions}>
-        <a className={styles.btn} href={PROFILE.cvUrl} download>
-          {UI.downloadCv[lang]}
-        </a>
-        <button type="button" className={`${styles.btn} ${styles.btnGhost}`} onClick={onCopyEmail}>
-          {UI.copyEmail[lang]}
-        </button>
-      </div>
       <div className={styles.quietLinks}>
         <a href={PROFILE.githubUrl} target="_blank" rel="noreferrer">
           GitHub
