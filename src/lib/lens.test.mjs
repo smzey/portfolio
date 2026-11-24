@@ -46,3 +46,16 @@ test('selectProjectsForLens orders projects by priority for each lens without mu
   // Original array untouched
   assert.equal(MOCK_PROJECTS[0].id, 'jaidee');
 });
+
+import { selectLedgerEntries } from './lens.ts';
+
+test('selectLedgerEntries filters by featuredIn and prints newest first', () => {
+  const P = [
+    { id: 'a', featuredIn: ['all', 'ai'], ledger: { opened: '2026-06' } },
+    { id: 'b', featuredIn: ['all', 'systems'], ledger: { opened: '2026-09' } },
+    { id: 'c', featuredIn: ['all', 'ai'], ledger: { opened: '2026-07' } },
+  ];
+  assert.deepEqual(selectLedgerEntries(P, 'all').map((p) => p.id), ['b', 'c', 'a']);
+  assert.deepEqual(selectLedgerEntries(P, 'ai').map((p) => p.id), ['c', 'a']);
+  assert.deepEqual(P.map((p) => p.id), ['a', 'b', 'c'], 'input not mutated');
+});

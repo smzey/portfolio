@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { PROFILE, PROJECTS, type Lang } from '@/data/portfolio';
 import { UI, fill } from '@/data/ui';
 import { parseProjectParam, withProjectParam } from '@/lib/deeplink';
-import { normalizeLens, selectProjectsForLens, type FocusLens } from '@/lib/lens';
+import { normalizeLens, selectLedgerEntries, type FocusLens } from '@/lib/lens';
 import { LANG_KEY, THEME_KEY, resolveLang, resolveTheme, type Theme } from '@/lib/preferences';
 import BackCover from './passbook/BackCover';
 import History from './passbook/History';
@@ -77,7 +77,7 @@ export default function PortfolioClient() {
     }
   }, [activeId]);
 
-  const ordered = useMemo(() => selectProjectsForLens(PROJECTS, lens), [lens]);
+  const ordered = useMemo(() => selectLedgerEntries(PROJECTS, lens), [lens]);
   const active = PROJECTS.find((p) => p.id === activeId) ?? null;
 
   const openProject = useCallback((id: string) => {

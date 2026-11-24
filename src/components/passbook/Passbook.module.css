@@ -364,8 +364,10 @@
   cursor: pointer;
 }
 
-.ledger tr.entry:hover {
-  background: var(--paper-2);
+@media (hover: hover) {
+  .ledger tr.entry:hover {
+    background: var(--paper-2);
+  }
 }
 
 .ledger tr.entry.active {
