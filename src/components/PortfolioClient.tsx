@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type MouseEvent } from 'react';
 import dynamic from 'next/dynamic';
 import {
+  CODE_ON_REQUEST,
   EDUCATION,
   EXPERIENCES,
   LENS_CONFIG,
@@ -607,10 +608,17 @@ export default function PortfolioClient() {
             </div>
 
             <div className={styles.ctaRow} style={{ marginTop: 4 }}>
-              {activeProject.repoUrl && (
+              {activeProject.repoUrl ? (
                 <a href={activeProject.repoUrl} target="_blank" rel="noreferrer" className={styles.primaryBtn}>
-                  <span>View Source on GitHub</span>
+                  <span>{lang === 'en' ? 'View Source on GitHub' : 'ดูซอร์สโค้ดบน GitHub'}</span>
                   <IconArrowUpRight />
+                </a>
+              ) : (
+                <a
+                  href={`mailto:${PROFILE.emailPrimary}?subject=${encodeURIComponent(`Source code request: ${activeProject.name}`)}`}
+                  className={styles.ghostBtn}
+                >
+                  <span>{CODE_ON_REQUEST[lang]}</span>
                 </a>
               )}
               <a href={PROFILE.cvUrl} download className={styles.ghostBtn}>

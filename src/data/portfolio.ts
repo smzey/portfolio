@@ -36,6 +36,11 @@ export interface ExperienceItem {
   tags: string[];
 }
 
+export const CODE_ON_REQUEST: BilingualText = {
+  en: 'Code available on request',
+  th: 'ขอดูซอร์สโค้ดได้ทางอีเมล',
+};
+
 export const PROFILE = {
   nameEN: 'Phanu Sawet',
   nameTH: 'ภาณุ สาเวศ',
@@ -225,6 +230,7 @@ export const PROJECTS: ProjectCaseStudy[] = [
     lensRank: { all: 3, ai: 5, fintech: 1, systems: 3 },
     featuredIn: ['all', 'fintech', 'systems'],
     stack: ['TypeScript', 'Node.js', 'REST API', 'Monorepo', 'Automated Tests'],
+    repoUrl: 'https://github.com/smzey/khaidee-v2',
     summary: {
       en: 'Ground-up v2 re-architecture of a street-vendor POS into a two-sided system: customers scan a stall QR code to place orders while vendors process a live synchronized order queue.',
       th: 'ออกแบบสถาปัตยกรรมใหม่จากแอปเดี่ยวสู่ระบบ 2 ฝั่ง: ลูกค้าสแกน QR สั่งอาหารหน้าร้าน ส่วนแม่ค้าจัดการคิวและสถานะออเดอร์แบบเรียลไทม์',
@@ -265,6 +271,7 @@ export const PROJECTS: ProjectCaseStudy[] = [
     lensRank: { all: 4, ai: 6, fintech: 4, systems: 1 },
     featuredIn: ['all', 'systems'],
     stack: ['React', 'Vite', 'Leaflet', 'Bin-Packing Algorithm'],
+    repoUrl: 'https://github.com/smzey/farmhouse-map-dc',
     summary: {
       en: 'Built to a real bakery distributor brief: pack bread baskets into 10-wheel trucks serving 40 distribution centers while minimizing both total trucks dispatched and wasted cargo volume.',
       th: 'พัฒนาตามโจทย์จริงของธุรกิจกระจายสินค้าเบเกอรี่: จัดเรียงตะกร้าสินค้าลงรถ 10 ล้อสำหรับ 40 ศูนย์กระจายสินค้า เพื่อลดทั้งจำนวนรถและพื้นที่ว่างเปล่า',
