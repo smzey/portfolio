@@ -248,7 +248,7 @@ export default function CvPage() {
             <div className={styles.skillLabel}>Systems &amp; Tools</div>
             <div className={styles.skillVal}>SwiftUI, Electron, Docker, Git &amp; GitHub, MCP, Leaflet, node --test, Supertest</div>
             <div className={styles.skillLabel}>Spoken</div>
-            <div className={styles.skillVal}>Thai (Native), English</div>
+            <div className={styles.skillVal}>Thai (Native), English, Korean</div>
           </div>
         </section>
       </article>

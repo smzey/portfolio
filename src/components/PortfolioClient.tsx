@@ -399,6 +399,19 @@ export default function PortfolioClient() {
                     ))}
                   </div>
                 </div>
+
+                <div>
+                  <div className={styles.mono} style={{ fontSize: 10, color: 'var(--text-subtle)', marginBottom: 8, letterSpacing: '0.07em' }}>
+                    {lang === 'en' ? 'SPOKEN LANGUAGES (TH · EN · KR)' : 'ภาษาที่สื่อสารได้ (ไทย · อังกฤษ · เกาหลี)'}
+                  </div>
+                  <div className={styles.tagList}>
+                    {EDUCATION.spokenLanguages.map((sp) => (
+                      <span key={sp.en} className={`${styles.tag} ${styles.mono}`}>
+                        {sp[lang]}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </aside>
             </div>
           </div>

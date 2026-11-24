@@ -495,6 +495,11 @@ export const EDUCATION = {
     'Elementary Statistics',
     'Informatics Research Methodology',
   ],
+  spokenLanguages: [
+    { en: 'Thai (Native)', th: 'ไทย (เจ้าของภาษา)' },
+    { en: 'English', th: 'อังกฤษ' },
+    { en: 'Korean', th: 'เกาหลี' },
+  ],
 };
 
 export const STACK_GROUPS: { title: BilingualText; items: string[] }[] = [
