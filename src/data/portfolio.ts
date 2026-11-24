@@ -94,7 +94,7 @@ export const LENS_CONFIG: Record<
 > = {
   all: {
     label: { en: 'All Work', th: 'ผลงานทั้งหมด' },
-    audience: 'Full Engineering Overview',
+    audience: '6 Case Studies',
     banner: {
       en: 'Showing all 6 flagship engineering projects across on-device AI, full-stack web systems, and operational optimization.',
       th: 'แสดงผลงานวิศวกรรมหลักทั้ง 6 โปรเจกต์ ครอบคลุม On-Device AI, ระบบเว็บ Full-Stack และการเพิ่มประสิทธิภาพเชิงระบบ',
@@ -102,26 +102,26 @@ export const LENS_CONFIG: Record<
   },
   ai: {
     label: { en: 'Edge & On-Device AI', th: 'Edge & On-Device AI' },
-    audience: 'NVIDIA · KBTG AI · DeepTech',
+    audience: 'Local LLMs · Edge ML · Vision',
     banner: {
-      en: 'Prioritized for Edge AI & Systems teams: zero-cloud CNN forward passes, local Ollama LLM safety separation, and Vision OCR pipelines.',
-      th: 'จัดลำดับสำหรับทีม Edge AI & Systems: โมเดล CNN รันบนเบราว์เซอร์แบบไม่พึ่งคลาวด์, Local LLM แยกชั้นความปลอดภัย และ Vision OCR',
+      en: 'Focused on edge & privacy-preserving AI: zero-cloud CNN forward passes, local Ollama LLM safety separation, and Vision OCR pipelines.',
+      th: 'เน้นด้าน Edge และ Privacy-Preserving AI: โมเดล CNN รันบนเบราว์เซอร์แบบไม่พึ่งคลาวด์, Local LLM แยกชั้นความปลอดภัย และ Vision OCR',
     },
   },
   fintech: {
-    label: { en: 'Full-Stack & FinTech', th: 'Full-Stack & FinTech' },
-    audience: 'SCB / SCBX · KBTG',
+    label: { en: 'Full-Stack & Reliability', th: 'Full-Stack และความเสถียร' },
+    audience: 'Tested APIs · Guardrails · SQL',
     banner: {
-      en: 'Prioritized for FinTech & Enterprise Engineering teams: 358-test domain-driven APIs, deterministic AI safety compliance, and raw-SQL reliability.',
-      th: 'จัดลำดับสำหรับทีม FinTech และองค์กร: สถาปัตยกรรมที่ผ่านการทดสอบ 358 เคส, ระบบ AI แบบ Deterministic และฐานข้อมูล SQL ที่ตรวจสอบได้',
+      en: 'Focused on reliable backend & full-stack engineering: 358-test domain-driven APIs, deterministic AI safety layers, and raw-SQL precision.',
+      th: 'เน้นวิศวกรรมแบ็กเอนด์และ Full-Stack ที่เสถียร: สถาปัตยกรรมที่ผ่านการทดสอบ 358 เคส, ระบบ AI แบบ Deterministic และฐานข้อมูล SQL ที่ตรวจสอบได้',
     },
   },
   systems: {
-    label: { en: 'Logistics & Systems', th: 'Logistics & Systems' },
-    audience: 'PTT · PTT Digital · Industrial Ops',
+    label: { en: 'Optimization & Systems', th: 'อัลกอริทึมและระบบ' },
+    audience: 'Algorithms · Native · Sync',
     banner: {
-      en: 'Prioritized for Operations & Systems teams: geo-constrained truck bin-packing across 40 centers, native macOS/PWA tooling, and real-time queue systems.',
-      th: 'จัดลำดับสำหรับทีมระบบปฏิบัติการและโลจิสติกส์: อัลกอริทึมจัดเรียงสินค้ารถบรรทุก 40 ศูนย์กระจายสินค้า และระบบ Cross-Platform แบบเรียลไทม์',
+      en: 'Focused on operational optimization & systems engineering: geo-constrained truck bin-packing across 40 centers, native macOS/PWA tooling, and live queues.',
+      th: 'เน้นการเพิ่มประสิทธิภาพเชิงระบบและวิศวกรรมซอฟต์แวร์: อัลกอริทึมจัดเรียงสินค้ารถบรรทุก 40 ศูนย์กระจายสินค้า และระบบ Cross-Platform แบบเรียลไทม์',
     },
   },
 };

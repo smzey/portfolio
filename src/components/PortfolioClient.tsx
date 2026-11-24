@@ -96,11 +96,6 @@ export default function PortfolioClient() {
     }
   };
 
-  const copyTailoredUrl = (alias: string, label: string) => {
-    const origin = typeof window !== 'undefined' ? window.location.origin : '';
-    void safeCopy(`${origin}/?lens=${alias}`, `Copied ${label} link`);
-  };
-
   return (
     <div className={styles.page}>
       {/* Sticky Minimal Header */}
@@ -228,7 +223,6 @@ export default function PortfolioClient() {
                     onClick={() => handleSelectLens(key)}
                   >
                     <span>{cfg.label[lang]}</span>
-                    {key !== 'all' && <span className={`${styles.lensAudience} ${styles.mono}`}>{cfg.audience}</span>}
                   </button>
                 );
               })}
@@ -428,26 +422,6 @@ export default function PortfolioClient() {
                 <a href={PROFILE.cvUrl} download className={styles.ghostBtn}>
                   Download CV (PDF) ↓
                 </a>
-              </div>
-
-              <div className={styles.tailoredRow}>
-                <span className={styles.mono} style={{ fontSize: 10.5, color: 'var(--text-subtle)' }}>
-                  {lang === 'en' ? 'SHARE TAILORED LENS URL:' : 'คัดลอกลิงก์เฉพาะตำแหน่ง:'}
-                </span>
-                <div className={styles.tagList}>
-                  <button type="button" className={`${styles.ghostBtn} ${styles.mono}`} onClick={() => copyTailoredUrl('nvidia', 'NVIDIA / Edge AI')}>
-                    ?lens=nvidia
-                  </button>
-                  <button type="button" className={`${styles.ghostBtn} ${styles.mono}`} onClick={() => copyTailoredUrl('kbtg', 'KBTG / FinTech')}>
-                    ?lens=kbtg
-                  </button>
-                  <button type="button" className={`${styles.ghostBtn} ${styles.mono}`} onClick={() => copyTailoredUrl('scb', 'SCB / SCBX')}>
-                    ?lens=scb
-                  </button>
-                  <button type="button" className={`${styles.ghostBtn} ${styles.mono}`} onClick={() => copyTailoredUrl('ptt', 'PTT / Systems')}>
-                    ?lens=ptt
-                  </button>
-                </div>
               </div>
             </div>
 
