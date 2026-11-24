@@ -1,35 +1,26 @@
 import type { Metadata } from 'next';
-import { Bricolage_Grotesque, IBM_Plex_Mono, IBM_Plex_Sans, IBM_Plex_Sans_Thai } from 'next/font/google';
+import { Anuphan, Doto } from 'next/font/google';
 import './globals.css';
 import { SITE_URL } from '../lib/site.ts';
 
-const bricolage = Bricolage_Grotesque({
-  subsets: ['latin'],
-  weight: ['500', '600', '700'],
-  variable: '--font-display',
-  display: 'swap',
-});
-
-const ibmSans = IBM_Plex_Sans({
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
+// Anuphan carries Thai and Latin in one family, so EN and TH share one voice.
+const anuphan = Anuphan({
+  subsets: ['thai', 'latin'],
+  weight: ['400', '500', '600', '700'],
   variable: '--font-sans',
   display: 'swap',
 });
 
-const ibmThai = IBM_Plex_Sans_Thai({
-  subsets: ['thai'],
-  weight: ['400', '500', '600'],
-  variable: '--font-thai',
+// Dot-matrix face, used only for printed ledger figures (data), never for prose.
+const doto = Doto({
+  subsets: ['latin'],
+  weight: ['500', '800'],
+  variable: '--font-dot',
   display: 'swap',
 });
 
-const ibmMono = IBM_Plex_Mono({
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
-  variable: '--font-mono',
-  display: 'swap',
-});
+// Applies the saved (or system) theme and language before first paint.
+const prefsScript = `try{var t=localStorage.getItem('phanu-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);if(localStorage.getItem('phanu-lang')==='th')document.documentElement.lang='th'}catch(e){}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -51,11 +42,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      data-theme="dark"
-      className={`${bricolage.variable} ${ibmSans.variable} ${ibmThai.variable} ${ibmMono.variable}`}
-    >
+    <html lang="en" className={`${anuphan.variable} ${doto.variable}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: prefsScript }} />
+      </head>
       <body>{children}</body>
     </html>
   );

@@ -1,0 +1,828 @@
+/* Passbook world. Cover = page ground; paper = every readable surface; ruled lines, no cards, no shadows. */
+
+.page {
+  min-height: 100vh;
+  background: var(--cover);
+  color: var(--ink);
+}
+
+.gutter {
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+}
+
+.wrap {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 28px;
+}
+
+.skip {
+  position: absolute;
+  left: 12px;
+  top: -60px;
+  z-index: 20;
+  background: var(--paper);
+  color: var(--ink);
+  padding: 10px 14px;
+  font-weight: 600;
+}
+
+.skip:focus {
+  top: 12px;
+}
+
+/* ---------- Cover bar ---------- */
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 20px;
+  padding-block: 18px 4px;
+  color: var(--cover-ink);
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 6px;
+}
+
+.nav a {
+  color: var(--cover-ink);
+  text-decoration: none;
+  font-size: 15px;
+  padding: 10px 10px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav a:hover {
+  text-decoration: underline;
+}
+
+.coverBtn {
+  min-height: 44px;
+  padding: 8px 14px;
+  border: 1.5px solid var(--cover-dim);
+  background: transparent;
+  color: var(--cover-ink);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.coverBtn:hover {
+  border-color: var(--cover-ink);
+}
+
+/* ---------- Paper ---------- */
+.paper {
+  background-color: var(--paper);
+  background-image:
+    repeating-linear-gradient(115deg, transparent 0 7px, var(--guilloche-a) 7px 8px),
+    repeating-linear-gradient(65deg, transparent 0 9px, var(--guilloche-b) 9px 10px);
+  color: var(--ink);
+}
+
+/* ---------- Spread (first viewport) ---------- */
+.spread {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.45fr);
+}
+
+.holder {
+  padding: 44px 44px 40px;
+  border-right: 2px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  min-width: 0;
+}
+
+.name {
+  margin: 0;
+  font-size: clamp(46px, 5.6vw, 78px);
+  line-height: 0.98;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+.nameTh {
+  margin-top: -12px;
+  font-size: clamp(22px, 2.3vw, 30px);
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+.thesis {
+  margin: 0;
+  font-size: clamp(22px, 2.1vw, 28px);
+  line-height: 1.28;
+  font-weight: 600;
+  max-width: 17ch;
+}
+
+.intro {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  max-width: 44ch;
+}
+
+.details {
+  margin: 0;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 8px 18px;
+  padding-top: 16px;
+  border-top: 1.5px solid var(--rule);
+  font-size: 15px;
+}
+
+.details dt {
+  color: var(--ink-2);
+}
+
+.details dd {
+  margin: 0;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 6px;
+}
+
+.btn {
+  min-height: 48px;
+  padding: 12px 18px;
+  border: 2px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn:hover {
+  background: transparent;
+  color: var(--ink);
+}
+
+.btnGhost {
+  background: transparent;
+  color: var(--ink);
+}
+
+.btnGhost:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.quietLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  font-size: 15px;
+}
+
+.quietLinks a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--ink-2);
+}
+
+.quietLinks a:hover {
+  color: var(--ink);
+}
+
+/* ---------- Ledger page ---------- */
+.ledgerPage {
+  padding: 40px 40px 36px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  position: relative;
+}
+
+.ledgerHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px 20px;
+}
+
+.ledgerTitle {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.lens {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+}
+
+.lensLabel {
+  color: var(--ink-2);
+  margin-right: 4px;
+}
+
+.lensBtn {
+  min-height: 44px;
+  padding: 6px 10px;
+  border: 1.5px solid transparent;
+  background: transparent;
+  color: var(--ink-2);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.lensBtn:hover {
+  color: var(--ink);
+  border-bottom-color: var(--rule-strong);
+}
+
+.lensBtn[aria-pressed='true'] {
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+.tableScroll {
+  overflow-x: auto;
+}
+
+.ledger {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--ink);
+}
+
+.ledger th {
+  text-align: left;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  padding: 0 10px 10px 0;
+  border-bottom: 1.5px solid var(--rule-strong);
+  white-space: nowrap;
+}
+
+.ledger td {
+  padding: 13px 10px 13px 0;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: baseline;
+}
+
+.ledger td:last-child {
+  padding-right: 0;
+}
+
+.num {
+  text-align: right;
+}
+
+.ledger th.num {
+  text-align: right;
+  padding-left: 18px;
+}
+
+.ledger th:last-child {
+  padding-right: 0;
+}
+
+.dot {
+  font-family: var(--font-dot), ui-monospace, monospace;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+/* The entry cell holds the row's real button (keyboard); the whole row is also clickable (mouse). */
+.ledger tr.entry {
+  cursor: pointer;
+}
+
+.rowBtn {
+  all: unset;
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  min-height: 44px;
+  cursor: pointer;
+}
+
+.ledger tr.entry:hover td {
+  background: var(--paper-2);
+}
+
+.ledger tr.entry.active td {
+  background: var(--paper-3);
+}
+
+.rowBtn:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 4px;
+}
+
+.entryNo {
+  font-size: 17px;
+  color: var(--ink-2);
+}
+
+.entryName {
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.entryCat {
+  display: block;
+  font-size: 14px;
+  color: var(--ink-2);
+  line-height: 1.4;
+  margin-top: 2px;
+}
+
+.proofFig {
+  font-size: 18px;
+  white-space: nowrap;
+}
+
+.proofCond {
+  display: block;
+  font-size: 13px;
+  color: var(--ink-2);
+  line-height: 1.35;
+  margin-top: 3px;
+}
+
+.cloud {
+  font-size: 18px;
+  white-space: nowrap;
+}
+
+.cloudApi {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+/* Printed live lines */
+.printed td {
+  background: var(--live);
+}
+
+.printed.miss td {
+  color: var(--stamp);
+}
+
+.printedText {
+  font-size: 16px;
+}
+
+@keyframes printLine {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.printed td {
+  animation: printLine 0.6s steps(16, end) both;
+}
+
+/* Printer strip */
+.printer {
+  display: grid;
+  gap: 12px;
+  padding-top: 6px;
+}
+
+.printerTitle {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.hands {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.hand {
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border: 2px solid var(--ink);
+  background: #000;
+  position: relative;
+  cursor: pointer;
+}
+
+.hand img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+}
+
+.hand span {
+  position: absolute;
+  right: 3px;
+  bottom: 1px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 0 3px #000, 0 0 2px #000;
+}
+
+.hand:hover {
+  border-color: var(--stamp);
+}
+
+.printStatus {
+  margin: 0;
+  font-size: 15px;
+  min-height: 1.5em;
+  color: var(--ink);
+}
+
+.printStatus.missText {
+  color: var(--stamp);
+}
+
+.honesty {
+  margin: 0;
+  font-size: 14px;
+  color: var(--ink-2);
+  max-width: 64ch;
+}
+
+.stamp {
+  display: inline-block;
+  transform: rotate(-6deg);
+  border: 3px solid var(--stamp);
+  color: var(--stamp);
+  padding: 6px 12px;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  line-height: 1.25;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.stampCorner {
+  position: absolute;
+  right: 36px;
+  bottom: 30px;
+}
+
+/* ---------- Statement ---------- */
+.statement {
+  padding: 40px 44px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 26px 48px;
+  scroll-margin-top: 16px;
+}
+
+.statementTop {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.statementTitle {
+  margin: 0;
+  font-size: clamp(28px, 3.2vw, 42px);
+  line-height: 1.08;
+  max-width: 28ch;
+}
+
+.statementTitle:focus {
+  outline: none;
+}
+
+.statementMeta {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 22px;
+  font-size: 15px;
+  color: var(--ink-2);
+  padding-bottom: 16px;
+  border-bottom: 1.5px solid var(--rule-strong);
+}
+
+.statementMeta a {
+  color: var(--ink);
+}
+
+.full {
+  grid-column: 1 / -1;
+  min-width: 0;
+}
+
+.block {
+  min-width: 0;
+}
+
+.blockTitle {
+  margin: 0 0 8px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.block p,
+.block li {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.65;
+  max-width: 68ch;
+}
+
+.block ul {
+  margin: 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 8px;
+}
+
+.diagram {
+  color: var(--ink);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding-block: 14px;
+  overflow-x: auto;
+}
+
+.diagram svg {
+  min-width: 600px;
+}
+
+.outcome {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 24px;
+}
+
+/* ---------- History ---------- */
+.section {
+  padding: 40px 44px;
+  display: grid;
+  gap: 20px;
+  scroll-margin-top: 16px;
+}
+
+.sectionTitle {
+  margin: 0;
+  font-size: clamp(24px, 2.6vw, 32px);
+  line-height: 1.15;
+}
+
+.history {
+  display: grid;
+}
+
+.histRow {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.32fr) minmax(0, 1fr);
+  gap: 6px 28px;
+  padding-block: 16px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.histRow:first-child {
+  border-top: 1.5px solid var(--rule-strong);
+}
+
+.histPeriod {
+  font-size: 15px;
+  white-space: nowrap;
+  color: var(--ink-2);
+}
+
+.histRole {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.histOrg {
+  font-size: 15px;
+  color: var(--ink-2);
+}
+
+.histList {
+  margin: 8px 0 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 4px;
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 72ch;
+}
+
+.cols {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 28px 48px;
+}
+
+.tools {
+  margin: 0;
+  display: grid;
+  gap: 10px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.tools dt {
+  font-weight: 700;
+}
+
+.tools dd {
+  margin: 0 0 6px;
+  color: var(--ink-2);
+}
+
+/* ---------- Back cover ---------- */
+.back {
+  background: var(--cover-deep);
+  color: var(--cover-ink);
+  padding: 48px 44px;
+  display: grid;
+  gap: 18px;
+  scroll-margin-top: 16px;
+}
+
+.backTitle {
+  margin: 0;
+  font-size: clamp(22px, 2.4vw, 30px);
+  line-height: 1.25;
+  max-width: 30ch;
+}
+
+.email {
+  font-size: clamp(28px, 5vw, 64px);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+  overflow-wrap: anywhere;
+  user-select: all;
+}
+
+.backNote {
+  margin: 0;
+  color: var(--cover-dim);
+  font-size: 16px;
+}
+
+.backActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.backBtn {
+  min-height: 48px;
+  padding: 12px 18px;
+  border: 2px solid var(--cover-ink);
+  background: var(--cover-ink);
+  color: var(--cover-deep);
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.backBtnGhost {
+  background: transparent;
+  color: var(--cover-ink);
+}
+
+.backBtn:hover {
+  background: transparent;
+  color: var(--cover-ink);
+}
+
+.backBtnGhost:hover {
+  background: var(--cover-ink);
+  color: var(--cover-deep);
+}
+
+.footer {
+  padding-block: 18px 32px;
+  color: var(--cover-dim);
+  font-size: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%);
+  z-index: 30;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 12px 18px;
+  font-size: 15px;
+  font-weight: 600;
+  max-width: calc(100vw - 32px);
+}
+
+/* Thai is never letter-spaced */
+:global(html[lang='th']) .ledger th,
+:global(html[lang='th']) .stamp,
+:global(html[lang='th']) .blockTitle,
+:global(html[lang='th']) .brand {
+  letter-spacing: normal;
+}
+
+@media (max-width: 960px) {
+  .spread,
+  .statement,
+  .cols {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .holder {
+    border-right: 0;
+    border-bottom: 2px solid var(--rule);
+  }
+}
+
+@media (max-width: 600px) {
+  .holder,
+  .ledgerPage,
+  .statement,
+  .section,
+  .back {
+    padding: 28px 20px;
+  }
+  .histRow {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .stampCorner {
+    position: static;
+    align-self: flex-start;
+  }
+  .ledger .colNo {
+    display: none;
+  }
+  .entryName {
+    font-size: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .printed td {
+    animation: none;
+  }
+}

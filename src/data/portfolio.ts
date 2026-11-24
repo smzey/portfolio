@@ -77,6 +77,14 @@ export const PROFILE = {
     en: 'AVAILABLE FOR 10-MONTH CO-OP / INTERNSHIP · JUN 2027 – MAR 2028',
     th: 'พร้อมฝึกงานสหกิจศึกษาเต็มเวลา 10 เดือน · มิ.ย. 2570 – มี.ค. 2571',
   },
+  thesis: {
+    en: 'AI that runs on your device and never leaves it.',
+    th: 'AI ที่ทำงานบนเครื่องของคุณ และข้อมูลไม่เคยออกจากเครื่อง',
+  },
+  intro: {
+    en: 'Chiang Mai University (CAMT) student and Head Teaching Assistant for AIoT. I build on-device AI and full-stack systems, and I publish the misses with the scores.',
+    th: 'นักศึกษา CAMT มหาวิทยาลัยเชียงใหม่ และ Head TA วิชา AIoT สร้าง On-Device AI และระบบ Full-Stack พร้อมแสดงผลที่ผิดควบคู่กับคะแนนเสมอ',
+  },
   heroTitle: {
     en: 'Full-Stack & On-Device AI Engineer.',
     th: 'วิศวกรซอฟต์แวร์ Full-Stack และ On-Device AI',
