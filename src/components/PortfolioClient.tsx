@@ -382,7 +382,7 @@ export default function PortfolioClient() {
 
                 <div className={styles.wilBox}>
                   <div className={styles.mono} style={{ fontSize: 10, color: 'var(--emerald)', marginBottom: 4 }}>
-                    WIL 19 CO-OP AVAILABILITY
+                    CO-OP / INTERNSHIP AVAILABILITY
                   </div>
                   {EDUCATION.wil[lang]}
                 </div>
@@ -435,8 +435,8 @@ export default function PortfolioClient() {
               <div>
                 <h2 className={styles.sectionTitle}>
                   {lang === 'en'
-                    ? 'Available for a 10-month WIL 19 engineering internship (Jun 2027 – Mar 2028).'
-                    : 'พร้อมเข้าร่วมทีมฝึกงานวิศวกรรม WIL 19 ระยะเวลา 10 เดือน (มิ.ย. 2570 – มี.ค. 2571)'}
+                    ? 'Available for a 10-month engineering internship (Jun 2027 – Mar 2028).'
+                    : 'พร้อมเข้าร่วมทีมฝึกงานวิศวกรรมเต็มเวลา 10 เดือน (มิ.ย. 2570 – มี.ค. 2571)'}
                 </h2>
                 <p style={{ margin: '10px 0 0', fontSize: 14, color: 'var(--text-muted)', maxWidth: '64ch' }}>
                   {lang === 'en'

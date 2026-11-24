@@ -49,12 +49,12 @@ export const PROFILE = {
   linkedinHandle: 'linkedin.com/in/phanu-sawet',
   cvUrl: '/Phanu_Sawet_CV.pdf',
   location: {
-    en: 'Chiang Mai, Thailand · Ready to relocate to Bangkok for WIL 19',
-    th: 'เชียงใหม่, ประเทศไทย · พร้อมย้ายเข้ากรุงเทพฯ สำหรับฝึกงาน WIL 19',
+    en: 'Chiang Mai, Thailand · Open to Bangkok relocation',
+    th: 'เชียงใหม่, ประเทศไทย · พร้อมย้ายเข้ากรุงเทพฯ',
   },
   availability: {
-    en: 'AVAILABLE FOR WIL 19 CO-OP · JUN 2027 – MAR 2028 (10 MONTHS)',
-    th: 'พร้อมปฏิบัติงานสหกิจศึกษา WIL 19 · มิ.ย. 2570 – มี.ค. 2571 (10 เดือน)',
+    en: 'AVAILABLE FOR 10-MONTH CO-OP / INTERNSHIP · JUN 2027 – MAR 2028',
+    th: 'พร้อมฝึกงานสหกิจศึกษาเต็มเวลา 10 เดือน · มิ.ย. 2570 – มี.ค. 2571',
   },
   heroTitle: {
     en: 'Full-Stack & On-Device AI Engineer.',
@@ -449,8 +449,8 @@ export const EDUCATION = {
   period: '2024 – 2028 (Expected)',
   gpa: 'Major GPA 3.56 · Cumulative GPA 3.42',
   wil: {
-    en: 'WIL 19 Co-op Window: 1 June 2027 – 31 March 2028 (10-Month Full-Time Internship)',
-    th: 'ช่วงปฏิบัติงานสหกิจศึกษา WIL 19: 1 มิถุนายน 2570 – 31 มีนาคม 2571 (ฝึกงานเต็มเวลา 10 เดือน)',
+    en: 'Co-op / Full-Time Internship Window: June 2027 – March 2028 (10 Months)',
+    th: 'ช่วงฝึกงานสหกิจศึกษาเต็มเวลา: มิถุนายน 2570 – มีนาคม 2571 (10 เดือน)',
   },
   coursework: [
     'Computer Programming (Basic & Advanced)',

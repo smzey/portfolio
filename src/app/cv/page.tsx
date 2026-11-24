@@ -50,23 +50,23 @@ export default function CvPage() {
           </div>
         </header>
 
-        {/* Engineering Proof & WIL 19 Availability Strip */}
+        {/* Engineering Proof Strip */}
         <section className={styles.strip}>
           <div className={styles.stripItem}>
-            <span className={`${styles.stripKey} ${styles.mono}`}>WIL 19 CO-OP WINDOW</span>
-            <span className={`${styles.stripVal} ${styles.mono}`}>Jun 2027 – Mar 2028 (10 Mo)</span>
+            <span className={`${styles.stripKey} ${styles.mono}`}>AVAILABILITY</span>
+            <span className={`${styles.stripVal} ${styles.mono}`}>10-Mo Internship · Jun 2027</span>
           </div>
           <div className={styles.stripItem}>
-            <span className={`${styles.stripKey} ${styles.mono}`}>ACADEMIC STANDING</span>
-            <span className={`${styles.stripVal} ${styles.mono}`}>Major 3.56 · Cum 3.42</span>
-          </div>
-          <div className={styles.stripItem}>
-            <span className={`${styles.stripKey} ${styles.mono}`}>TEST RIGOR</span>
+            <span className={`${styles.stripKey} ${styles.mono}`}>TEST COVERAGE</span>
             <span className={`${styles.stripVal} ${styles.mono}`}>358 Automated Tests</span>
           </div>
           <div className={styles.stripItem}>
             <span className={`${styles.stripKey} ${styles.mono}`}>EDGE ML ACCURACY</span>
             <span className={`${styles.stripVal} ${styles.mono}`}>94.8% CNN · 0 Cloud</span>
+          </div>
+          <div className={styles.stripItem}>
+            <span className={`${styles.stripKey} ${styles.mono}`}>TEACHING &amp; MENTORING</span>
+            <span className={`${styles.stripVal} ${styles.mono}`}>2-Term CS Lab TA (~32/sec)</span>
           </div>
         </section>
 
@@ -85,7 +85,7 @@ export default function CvPage() {
             </div>
             <div className={styles.entryTop}>
               <div className={styles.entryOrg} style={{ fontSize: '9px' }}>
-                B.Sc. in Modern Management and Information Technology (MMIT) · 90/126 credits completed
+                B.Sc. in Modern Management and Information Technology (MMIT)
               </div>
               <div className={`${styles.entryMeta} ${styles.mono}`} style={{ color: '#09090b', fontWeight: 600 }}>
                 Major GPA 3.56 · Cumulative GPA 3.42
