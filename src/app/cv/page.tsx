@@ -38,8 +38,8 @@ export default function CvPage() {
               switzersawet@gmail.com
             </a>
             <span className={styles.contactSep}>·</span>
-            <a className={styles.contactLink} href="https://portfolio-gamma-steel-51.vercel.app">
-              portfolio-gamma-steel-51.vercel.app
+            <a className={styles.contactLink} href="https://phanu.xyz">
+              phanu.xyz
             </a>
             <span className={styles.contactSep}>·</span>
             <a className={styles.contactLink} href="https://github.com/smzey">
@@ -88,12 +88,12 @@ export default function CvPage() {
                 Head Teaching Assistant (Gen 1) &amp; Teaching Assistant (Gen 2–3) — AIoT Event{' '}
                 <span className={styles.entryOrg}>· CMU School of Lifelong Education</span>
               </div>
-              <div className={styles.entryMeta}>Sep 2026 – Present</div>
+              <div className={styles.entryMeta}>Sep 2026 – Oct 2026</div>
             </div>
             <ul className={styles.bullets}>
               <li>
                 Led the 1st Generation AIoT cohort as <strong>Head Teaching Assistant</strong> (Sep 2026) and continued teaching the
-                2nd and 3rd Generation cohorts (Oct 2026 – Present) on-site at CMU School of Lifelong Education.
+                2nd and 3rd Generation cohorts (Oct 2026) on-site at CMU School of Lifelong Education.
               </li>
               <li>
                 Facilitated hands-on AIoT and edge computer-vision labs covering Python, <strong>YOLOv8</strong> object detection,
