@@ -5,7 +5,7 @@
 .frame {
   position: relative;
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 0;
   overflow: hidden;
   background: #000;
   aspect-ratio: 16 / 10;
@@ -22,7 +22,7 @@
   position: absolute;
   inset: auto auto 12px 12px;
   padding: 7px 12px;
-  border-radius: 7px;
+  border-radius: 0;
   border: 1px solid var(--accent-solid-bg);
   background: var(--accent-solid-bg);
   color: var(--accent-solid-fg);
@@ -48,6 +48,6 @@
   width: 100%;
   aspect-ratio: 16 / 10;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 0;
   border: 1px solid var(--border);
 }

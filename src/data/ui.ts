@@ -1,0 +1,68 @@
+import type { BilingualText } from './portfolio.ts';
+
+/** Every visible interface string on the homepage, in English and Thai. */
+export const UI = {
+  skip: { en: 'Skip to the ledger', th: 'ข้ามไปที่รายการผลงาน' },
+  navLedger: { en: 'Ledger', th: 'รายการ' },
+  navHistory: { en: 'History', th: 'ประวัติ' },
+  navContact: { en: 'Contact', th: 'ติดต่อ' },
+  switchLang: { en: 'อ่านภาษาไทย', th: 'Read in English' },
+  switchLangShort: { en: 'ไทย', th: 'EN' },
+  toDark: { en: 'Dark', th: 'โหมดมืด' },
+  toLight: { en: 'Light', th: 'โหมดสว่าง' },
+  themeLabel: { en: 'Switch colour theme', th: 'สลับธีมสี' },
+  detailType: { en: 'Focus', th: 'ความเชี่ยวชาญ' },
+  detailBranch: { en: 'Based in', th: 'ประจำที่' },
+  detailAvailable: { en: 'Available', th: 'พร้อมเริ่มงาน' },
+  detailGpa: { en: 'GPA', th: 'เกรดเฉลี่ย' },
+  downloadCv: { en: 'Download CV (PDF)', th: 'ดาวน์โหลด CV (PDF)' },
+  copyEmail: { en: 'Copy email', th: 'คัดลอกอีเมล' },
+  copied: { en: 'Copied {email}', th: 'คัดลอก {email} แล้ว' },
+  copyFailed: { en: 'Select and copy: {email}', th: 'เลือกแล้วคัดลอก: {email}' },
+  ledgerTitle: { en: 'Projects, printed with their proof', th: 'ผลงาน พร้อมหลักฐานกำกับทุกบรรทัด' },
+  lensLabel: { en: 'Show', th: 'แสดง' },
+  colNo: { en: 'Opened', th: 'เริ่ม' },
+  colEntry: { en: 'Entry', th: 'รายการ' },
+  colProof: { en: 'Proof', th: 'หลักฐาน' },
+  colCloud: { en: 'Cloud calls', th: 'เรียกคลาวด์' },
+  cloudZero: { en: '0', th: '0' },
+  cloudUses: { en: 'Uses API', th: 'ใช้ API' },
+  cloudNa: { en: '—', th: '—' },
+  cloudNaSr: { en: 'not an on-device project', th: 'ไม่ใช่โปรเจกต์ On-Device' },
+  openStatement: { en: 'Open the statement for {name}', th: 'เปิดรายละเอียดของ {name}' },
+  printTitle: { en: 'Print a live prediction', th: 'พิมพ์ผลทำนายสด' },
+  printHint: { en: 'Tap a hand. The SignBridge model runs in this tab and prints a new line. Nothing is uploaded.', th: 'แตะภาพมือ โมเดล SignBridge จะทำงานในแท็บนี้และพิมพ์บรรทัดใหม่ ไม่มีการอัปโหลดข้อมูล' },
+  printHand: { en: 'Run the model on a test hand showing {label}', th: 'ทดสอบโมเดลกับภาพมือที่แสดงตัว {label}' },
+  printLoading: { en: 'Loading the 416 KB model…', th: 'กำลังโหลดโมเดล 416 KB…' },
+  printFailed: { en: "The model didn't load. Check your connection and tap a hand again.", th: 'โหลดโมเดลไม่สำเร็จ ตรวจสอบการเชื่อมต่อแล้วแตะภาพมืออีกครั้ง' },
+  printedOk: { en: 'Read {read} correctly · {conf}% · {ms} ms', th: 'อ่านตัว {read} ถูกต้อง · {conf}% · {ms} ms' },
+  printedMiss: { en: 'Miss: hand {truth}, read as {read}. Misses stay on the page.', th: 'ทายผิด: มือตัว {truth} อ่านเป็น {read} เราแสดงผลที่ผิดไว้ด้วย' },
+  printedEntry: { en: 'Live · hand {truth} → {read}', th: 'สด · มือ {truth} → {read}' },
+  printedMissTag: { en: 'miss', th: 'ผิด' },
+  honesty: { en: '6 of these 8 hands are read correctly; 2 are known misses. 94.8% on the full 7,172-image test set.', th: 'ภาพมือ 8 ภาพนี้อ่านถูก 6 ภาพ และผิด 2 ภาพที่ทราบอยู่แล้ว ความแม่นยำ 94.8% บนชุดทดสอบเต็ม 7,172 ภาพ' },
+  verified: { en: 'Verified', th: 'ตรวจสอบแล้ว' },
+  closeStatement: { en: 'Close statement', th: 'ปิดรายละเอียด' },
+  problem: { en: 'Problem', th: 'โจทย์' },
+  architecture: { en: 'Architecture', th: 'สถาปัตยกรรม' },
+  decisions: { en: 'Decisions', th: 'การตัดสินใจ' },
+  outcome: { en: 'Verified outcome', th: 'ผลลัพธ์ที่ตรวจสอบได้' },
+  stack: { en: 'Built with', th: 'เทคโนโลยี' },
+  source: { en: 'Source', th: 'ซอร์สโค้ด' },
+  viewSource: { en: 'View source on GitHub', th: 'ดูซอร์สโค้ดบน GitHub' },
+  historyTitle: { en: 'Work and teaching history', th: 'ประวัติการทำงานและการสอน' },
+  education: { en: 'Education', th: 'การศึกษา' },
+  coursework: { en: 'Relevant coursework', th: 'รายวิชาที่เกี่ยวข้อง' },
+  toolsTitle: { en: 'Tools I build with', th: 'เครื่องมือที่ใช้สร้างงาน' },
+  spoken: { en: 'Languages', th: 'ภาษา' },
+  contactTitle: { en: 'Open to a 10-month co-op, June 2027 – March 2028.', th: 'พร้อมฝึกงานสหกิจศึกษา 10 เดือน มิถุนายน 2570 – มีนาคม 2571' },
+  contactNote: { en: 'Bangkok, hybrid or remote. Thai, English and Korean.', th: 'กรุงเทพฯ แบบไฮบริด หรือทำงานทางไกล สื่อสารภาษาไทย อังกฤษ และเกาหลี' },
+  universityEmail: { en: 'University email', th: 'อีเมลมหาวิทยาลัย' },
+  footer: { en: 'Built as a static site. The only model on this page runs in your browser.', th: 'เว็บไซต์แบบ Static โมเดลเดียวในหน้านี้ทำงานบนเบราว์เซอร์ของคุณ' },
+} satisfies Record<string, BilingualText>;
+
+export type UiKey = keyof typeof UI;
+
+/** Fills {placeholders} in a UI string. */
+export function fill(text: string, values: Record<string, string>): string {
+  return text.replace(/\{(\w+)\}/g, (_, k: string) => values[k] ?? `{${k}}`);
+}

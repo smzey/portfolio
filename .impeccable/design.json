@@ -1,0 +1,747 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-24T07:51:58.189Z",
+  "title": "Design System: phanu.xyz",
+  "extensions": {
+    "colorMeta": {
+      "ink": {
+        "role": "primary",
+        "displayName": "Carbon-Blue Ink",
+        "canonical": "#1b2740",
+        "oklch": "oklch(27.5% 0.050 263.9)",
+        "tonalRamp": [
+          "#070b13",
+          "#1e2533",
+          "#384256",
+          "#54617b",
+          "#75839e",
+          "#9aa5bd",
+          "#c0c9dc",
+          "#e8effc"
+        ]
+      },
+      "ink-dark": {
+        "role": "primary",
+        "displayName": "Carbon-Blue Ink (lamp-lit)",
+        "canonical": "#16213a",
+        "oklch": "oklch(25.1% 0.050 265.0)",
+        "tonalRamp": [
+          "#070b13",
+          "#1e2533",
+          "#384256",
+          "#55617c",
+          "#75829e",
+          "#9aa5bd",
+          "#c0c9dc",
+          "#e8effc"
+        ]
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "Faded Ink",
+        "canonical": "#44546a",
+        "oklch": "oklch(44.1% 0.042 256.4)",
+        "tonalRamp": [
+          "#070b12",
+          "#1e2630",
+          "#384352",
+          "#536277",
+          "#748499",
+          "#99a6b8",
+          "#c0cad8",
+          "#e8eff9"
+        ]
+      },
+      "ink-2-dark": {
+        "role": "neutral",
+        "displayName": "Faded Ink (lamp-lit)",
+        "canonical": "#364659",
+        "oklch": "oklch(38.8% 0.038 253.1)",
+        "tonalRamp": [
+          "#070c11",
+          "#1e262f",
+          "#384351",
+          "#536375",
+          "#748497",
+          "#99a7b7",
+          "#c0cad7",
+          "#e8eff8"
+        ]
+      },
+      "stamp": {
+        "role": "secondary",
+        "displayName": "Teller-Stamp Vermilion",
+        "canonical": "#b3302a",
+        "oklch": "oklch(51.1% 0.169 27.5)",
+        "tonalRamp": [
+          "#200000",
+          "#490908",
+          "#761d19",
+          "#a7322c",
+          "#ce574c",
+          "#e8857a",
+          "#ffb2a8",
+          "#ffdfd7"
+        ]
+      },
+      "stamp-dark": {
+        "role": "secondary",
+        "displayName": "Teller-Stamp Oxblood (lamp-lit)",
+        "canonical": "#8f221d",
+        "oklch": "oklch(43.1% 0.146 27.8)",
+        "tonalRamp": [
+          "#1d0101",
+          "#44100d",
+          "#702620",
+          "#9f3d34",
+          "#c55f54",
+          "#e08a80",
+          "#fab6ac",
+          "#ffe1da"
+        ]
+      },
+      "guilloche": {
+        "role": "tertiary",
+        "displayName": "Guilloche Green",
+        "canonical": "#2f6b57",
+        "oklch": "oklch(48.2% 0.071 168.9)",
+        "tonalRamp": [
+          "#010f09",
+          "#0e2b22",
+          "#234b3d",
+          "#386d5b",
+          "#5a8f7c",
+          "#85b09f",
+          "#b1d2c5",
+          "#def5eb"
+        ]
+      },
+      "guilloche-dark": {
+        "role": "tertiary",
+        "displayName": "Guilloche Green (lamp-lit)",
+        "canonical": "#245545",
+        "oklch": "oklch(41.0% 0.060 169.3)",
+        "tonalRamp": [
+          "#030e0a",
+          "#132a22",
+          "#294a3e",
+          "#406b5c",
+          "#618d7d",
+          "#8aaea0",
+          "#b5d1c5",
+          "#e1f4ec"
+        ]
+      },
+      "cover": {
+        "role": "neutral",
+        "displayName": "Passbook Navy",
+        "canonical": "#173a52",
+        "oklch": "oklch(33.5% 0.059 241.5)",
+        "tonalRamp": [
+          "#040c14",
+          "#162734",
+          "#2d4557",
+          "#45657d",
+          "#6687a0",
+          "#8ea9be",
+          "#b7ccdd",
+          "#e2f1fc"
+        ]
+      },
+      "cover-dark": {
+        "role": "neutral",
+        "displayName": "Passbook Navy (night)",
+        "canonical": "#0a1722",
+        "oklch": "oklch(19.9% 0.029 245.5)",
+        "tonalRamp": [
+          "#080c10",
+          "#1f262c",
+          "#39434d",
+          "#556370",
+          "#768491",
+          "#9ba7b2",
+          "#c1cad3",
+          "#e9eff5"
+        ]
+      },
+      "cover-deep": {
+        "role": "neutral",
+        "displayName": "Back Board Navy",
+        "canonical": "#10293b",
+        "oklch": "oklch(27.1% 0.046 242.4)",
+        "tonalRamp": [
+          "#050c12",
+          "#1a2730",
+          "#324453",
+          "#4d6477",
+          "#6d869a",
+          "#93a8b9",
+          "#bbccd9",
+          "#e5f0f9"
+        ]
+      },
+      "cover-deep-dark": {
+        "role": "neutral",
+        "displayName": "Back Board Navy (night)",
+        "canonical": "#06111a",
+        "oklch": "oklch(17.2% 0.025 243.4)",
+        "tonalRamp": [
+          "#080c0f",
+          "#1f262b",
+          "#3a434b",
+          "#56636e",
+          "#77848f",
+          "#9ca7b0",
+          "#c2cad2",
+          "#e9eff5"
+        ]
+      },
+      "cover-ink": {
+        "role": "neutral",
+        "displayName": "Cover Ink",
+        "canonical": "#e4edf3",
+        "oklch": "oklch(94.1% 0.013 236.6)",
+        "tonalRamp": [
+          "#090b0d",
+          "#222628",
+          "#3e4346",
+          "#5b6267",
+          "#7c8488",
+          "#a0a6aa",
+          "#c5cacd",
+          "#eceff1"
+        ]
+      },
+      "cover-dim": {
+        "role": "neutral",
+        "displayName": "Cover Dim",
+        "canonical": "#a9c0cf",
+        "oklch": "oklch(79.5% 0.033 236.5)",
+        "tonalRamp": [
+          "#070c10",
+          "#1d272d",
+          "#36444d",
+          "#516470",
+          "#728692",
+          "#97a8b2",
+          "#becbd4",
+          "#e7f0f6"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Mint Security Paper",
+        "canonical": "#e7f0e8",
+        "oklch": "oklch(94.6% 0.014 148.8)",
+        "tonalRamp": [
+          "#0a0c0a",
+          "#222623",
+          "#3e443f",
+          "#5c635d",
+          "#7d857e",
+          "#a1a7a1",
+          "#c6cbc6",
+          "#ecefec"
+        ]
+      },
+      "paper-dark": {
+        "role": "neutral",
+        "displayName": "Lamp-Lit Sage Paper",
+        "canonical": "#bccdc0",
+        "oklch": "oklch(83.2% 0.026 152.8)",
+        "tonalRamp": [
+          "#080c09",
+          "#202722",
+          "#3b453d",
+          "#58655b",
+          "#78877c",
+          "#9da99f",
+          "#c3ccc5",
+          "#eaf0eb"
+        ]
+      },
+      "paper-2": {
+        "role": "neutral",
+        "displayName": "Paper Leaf / Hover",
+        "canonical": "#dbe8dd",
+        "oklch": "oklch(91.8% 0.020 150.1)",
+        "tonalRamp": [
+          "#090c09",
+          "#212722",
+          "#3d443e",
+          "#5a645c",
+          "#7b867d",
+          "#9fa8a0",
+          "#c4cbc5",
+          "#ebf0ec"
+        ]
+      },
+      "paper-2-dark": {
+        "role": "neutral",
+        "displayName": "Lamp-Lit Leaf",
+        "canonical": "#b1c3b5",
+        "oklch": "oklch(79.9% 0.028 152.3)",
+        "tonalRamp": [
+          "#080c09",
+          "#202721",
+          "#3a453d",
+          "#57665a",
+          "#78877b",
+          "#9ca99f",
+          "#c2ccc4",
+          "#eaf1eb"
+        ]
+      },
+      "paper-3": {
+        "role": "neutral",
+        "displayName": "Deep Leaf / Open Entry",
+        "canonical": "#cfe0d2",
+        "oklch": "oklch(89.0% 0.026 150.7)",
+        "tonalRamp": [
+          "#080c09",
+          "#202721",
+          "#3b453d",
+          "#58655a",
+          "#79877b",
+          "#9da99f",
+          "#c3ccc4",
+          "#eaf0eb"
+        ]
+      },
+      "paper-3-dark": {
+        "role": "neutral",
+        "displayName": "Lamp-Lit Deep Leaf / Open Entry",
+        "canonical": "#a6baab",
+        "oklch": "oklch(76.9% 0.030 153.2)",
+        "tonalRamp": [
+          "#080d09",
+          "#1f2821",
+          "#39463c",
+          "#56665a",
+          "#76877b",
+          "#9ba99f",
+          "#c1cdc4",
+          "#e9f1eb"
+        ]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Ruling",
+        "canonical": "#a9c2b0",
+        "oklch": "oklch(79.0% 0.037 154.2)",
+        "tonalRamp": [
+          "#070d09",
+          "#1d2821",
+          "#37463b",
+          "#536759",
+          "#738979",
+          "#99aa9d",
+          "#bfcdc3",
+          "#e8f1ea"
+        ]
+      },
+      "rule-dark": {
+        "role": "neutral",
+        "displayName": "Ruling (lamp-lit)",
+        "canonical": "#8aa592",
+        "oklch": "oklch(69.6% 0.041 154.6)",
+        "tonalRamp": [
+          "#060d08",
+          "#1c2820",
+          "#36473b",
+          "#516858",
+          "#718979",
+          "#97ab9d",
+          "#becec3",
+          "#e7f2ea"
+        ]
+      },
+      "rule-strong": {
+        "role": "neutral",
+        "displayName": "Heavy Ruling",
+        "canonical": "#6f8a78",
+        "oklch": "oklch(60.7% 0.041 155.8)",
+        "tonalRamp": [
+          "#060d08",
+          "#1c2820",
+          "#35473b",
+          "#506858",
+          "#718979",
+          "#97ab9d",
+          "#becec3",
+          "#e7f2ea"
+        ]
+      },
+      "rule-strong-dark": {
+        "role": "neutral",
+        "displayName": "Heavy Ruling (lamp-lit)",
+        "canonical": "#5d7766",
+        "oklch": "oklch(54.3% 0.040 156.2)",
+        "tonalRamp": [
+          "#060d09",
+          "#1c2821",
+          "#35473b",
+          "#516859",
+          "#718979",
+          "#97ab9d",
+          "#becec3",
+          "#e7f2ea"
+        ]
+      },
+      "live": {
+        "role": "neutral",
+        "displayName": "Fresh Print",
+        "canonical": "#f1e5d6",
+        "oklch": "oklch(92.7% 0.024 73.6)",
+        "tonalRamp": [
+          "#0d0b07",
+          "#29241e",
+          "#484138",
+          "#696054",
+          "#8a8174",
+          "#aca499",
+          "#cec8c0",
+          "#f2eee8"
+        ]
+      },
+      "live-dark": {
+        "role": "neutral",
+        "displayName": "Fresh Print (lamp-lit)",
+        "canonical": "#d6c9b6",
+        "oklch": "oklch(84.1% 0.030 77.5)",
+        "tonalRamp": [
+          "#0e0b06",
+          "#2a241c",
+          "#494135",
+          "#6a6050",
+          "#8c8171",
+          "#ada496",
+          "#cfc8be",
+          "#f3eee6"
+        ]
+      }
+    },
+    "themes": {
+      "note": "Each base key is the day value; its -dark sibling is the lamp-lit value applied under prefers-color-scheme: dark (unless data-theme=\"light\") and under data-theme=\"dark\". Dark dims the book without inverting it: paper stays light sage under dark ink, and both themes declare color-scheme: light. cover-ink and cover-dim are shared. --focus equals --stamp in both themes.",
+      "selectors": {
+        "light": ":root",
+        "darkSystem": "@media (prefers-color-scheme: dark) { :root:not([data-theme='light']) }",
+        "darkForced": ":root[data-theme='dark']"
+      }
+    },
+    "textures": [
+      {
+        "name": "guilloche-img",
+        "value": "160 x 24 px SVG tile of three phase-shifted sine polylines, stroke-width 0.7",
+        "light": "stroke #1b2740 at opacity 0.12",
+        "dark": "same tile: stroke #1b2740 at opacity 0.12",
+        "purpose": "Security-paper texture under every paper surface."
+      }
+    ],
+    "typographyMeta": {
+      "display": {
+        "displayName": "Holder Name",
+        "purpose": "The account holder name, once per page."
+      },
+      "display-email": {
+        "displayName": "Back-Cover Email",
+        "purpose": "Email set as the closing headline; breaks only after the @ (<wbr>)."
+      },
+      "headline": {
+        "displayName": "Statement Title",
+        "purpose": "Case-study statement titles."
+      },
+      "headline-section": {
+        "displayName": "Section Title",
+        "purpose": "History and other paper-sheet section titles."
+      },
+      "thesis": {
+        "displayName": "Thesis",
+        "purpose": "The one claim under the name, max 17ch."
+      },
+      "title": {
+        "displayName": "Entry Title",
+        "purpose": "Ledger entry names and history roles."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Prose, 44–72ch measures."
+      },
+      "body-small": {
+        "displayName": "Body Small",
+        "purpose": "Details, meta, nav, buttons."
+      },
+      "label": {
+        "displayName": "Column Head",
+        "purpose": "Ledger column heads; uppercase, tracked; untracked in Thai."
+      },
+      "label-block": {
+        "displayName": "Block Head",
+        "purpose": "Statement block heads and the stamp; uppercase, tracked; untracked in Thai."
+      },
+      "figure": {
+        "displayName": "Printed Figure",
+        "purpose": "Doto dot-matrix for printed ledger figures only (proof, cloud count, latency, print time) and the demo predicted letter."
+      },
+      "date": {
+        "displayName": "Written Date",
+        "purpose": "History periods: Anuphan 600, tabular figures, faded ink."
+      },
+      "figure-opened": {
+        "displayName": "Opened Month",
+        "purpose": "Each ledger entry's first-commit month via ledgerMonth(): 'JUN 2026' / 'มิ.ย. 2569' (Buddhist era); 14px on phones."
+      }
+    },
+    "shadows": [],
+    "borders": [
+      {
+        "name": "hairline",
+        "value": "1px solid var(--rule)",
+        "purpose": "Between ledger rows, history rows, around diagrams and stacked leaf edges."
+      },
+      {
+        "name": "rule-heavy",
+        "value": "1.5px solid var(--rule-strong)",
+        "purpose": "Under column heads, statement meta, above the first history row."
+      },
+      {
+        "name": "spine",
+        "value": "2px solid var(--rule-strong)",
+        "purpose": "Between holder and ledger pages; becomes a 2px var(--rule) bottom line when stacked."
+      },
+      {
+        "name": "stamp",
+        "value": "3px solid var(--stamp)",
+        "purpose": "Teller stamp outline."
+      },
+      {
+        "name": "back-close",
+        "value": "3px double var(--cover-dim)",
+        "purpose": "Top edge of the back cover; closes the book."
+      }
+    ],
+    "focus": [
+      {
+        "name": "focus-ring",
+        "value": "outline: 3px solid var(--focus); outline-offset: 2px",
+        "purpose": "All interactive elements; ledger row buttons use 4px offset."
+      }
+    ],
+    "motion": [
+      {
+        "name": "print-line",
+        "value": "clip-path inset(0 100% 0 0) -> inset(0); 0.6s steps(16, end)",
+        "purpose": "A newly printed ledger line reveals left to right like a printer head. Off under prefers-reduced-motion."
+      },
+      {
+        "name": "smooth-scroll",
+        "value": "scroll-behavior: smooth",
+        "purpose": "Anchor navigation; auto under reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "stack",
+        "value": "960px",
+        "purpose": "Spread, statement and history columns stack."
+      },
+      {
+        "name": "phone",
+        "value": "600px",
+        "purpose": "Pages pad 28px x 20px; ledger restacks with the opened month on its own 14px line; corner stamp flows."
+      }
+    ],
+    "layout": {
+      "maxWidth": "1240px",
+      "gutter": "max(20px, safe-area-inset)",
+      "sheetGap": "28px",
+      "leafReserve": "10px right and bottom",
+      "spread": "0.95fr / 1.45fr"
+    },
+    "depth": [
+      {
+        "name": "leaf-1",
+        "value": "::before inset 5px -5px -5px 5px; background var(--paper-2); border 1px solid var(--rule); z-index -1",
+        "purpose": "First page edge beneath the spread, statement and history."
+      },
+      {
+        "name": "leaf-2",
+        "value": "::after inset 10px -10px -10px 10px; background var(--paper-3); border 1px solid var(--rule); z-index -1",
+        "purpose": "Second, deeper page edge; the leaf reserves margin-right/bottom 10px."
+      },
+      {
+        "name": "gutter-fold",
+        "value": "linear-gradient(to left, var(--paper-3), transparent 28px)",
+        "purpose": "Holder page bends into the spine; the only gradient."
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Filled ink button on paper for the main action (Download CV, View source); inverts on hover.",
+      "html": "<a class=\"ds-btn\" href=\"#\">Download CV</a>",
+      "css": ".ds-btn { font-family: var(--font-sans), 'Noto Sans Thai', system-ui, sans-serif; display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 12px 18px; border: 2px solid var(--ink); border-radius: 0; background: var(--ink); color: var(--paper); font-size: 15px; font-weight: 700; text-decoration: none; cursor: pointer; } .ds-btn:hover { background: transparent; color: var(--ink); } .ds-btn:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Outlined ink button on paper for secondary actions (Copy email, Close statement); fills on hover.",
+      "html": "<button type=\"button\" class=\"ds-btn-ghost\">Copy email</button>",
+      "css": ".ds-btn-ghost { font-family: var(--font-sans), 'Noto Sans Thai', system-ui, sans-serif; display: inline-flex; align-items: center; min-height: 48px; padding: 12px 18px; border: 2px solid var(--ink); border-radius: 0; background: transparent; color: var(--ink); font-size: 15px; font-weight: 700; cursor: pointer; } .ds-btn-ghost:hover { background: var(--ink); color: var(--paper); } .ds-btn-ghost:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }"
+    },
+    {
+      "name": "Cover Bar",
+      "kind": "nav",
+      "refersTo": "button-cover",
+      "description": "Brand, text links and the language/theme toggles printed directly on the navy cover.",
+      "html": "<header class=\"ds-bar\"><a class=\"ds-brand\" href=\"#\">phanu.xyz</a><nav class=\"ds-nav\"><a href=\"#\">Ledger</a><a href=\"#\">History</a><a href=\"#\">Contact</a><button type=\"button\" class=\"ds-cover-btn\">ไทย</button><button type=\"button\" class=\"ds-cover-btn\" aria-pressed=\"false\">Dark</button></nav></header>",
+      "css": ".ds-bar { font-family: var(--font-sans), 'Noto Sans Thai', system-ui, sans-serif; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 20px; padding: 18px 20px 4px; background: var(--cover); color: var(--cover-ink); } .ds-brand { color: var(--cover-ink); font-weight: 700; font-size: 17px; letter-spacing: 0.04em; text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; } .ds-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; } .ds-nav a { color: var(--cover-ink); text-decoration: none; font-size: 15px; padding: 10px; min-height: 44px; display: inline-flex; align-items: center; } .ds-nav a:hover { text-decoration: underline; text-underline-offset: 4px; } .ds-cover-btn { font-family: var(--font-sans), 'Noto Sans Thai', system-ui, sans-serif; min-height: 44px; padding: 8px 14px; border: 1.5px solid var(--cover-dim); border-radius: 0; background: transparent; color: var(--cover-ink); font-size: 14px; font-weight: 600; cursor: pointer; } .ds-cover-btn:hover { border-color: var(--cover-ink); } .ds-nav a:focus-visible, .ds-cover-btn:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }"
+    },
+    {
+      "name": "Lens Toggles",
+      "kind": "chip",
+      "refersTo": "lens-toggle",
+      "description": "Text toggles that choose which ledger entries show by audience, newest-opened first; the pressed one takes an ink outline.",
+      "html": "<div class=\"ds-lens\" role=\"group\" aria-label=\"Show\"><span class=\"ds-lens-label\">Show</span><button type=\"button\" class=\"ds-lens-btn\" aria-pressed=\"true\">All</button><button type=\"button\" class=\"ds-lens-btn\" aria-pressed=\"false\">AI</button><button type=\"button\" class=\"ds-lens-btn\" aria-pressed=\"false\">Fintech</button><button type=\"button\" class=\"ds-lens-btn\" aria-pressed=\"false\">Systems</button></div>",
+      "css": ".ds-lens { font-family: var(--font-sans), 'Noto Sans Thai', system-ui, sans-serif; display: flex; flex-wrap: wrap; align-items: center; gap: 4px; font-size: 14px; padding: 12px; background: var(--paper); color: var(--ink); } .ds-lens-label { color: var(--ink-2); margin-right: 4px; } .ds-lens-btn { font-family: var(--font-sans), 'Noto Sans Thai', system-ui, sans-serif; min-height: 44px; padding: 6px 10px; border: 1.5px solid transparent; border-radius: 0; background: transparent; color: var(--ink-2); font-size: 14px; font-weight: 600; cursor: pointer; } .ds-lens-btn:hover { color: var(--ink); border-bottom-color: var(--rule-strong); } .ds-lens-btn[aria-pressed='true'] { color: var(--ink); border-color: var(--ink); } .ds-lens-btn:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }"
+    },
+    {
+      "name": "Ledger",
+      "kind": "custom",
+      "refersTo": "ledger-entry-hover",
+      "description": "Projects as ruled ledger entries: opened month (Doto), name and category, a Doto proof figure with its condition, and the cloud-call count. Includes one printed live line and one miss.",
+      "html": "<table class=\"ds-ledger\"><thead><tr><th>Opened</th><th>Entry</th><th class=\"ds-num\">Proof</th><th class=\"ds-num\">Cloud calls</th></tr></thead><tbody><tr class=\"ds-printed\"><td class=\"ds-dot\">14:02:11</td><td>Sample B read as B</td><td class=\"ds-num ds-dot ds-fig\">11 ms</td><td class=\"ds-num ds-dot ds-fig\">0</td></tr><tr class=\"ds-printed ds-miss\"><td class=\"ds-dot\">14:02:07</td><td>Sample M read as N · miss</td><td class=\"ds-num ds-dot ds-fig\">9 ms</td><td class=\"ds-num ds-dot ds-fig\">0</td></tr><tr class=\"ds-entry\"><td class=\"ds-dot ds-no\">JUL 2026</td><td><span class=\"ds-name\">SignBridge</span><span class=\"ds-cat\">On-device ASL fingerspelling CNN</span></td><td class=\"ds-num\"><span class=\"ds-dot ds-fig\">94.8%</span><span class=\"ds-cond\">7,172 held-out test images</span></td><td class=\"ds-num ds-dot ds-fig\">0</td></tr><tr class=\"ds-entry ds-active\"><td class=\"ds-dot ds-no\">JUL 2026</td><td><span class=\"ds-name\">Anya</span><span class=\"ds-cat\">Medicine-label reader</span></td><td class=\"ds-num\"><span class=\"ds-dot ds-fig\">Thai OCR</span><span class=\"ds-cond\">medicine label to speech, zero-UI</span></td><td class=\"ds-num\"><span class=\"ds-api\">Uses cloud API</span></td></tr></tbody></table>",
+      "css": ".ds-ledger { font-family: var(--font-sans), 'Noto Sans Thai', system-ui, sans-serif; width: 100%; border-collapse: collapse; color: var(--ink); background-color: var(--paper); background-image: var(--guilloche-img); background-size: 160px 24px; } .ds-ledger th { text-align: left; font-size: 12.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-2); padding: 12px 10px 10px 12px; border-bottom: 1.5px solid var(--rule-strong); white-space: nowrap; } .ds-ledger td { padding: 13px 10px 13px 12px; border-bottom: 1px solid var(--rule); vertical-align: baseline; } .ds-num { text-align: right !important; } .ds-dot { font-family: var(--font-dot), ui-monospace, monospace; font-weight: 800; font-variant-numeric: tabular-nums; } .ds-fig { font-size: 18px; white-space: nowrap; } .ds-no { font-size: 16px; color: var(--ink-2); white-space: nowrap; } .ds-name { display: block; font-size: 17px; font-weight: 700; line-height: 1.3; } .ds-cat { display: block; font-size: 14px; color: var(--ink-2); margin-top: 2px; } .ds-cond { display: block; font-size: 13px; color: var(--ink-2); margin-top: 3px; } .ds-api { font-size: 13px; font-weight: 600; color: var(--ink-2); } .ds-entry { cursor: pointer; } @media (hover: hover) { .ds-entry:hover { background: var(--paper-2); } } .ds-entry.ds-active { background: var(--paper-3); } .ds-printed { background: var(--live); } .ds-printed td { font-size: 16px; animation: ds-print 0.6s steps(16, end) both; } .ds-printed.ds-miss td { color: var(--stamp); } @keyframes ds-print { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } } @media (prefers-reduced-motion: reduce) { .ds-printed td { animation: none; } }"
+    },
+    {
+      "name": "Teller Stamp",
+      "kind": "custom",
+      "refersTo": "stamp",
+      "description": "Rotated stamp-red outline mark for verified states and statement outcomes; the only rotated element.",
+      "html": "<div class=\"ds-stamp-wrap\"><span class=\"ds-stamp\">Verified<br>on device</span></div>",
+      "css": ".ds-stamp-wrap { padding: 24px; background: var(--paper); } .ds-stamp { font-family: var(--font-sans), 'Noto Sans Thai', system-ui, sans-serif; display: inline-block; transform: rotate(-6deg); border: 3px solid var(--stamp); border-radius: 0; color: var(--stamp); padding: 6px 12px; font-weight: 700; font-size: 14px; letter-spacing: 0.08em; line-height: 1.25; text-align: center; text-transform: uppercase; }"
+    },
+    {
+      "name": "Hand Sample",
+      "kind": "button",
+      "refersTo": "hand-sample",
+      "description": "56px pixelated SignBridge sample tile in the print strip; tapping it prints a prediction line.",
+      "html": "<div class=\"ds-hands\"><button type=\"button\" class=\"ds-hand\" aria-label=\"Print sample A\"><i></i><span aria-hidden=\"true\">A</span></button><button type=\"button\" class=\"ds-hand\" aria-label=\"Print sample B\"><i></i><span aria-hidden=\"true\">B</span></button></div>",
+      "css": ".ds-hands { display: flex; gap: 8px; padding: 12px; background: var(--paper); } .ds-hand { width: 56px; height: 56px; padding: 0; border: 2px solid var(--ink); border-radius: 0; background: #000; position: relative; cursor: pointer; } .ds-hand i { position: absolute; inset: 14px; background: repeating-linear-gradient(90deg, #777 0 4px, #333 4px 8px); } .ds-hand span { position: absolute; right: 0; bottom: 0; font-family: var(--font-sans), 'Noto Sans Thai', system-ui, sans-serif; font-size: 12px; font-weight: 700; line-height: 1; padding: 3px 4px; background: var(--ink); color: var(--paper); } .ds-hand:hover { border-color: var(--stamp); } .ds-hand:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }"
+    },
+    {
+      "name": "Stacked Leaf",
+      "kind": "card",
+      "refersTo": "leaf-under",
+      "description": "A paper sheet over two offset page edges with a gutter fold on its left page: depth by overlap, never by shadow.",
+      "html": "<div class=\"ds-leaf-wrap\"><div class=\"ds-leaf\"><div class=\"ds-leaf-left\">Holder page</div><div class=\"ds-leaf-right\">Ledger page</div></div></div>",
+      "css": ".ds-leaf-wrap { padding: 20px 30px 30px 20px; background: var(--cover); } .ds-leaf { font-family: var(--font-sans), 'Noto Sans Thai', system-ui, sans-serif; position: relative; isolation: isolate; display: grid; grid-template-columns: 0.95fr 1.45fr; background-color: var(--paper); background-image: var(--guilloche-img); background-size: 160px 24px; color: var(--ink); border-radius: 0; } .ds-leaf::before, .ds-leaf::after { content: ''; position: absolute; z-index: -1; background: var(--paper-2); border: 1px solid var(--rule); } .ds-leaf::before { inset: 5px -5px -5px 5px; } .ds-leaf::after { inset: 10px -10px -10px 10px; background: var(--paper-3); } .ds-leaf-left { padding: 28px; border-right: 2px solid var(--rule-strong); background-image: linear-gradient(to left, var(--paper-3), transparent 28px); font-weight: 700; } .ds-leaf-right { padding: 28px; font-weight: 700; }"
+    },
+    {
+      "name": "History Row",
+      "kind": "custom",
+      "refersTo": "title",
+      "description": "A ruled history line: written date in Anuphan 600 tabular figures beside role and organisation.",
+      "html": "<div class=\"ds-hist\"><div class=\"ds-hist-row\"><div class=\"ds-hist-date\">Jun 2025 – Present</div><div><h3 class=\"ds-hist-role\">Teaching assistant</h3><div class=\"ds-hist-org\">University</div></div></div></div>",
+      "css": ".ds-hist { font-family: var(--font-sans), 'Noto Sans Thai', system-ui, sans-serif; background: var(--paper); color: var(--ink); padding: 16px; } .ds-hist-row { display: grid; grid-template-columns: minmax(150px, 0.32fr) minmax(0, 1fr); gap: 6px 28px; padding-block: 16px; border-top: 1.5px solid var(--rule-strong); border-bottom: 1px solid var(--rule); } .ds-hist-date { font-size: 15px; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--ink-2); } .ds-hist-role { margin: 0; font-size: 17px; font-weight: 700; line-height: 1.35; } .ds-hist-org { font-size: 15px; color: var(--ink-2); }"
+    },
+    {
+      "name": "Back Cover",
+      "kind": "card",
+      "refersTo": "button-back",
+      "description": "Closing board in cover-deep navy under a 3px double cover-dim rule: the email as headline (breaks only after @) with inverted cover buttons.",
+      "html": "<section class=\"ds-back\"><h2 class=\"ds-back-title\">Open to a 10-month co-op, June 2027 – March 2028.</h2><div class=\"ds-email\">name@<wbr>example.com</div><div class=\"ds-back-actions\"><button type=\"button\" class=\"ds-back-btn\">Copy email</button><a class=\"ds-back-btn ds-back-ghost\" href=\"#\">Download CV</a></div></section>",
+      "css": ".ds-back { font-family: var(--font-sans), 'Noto Sans Thai', system-ui, sans-serif; background: var(--cover-deep); color: var(--cover-ink); border-top: 3px double var(--cover-dim); padding: 48px 44px; display: grid; gap: 18px; } .ds-back-title { margin: 0; font-size: clamp(22px, 2.4vw, 30px); line-height: 1.25; max-width: 30ch; } .ds-email { font-size: clamp(26px, 6.4vw, 64px); font-weight: 700; letter-spacing: -0.01em; line-height: 1.1; overflow-wrap: normal; user-select: all; } .ds-back-actions { display: flex; flex-wrap: wrap; gap: 12px; } .ds-back-btn { font-family: var(--font-sans), 'Noto Sans Thai', system-ui, sans-serif; min-height: 48px; padding: 12px 18px; border: 2px solid var(--cover-ink); border-radius: 0; background: var(--cover-ink); color: var(--cover-deep); font-size: 15px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; cursor: pointer; } .ds-back-btn:hover { background: transparent; color: var(--cover-ink); } .ds-back-ghost { background: transparent; color: var(--cover-ink); } .ds-back-ghost:hover { background: var(--cover-ink); color: var(--cover-deep); } .ds-back-btn:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }"
+    },
+    {
+      "name": "Toast",
+      "kind": "custom",
+      "refersTo": "toast",
+      "description": "Solid ink slip reporting clipboard results; no shadow.",
+      "html": "<div class=\"ds-toast\" role=\"status\">Copied name@example.com</div>",
+      "css": ".ds-toast { font-family: var(--font-sans), 'Noto Sans Thai', system-ui, sans-serif; display: inline-block; background: var(--ink); color: var(--paper); padding: 12px 18px; font-size: 15px; font-weight: 600; border-radius: 0; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Personal Passbook",
+    "overview": "The site is a Thai bank passbook (สมุดบัญชี) that belongs to one person and never leaves him, the same way the AI he builds never leaves the device. The page ground is the navy cover; every readable surface is a leaf of mint security paper printed with a faint guilloche wave; text is carbon-blue ink; and one vermilion teller-stamp red marks what has been verified and what missed. Projects are not cards: they are printed ledger entries in a ruled table, each dated by the month it was opened, with its proof figure, the condition that figure was measured under, and a count of cloud calls.\n\nDensity is that of a working document, not a brochure. Lines are ruled, figures are right-aligned and printed in a dot-matrix face, prose is set in one humanist sans that carries Thai and Latin as equals. There are no corners, no shadows and no glows. Depth is physical: the leaves are stacked, so the edges of the pages beneath show at the bottom-right of each sheet; the open spread folds into its gutter; and a darker back board, closed off by a double rule, ends the book.\n\nLight theme is the passbook by day. Dark theme is the same book under a desk lamp: the cover drops to near-black navy and the paper dims to a deeper sage, but the pages stay paper — ink stays dark on light, and the paper keeps `color-scheme: light`. It is the same object in lower light, never an inverted screen.",
+    "keyCharacteristics": [
+      "Navy cover as page ground, mint guilloche paper as every reading surface.",
+      "Ruled ledger lines instead of cards; square corners everywhere.",
+      "Anuphan for all prose and dates in EN and TH; Doto dot-matrix only for printed ledger figures.",
+      "One stamp red, reserved for verified marks, misses and focus.",
+      "No shadows, no glows; depth by stacked leaves, the gutter fold and cover/paper contrast.",
+      "Every figure carries its condition; every entry carries its opening month."
+    ],
+    "rules": [
+      {
+        "name": "The One Red Rule",
+        "body": "Stamp vermilion is the only saturated warm color. It means \"verified\", \"missed\" or \"you are here\" (focus). It never decorates, never fills a button, never colors a heading.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two Surfaces Rule",
+        "body": "Content sits either on paper (ink colors) or on the cover (cover-ink colors). Never set paper ink on the cover or cover ink on paper.",
+        "section": "colors"
+      },
+      {
+        "name": "The Desk Lamp Rule",
+        "body": "Dark theme dims the book; it does not invert it. Paper stays a light sage under dark ink, the cover goes near-black, and every new token needs both a day and a lamp-lit value that keeps that relationship.",
+        "section": "colors"
+      },
+      {
+        "name": "The Guilloche Texture Rule",
+        "body": "Every paper surface carries the guilloche wave (`--guilloche-img`, a 160 × 24 px tile of three sine polylines in ink at 12% opacity, the same tile in both themes). It is a texture under text, not an ornament; never enlarge, recolor or animate it.",
+        "section": "colors"
+      },
+      {
+        "name": "The Printer Rule",
+        "body": "Doto is for what the ledger printed — proof figures, cloud counts, opened months, print times — and the demo's predicted letter. Never for prose, headings, labels or dates a person wrote (history periods are Anuphan).",
+        "section": "typography"
+      },
+      {
+        "name": "The Untracked Thai Rule",
+        "body": "Thai is never letter-spaced and never uppercased into tracking: every tracked label (column heads, block heads, stamp, brand) reverts to `letter-spacing: normal` under `lang=\"th\"`.",
+        "section": "typography"
+      },
+      {
+        "name": "The Stacked Leaf Rule",
+        "body": "If a surface needs to read as separate or on top, change its material (cover vs paper vs paper-3), rule it, or lay it on offset paper edges; never lift it with a shadow.",
+        "section": "elevation"
+      },
+      {
+        "name": "The One Fold Rule",
+        "body": "The only gradient is the gutter fold beside the spine. No other gradient, sheen or vignette belongs on paper or cover.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do set every readable surface on paper with the guilloche texture, and every frame element (bar, footer, back cover) on the cover.",
+      "Do give each major paper sheet its stacked leaf edges (paper-2 at 5px, paper-3 at 10px, 1px rule) instead of any shadow.",
+      "Do print every ledger figure in Doto with tabular numerals and put its measurement condition directly beneath it in faded ink.",
+      "Do date every ledger entry by its first-commit month (`JUN 2026` / `มิ.ย. 2569`).",
+      "Do set history and other written dates in Anuphan 600 with tabular figures.",
+      "Do separate rows and regions with rules (1px rule, 1.5px rule-strong) rather than boxes.",
+      "Do keep corners at 0px and buttons at 48px tall with 2px borders that invert on hover.",
+      "Do reserve stamp red for verified marks, misses and focus.",
+      "Do give Thai the same face, size and weight as English, and drop letter-spacing for Thai.",
+      "Do define both a day and a lamp-lit value for every new color token, keeping dark ink on light paper in both."
+    ],
+    "donts": [
+      "Don't use cards, drop shadows, glows or blur on passbook surfaces.",
+      "Don't add gradients beyond the gutter fold.",
+      "Don't round corners.",
+      "Don't use Doto for prose, headings, labels or written dates.",
+      "Don't use stamp red as a fill, a heading color or decoration.",
+      "Don't invert the paper to dark in dark theme.",
+      "Don't let the email break anywhere but after the `@`.",
+      "Don't add kickers or eyebrow labels above headings.",
+      "Don't reintroduce the old dark dev-portfolio vocabulary: zinc greys, emerald glows, metric tiles, 3D heroes.",
+      "Don't letter-space or uppercase Thai."
+    ]
+  }
+}
