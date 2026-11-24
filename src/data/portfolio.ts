@@ -7,6 +7,13 @@ export interface BilingualText {
   th: string;
 }
 
+export interface ProjectVideo {
+  mp4: string; // public path, e.g. /videos/khaidee-v2.mp4 (H.264, ≤ 2 MB)
+  webm: string; // ≤ 2 MB
+  poster: string; // JPG shown before play / under reduced motion
+  caption: BilingualText;
+}
+
 export interface ProjectCaseStudy {
   id: 'jaidee' | 'signbridge' | 'khaidee-v2' | 'farmhouse' | 'cockpit' | 'anya';
   index: string;
@@ -19,6 +26,7 @@ export interface ProjectCaseStudy {
   stack: string[];
   repoUrl?: string;
   liveNote?: string;
+  video?: ProjectVideo;
   summary: BilingualText;
   problem: BilingualText;
   architectureNote: BilingualText;

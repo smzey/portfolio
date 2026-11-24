@@ -17,6 +17,8 @@ import { normalizeLens, selectProjectsForLens, type FocusLens } from '@/lib/lens
 import ArchitectureDiagram from './ArchitectureDiagram';
 import HeroSchematicCanvas, { type GyroStatus } from './HeroSchematicCanvas';
 import styles from './Portfolio.module.css';
+import ProjectVideo from './ProjectVideo';
+import videoStyles from './ProjectVideo.module.css';
 
 const SignBridgeDemo = dynamic(() => import('./SignBridgeDemo'), { ssr: false });
 
@@ -347,9 +349,14 @@ export default function PortfolioClient() {
                       <h3 className={styles.projectName}>{project.name}</h3>
                       <p className={styles.projectTagline}>{project.tagline[lang]}</p>
 
-                      <div className={styles.diagramPreview}>
-                        <ArchitectureDiagram id={project.id} />
-                      </div>
+                      {project.video ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={project.video.poster} alt="" loading="lazy" className={videoStyles.poster} />
+                      ) : (
+                        <div className={styles.diagramPreview}>
+                          <ArchitectureDiagram id={project.id} />
+                        </div>
+                      )}
                     </div>
 
                     <div className={styles.projectFooter}>
@@ -567,6 +574,8 @@ export default function PortfolioClient() {
                 </span>
               ))}
             </div>
+
+            {activeProject.video && <ProjectVideo video={activeProject.video} lang={lang} />}
 
             {activeProject.id === 'signbridge' && <SignBridgeDemo lang={lang} />}
 
