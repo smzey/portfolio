@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "test": "node --test \"src/**/*.test.mjs\"",
-    "pack:signbridge": "node scripts/pack-signbridge.mjs \"/Users/phanu/Developer/projects/hackathon_2/public\" public/signbridge"
+    "pack:signbridge": "node scripts/pack-signbridge.mjs"
   },
   "dependencies": {
     "next": "16.2.6",

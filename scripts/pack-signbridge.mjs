@@ -1,15 +1,21 @@
 #!/usr/bin/env node
 // Pack SignBridge weights (model_cnn.json, ~9 MB) into public/signbridge/model.bin + model.meta.json.
-// Usage: node scripts/pack-signbridge.mjs <srcDir> <outDir> [--encoding int8|float16|float32]
+// Usage: node scripts/pack-signbridge.mjs [srcDir] [outDir] [--encoding int8|float16|float32]
+// Source dir defaults to SIGNBRIDGE_SRC env var, falling back to the local hackathon_2 path.
 // Conv/dense weight matrices use the chosen encoding; biases and BatchNorm params stay float32.
 import { readFileSync, writeFileSync, copyFileSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 
-const [srcDir, outDir] = process.argv.slice(2);
-const encIdx = process.argv.indexOf('--encoding');
-const encoding = encIdx > -1 ? process.argv[encIdx + 1] : 'int8';
+const DEFAULT_SRC_DIR = '/Users/phanu/Developer/projects/hackathon_2/public';
+const DEFAULT_OUT_DIR = 'public/signbridge';
+const argv = process.argv.slice(2);
+const encIdx = argv.indexOf('--encoding');
+const encoding = encIdx > -1 ? argv[encIdx + 1] : 'int8';
+const positional = argv.filter((_, i) => i !== encIdx && (encIdx === -1 || i !== encIdx + 1));
+const srcDir = positional[0] || process.env.SIGNBRIDGE_SRC || DEFAULT_SRC_DIR;
+const outDir = positional[1] || DEFAULT_OUT_DIR;
 if (!srcDir || !outDir || !['int8', 'float16', 'float32'].includes(encoding)) {
-  console.error('usage: pack-signbridge.mjs <srcDir> <outDir> [--encoding int8|float16|float32]');
+  console.error('usage: pack-signbridge.mjs [srcDir] [outDir] [--encoding int8|float16|float32]');
   process.exit(2);
 }
 
