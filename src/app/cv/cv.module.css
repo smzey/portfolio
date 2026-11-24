@@ -1,8 +1,11 @@
 .wrapper {
   min-height: 100vh;
-  background: #e9e9ec;
+  background: #e7e8ec;
   padding: 28px 16px 56px;
-  color: #09090b;
+  color: #111827;
+  font-family: var(--font-cv), -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .toolbar {
@@ -19,217 +22,204 @@
   align-items: center;
   gap: 6px;
   padding: 8px 14px;
-  border-radius: 7px;
-  border: 1px solid rgba(9, 9, 11, 0.16);
+  border-radius: 6px;
+  border: 1px solid rgba(17, 24, 39, 0.16);
   background: #ffffff;
-  color: #09090b;
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 11.5px;
-  font-weight: 500;
+  color: #111827;
+  font-family: var(--font-cv), -apple-system, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .toolbarPrimary {
-  background: #09090b;
-  color: #fafafa;
-  border-color: #09090b;
+  background: #111827;
+  color: #ffffff;
+  border-color: #111827;
 }
 
-/* Exact A4 Swiss Architectural Sheet */
+/* Exact A4 Executive Engineering CV Sheet */
 .sheet {
   width: 210mm;
   min-height: 297mm;
   max-height: 297mm;
   margin: 0 auto;
   background: #ffffff;
-  color: #09090b;
-  padding: 11mm 13.5mm 10mm;
-  border-top: 3.5px solid #09090b;
-  box-shadow: 0 20px 60px rgba(9, 9, 11, 0.14);
+  color: #111827;
+  padding: 14mm 15.5mm 13mm;
+  box-shadow: 0 20px 60px rgba(17, 24, 39, 0.14);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 9px;
-}
-
-.mono {
-  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  gap: 13px;
+  font-family: var(--font-cv), -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
   font-variant-numeric: tabular-nums;
 }
 
 /* Header */
 .header {
-  display: grid;
-  grid-template-columns: 1.3fr 1fr;
-  gap: 14px;
-  align-items: start;
-  padding-bottom: 9px;
-  border-bottom: 1px solid #d4d4d8;
+  display: flex;
+  flex-direction: column;
+  gap: 5.5px;
+  padding-bottom: 10px;
+  border-bottom: 1.5px solid #111827;
+}
+
+.headerTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
 }
 
 .name {
   margin: 0;
-  font-family: var(--font-display), var(--font-sans), sans-serif;
   font-size: 25px;
   font-weight: 700;
-  letter-spacing: -0.03em;
+  letter-spacing: 0.015em;
   line-height: 1.05;
-  color: #09090b;
+  color: #0f172a;
 }
 
 .role {
-  margin-top: 3px;
-  font-size: 11.5px;
+  font-size: 12.2px;
   font-weight: 600;
-  color: #27272a;
+  color: #334155;
+  letter-spacing: 0.005em;
 }
 
-.summary {
-  margin: 6px 0 0;
-  font-size: 9.2px;
-  line-height: 1.44;
-  color: #3f3f46;
-}
-
-.contactBlock {
+.contactLine {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 2.5px;
-  font-size: 8.6px;
-  line-height: 1.38;
-  color: #27272a;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 4.5px;
+  font-size: 8.85px;
+  line-height: 1.4;
+  color: #374151;
+  white-space: nowrap;
+}
+
+.contactSep {
+  color: #9ca3af;
 }
 
 .contactLink {
-  color: #09090b;
+  color: #111827;
+  text-decoration: none;
   font-weight: 500;
 }
 
-/* KPI Proof Strip */
-.strip {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 7px;
-  padding: 6.5px 9px;
-  background: #f4f4f6;
-  border: 1px solid #e4e4e7;
-  border-radius: 5px;
-}
-
-.stripItem {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-}
-
-.stripKey {
-  font-size: 7.4px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #52525b;
-}
-
-.stripVal {
-  font-size: 9.2px;
-  font-weight: 600;
-  color: #09090b;
+.summary {
+  margin: 3px 0 0;
+  font-size: 10px;
+  line-height: 1.5;
+  color: #1f2937;
 }
 
 /* Sections */
 .section {
   display: flex;
   flex-direction: column;
-  gap: 5.5px;
-}
-
-.secHead {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  gap: 7.5px;
 }
 
 .secTitle {
   margin: 0;
-  font-family: var(--font-display), var(--font-sans), sans-serif;
-  font-size: 10.5px;
+  padding-bottom: 3px;
+  border-bottom: 1px solid #cbd5e1;
+  font-size: 10.2px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #09090b;
-  white-space: nowrap;
-}
-
-.secRule {
-  flex: 1;
-  height: 1px;
-  background: #d4d4d8;
+  color: #0f172a;
 }
 
 /* Entries */
 .entry {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 2.5px;
 }
 
 .entryTop {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  gap: 10px;
+  gap: 12px;
 }
 
 .entryTitle {
-  font-size: 10.2px;
-  font-weight: 600;
-  color: #09090b;
+  font-size: 10.8px;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.3;
 }
 
 .entryOrg {
   font-weight: 400;
-  color: #3f3f46;
+  color: #374151;
+}
+
+.entrySub {
+  font-size: 9.8px;
+  font-style: italic;
+  color: #374151;
+  line-height: 1.38;
 }
 
 .entryMeta {
-  font-size: 8.3px;
-  color: #52525b;
+  font-size: 9.3px;
+  font-weight: 500;
+  color: #4b5563;
+  white-space: nowrap;
+}
+
+.entryMetaStrong {
+  font-size: 9.5px;
+  font-weight: 600;
+  color: #111827;
   white-space: nowrap;
 }
 
 .bullets {
-  margin: 1.5px 0 0;
-  padding-left: 13px;
+  margin: 2px 0 0;
+  padding-left: 14px;
+  list-style-type: disc;
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  font-size: 8.9px;
-  line-height: 1.4;
-  color: #27272a;
+  gap: 3px;
+  font-size: 9.8px;
+  line-height: 1.46;
+  color: #1f2937;
+}
+
+.bullets li::marker {
+  color: #6b7280;
 }
 
 .bullets li strong {
-  color: #09090b;
+  color: #0f172a;
   font-weight: 600;
 }
 
-/* Skills Table */
+/* Skills Grid */
 .skillsGrid {
   display: grid;
-  grid-template-columns: 96px 1fr;
-  row-gap: 3px;
-  column-gap: 10px;
-  font-size: 8.9px;
-  line-height: 1.38;
+  grid-template-columns: 98px 1fr;
+  row-gap: 4px;
+  column-gap: 12px;
+  font-size: 9.8px;
+  line-height: 1.44;
 }
 
 .skillLabel {
-  font-weight: 600;
-  color: #09090b;
+  font-weight: 700;
+  color: #0f172a;
 }
 
 .skillVal {
-  color: #27272a;
+  color: #1f2937;
 }
 
 @page {
