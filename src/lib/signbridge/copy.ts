@@ -1,4 +1,4 @@
-import type { BilingualText } from '../../data/portfolio.ts';
+import type { BilingualText, Lang } from '../../data/portfolio.ts';
 
 export const SIGNBRIDGE_COPY = {
   tryLive: { en: 'Try it live', th: 'ลองใช้งานจริง' },
@@ -9,8 +9,8 @@ export const SIGNBRIDGE_COPY = {
   samplesMode: { en: 'Test images', th: 'ภาพทดสอบ' },
   webcamMode: { en: 'Use webcam', th: 'ใช้กล้องเว็บแคม' },
   sampleStat: {
-    en: '43 / 48 correct on these samples · 94.8% on the full 7,172-image test set',
-    th: 'ถูกต้อง 43 / 48 ภาพในชุดตัวอย่างนี้ · 94.8% บนชุดทดสอบเต็ม 7,172 ภาพ',
+    en: '{correct} / {total} correct on these samples · 94.8% on the full 7,172-image test set',
+    th: 'ถูกต้อง {correct} / {total} ภาพในชุดตัวอย่างนี้ · 94.8% บนชุดทดสอบเต็ม 7,172 ภาพ',
   },
   sampleHint: {
     en: 'Tap a hand to run the real CNN on it.',
@@ -58,4 +58,10 @@ export function summarizeSamples(results: { label: string; letter: string }[]): 
 } {
   const misses = results.flatMap((r, index) => (r.letter === r.label ? [] : [{ index, label: r.label, predicted: r.letter }]));
   return { correct: results.length - misses.length, total: results.length, misses };
+}
+
+export function formatSampleStat(summary: { correct: number; total: number }, lang: Lang): string {
+  return SIGNBRIDGE_COPY.sampleStat[lang]
+    .replace('{correct}', String(summary.correct))
+    .replace('{total}', String(summary.total));
 }

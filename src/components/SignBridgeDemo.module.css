@@ -95,10 +95,6 @@
   color: var(--text-muted);
 }
 
-.verify {
-  color: var(--text-subtle);
-}
-
 .result {
   display: flex;
   align-items: center;

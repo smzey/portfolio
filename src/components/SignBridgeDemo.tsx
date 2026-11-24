@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Lang } from '@/data/portfolio';
 import type { Sample } from '@/lib/signbridge/cnn';
 import { createSignBridgeClient, withTimeout, type SignBridgeClient, type TimedPrediction } from '@/lib/signbridge/client';
-import { SIGNBRIDGE_COPY as C, summarizeSamples } from '@/lib/signbridge/copy';
+import { SIGNBRIDGE_COPY as C, formatSampleStat, summarizeSamples } from '@/lib/signbridge/copy';
 import SignBridgeWebcam from './SignBridgeWebcam';
 import styles from './SignBridgeDemo.module.css';
 
@@ -130,13 +130,7 @@ export default function SignBridgeDemo({ lang }: { lang: Lang }) {
 
       {status === 'ready' && mode === 'samples' && (
         <>
-          <p className={styles.stat}>
-            {C.sampleStat[lang]}
-            <span className={styles.verify}>
-              {' '}
-              ({summary.correct}/{summary.total})
-            </span>
-          </p>
+          <p className={styles.stat}>{formatSampleStat(summary, lang)}</p>
           <div className={styles.result} aria-live="polite">
             {sel ? (
               <>
