@@ -52,12 +52,22 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--font-sans), var(--font-thai), -apple-system, BlinkMacSystemFont, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: clip;
-  line-height: 1.55;
+  line-height: 1.6;
   caret-color: var(--emerald);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display), var(--font-thai), var(--font-sans), sans-serif;
+}
+
+p {
+  text-wrap: pretty;
 }
 
 a {

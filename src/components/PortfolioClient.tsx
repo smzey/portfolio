@@ -194,7 +194,7 @@ export default function PortfolioClient() {
                   <span>{PROFILE.availability[lang]}</span>
                 </div>
 
-                <div className={`${styles.heroIdentity} ${styles.mono} ${styles.arrive1}`}>
+                <div className={`${styles.heroIdentity} ${styles.arrive1}`}>
                   {PROFILE.nameEN} ({PROFILE.nameTH}) · {PROFILE.location[lang]}
                 </div>
 
