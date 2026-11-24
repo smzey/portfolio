@@ -46,3 +46,8 @@ test('every project has a ledger line: proof figure, bilingual condition, and an
   assert.equal(byId.signbridge, '0');
   assert.equal(byId.anya, 'cloud', 'Anya uses Gemini Vision, a cloud API');
 });
+
+test('every ledger line carries its first-commit month (YYYY-MM)', async () => {
+  const { PROJECTS } = await import('./portfolio.ts');
+  for (const p of PROJECTS) assert.match(p.ledger.opened ?? '', /^20\d\d-(0[1-9]|1[0-2])$/, p.id);
+});

@@ -167,7 +167,7 @@ export default function PortfolioClient() {
         </header>
 
         <main className={styles.wrap}>
-          <div className={`${styles.spread} ${styles.paper}`}>
+          <div className={`${styles.spread} ${styles.paper} ${styles.leaf}`}>
             <HolderPage lang={lang} onCopyEmail={() => void copyEmail()} />
             <LedgerPage
               lang={lang}

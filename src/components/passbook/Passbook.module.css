@@ -98,6 +98,32 @@
   color: var(--ink);
 }
 
+/* Stacked leaves: depth by overlapping page edges, never by shadow. */
+.leaf {
+  position: relative;
+  isolation: isolate;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.leaf::before,
+.leaf::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  background: var(--paper-2);
+  border: 1px solid var(--rule);
+}
+
+.leaf::before {
+  inset: 5px -5px -5px 5px;
+}
+
+.leaf::after {
+  inset: 10px -10px -10px 10px;
+  background: var(--paper-3);
+}
+
 /* ---------- Spread (first viewport) ---------- */
 .spread {
   display: grid;
@@ -106,7 +132,8 @@
 
 .holder {
   padding: 44px 44px 40px;
-  border-right: 2px solid var(--rule);
+  border-right: 2px solid var(--rule-strong);
+  background-image: linear-gradient(to left, var(--paper-3), transparent 28px);
   display: flex;
   flex-direction: column;
   gap: 22px;
@@ -337,11 +364,11 @@
   cursor: pointer;
 }
 
-.ledger tr.entry:hover td {
+.ledger tr.entry:hover {
   background: var(--paper-2);
 }
 
-.ledger tr.entry.active td {
+.ledger tr.entry.active {
   background: var(--paper-3);
 }
 
@@ -351,8 +378,9 @@
 }
 
 .entryNo {
-  font-size: 17px;
+  font-size: 16px;
   color: var(--ink-2);
+  white-space: nowrap;
 }
 
 .entryName {
@@ -395,7 +423,7 @@
 }
 
 /* Printed live lines */
-.printed td {
+.ledger tr.printed {
   background: var(--live);
 }
 
@@ -638,6 +666,8 @@
 
 .histPeriod {
   font-size: 15px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
   white-space: nowrap;
   color: var(--ink-2);
 }
@@ -690,6 +720,7 @@
 /* ---------- Back cover ---------- */
 .back {
   background: var(--cover-deep);
+  border-top: 3px double var(--cover-dim);
   color: var(--cover-ink);
   padding: 48px 44px;
   display: grid;
@@ -705,11 +736,11 @@
 }
 
 .email {
-  font-size: clamp(28px, 5vw, 64px);
+  font-size: clamp(26px, 6.4vw, 64px);
   font-weight: 700;
   letter-spacing: -0.01em;
-  line-height: 1.05;
-  overflow-wrap: anywhere;
+  line-height: 1.1;
+  overflow-wrap: normal;
   user-select: all;
 }
 
@@ -832,8 +863,10 @@
     border-bottom: 0;
     padding: 0;
   }
-  .ledger .colNo {
-    display: none;
+  .ledger td.colNo {
+    grid-column: 1 / -1;
+    font-size: 14px;
+    margin-bottom: 4px;
   }
   .ledger tr > td:nth-child(2) {
     grid-column: 1 / -1;

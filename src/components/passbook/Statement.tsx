@@ -14,7 +14,7 @@ const SignBridgeDemo = dynamic(() => import('../SignBridgeDemo'), { ssr: false }
 const Statement = forwardRef<HTMLHeadingElement, { project: ProjectCaseStudy; lang: Lang; onClose: () => void }>(
   function Statement({ project: p, lang, onClose }, headingRef) {
     return (
-      <article id="statement" className={`${styles.statement} ${styles.paper}`} aria-labelledby="statement-title">
+      <article id="statement" className={`${styles.statement} ${styles.paper} ${styles.leaf}`} aria-labelledby="statement-title">
         <div className={styles.statementTop}>
           <h2 id="statement-title" ref={headingRef} tabIndex={-1} className={styles.statementTitle}>
             {p.name}

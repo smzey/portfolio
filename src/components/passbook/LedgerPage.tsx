@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { LENS_CONFIG, type Lang, type ProjectCaseStudy } from '@/data/portfolio';
 import { UI, fill } from '@/data/ui';
 import type { FocusLens } from '@/lib/lens';
-import { MAX_PRINTED, printedLine, type PrintedLine } from '@/lib/ledger';
+import { MAX_PRINTED, ledgerMonth, printedLine, type PrintedLine } from '@/lib/ledger';
 import type { Sample } from '@/lib/signbridge/cnn';
 import { createSignBridgeClient, type SignBridgeClient } from '@/lib/signbridge/client';
 import styles from './Passbook.module.css';
@@ -152,7 +152,7 @@ export default function LedgerPage({
                 className={`${styles.entry} ${activeId === p.id ? styles.active : ''}`}
                 onClick={() => onOpen(p.id)}
               >
-                <td className={`${styles.colNo} ${styles.dot} ${styles.entryNo}`}>{p.index}</td>
+                <td className={`${styles.colNo} ${styles.dot} ${styles.entryNo}`}>{ledgerMonth(p.ledger.opened, lang)}</td>
                 <td>
                   <button
                     type="button"

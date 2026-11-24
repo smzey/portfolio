@@ -21,7 +21,7 @@ export const UI = {
   copyFailed: { en: 'Select and copy: {email}', th: 'เลือกแล้วคัดลอก: {email}' },
   ledgerTitle: { en: 'Projects, printed with their proof', th: 'ผลงาน พร้อมหลักฐานกำกับทุกบรรทัด' },
   lensLabel: { en: 'Show', th: 'แสดง' },
-  colNo: { en: 'No.', th: 'ลำดับ' },
+  colNo: { en: 'Opened', th: 'เริ่ม' },
   colEntry: { en: 'Entry', th: 'รายการ' },
   colProof: { en: 'Proof', th: 'หลักฐาน' },
   colCloud: { en: 'Cloud calls', th: 'เรียกคลาวด์' },

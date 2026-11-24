@@ -5,7 +5,7 @@ import styles from './Passbook.module.css';
 /** Work, teaching and education as ruled ledger lines, then the tools as plain prose lists. */
 export default function History({ lang }: { lang: Lang }) {
   return (
-    <section id="history" className={`${styles.section} ${styles.paper}`} aria-labelledby="history-title">
+    <section id="history" className={`${styles.section} ${styles.paper} ${styles.leaf}`} aria-labelledby="history-title">
       <h2 id="history-title" className={styles.sectionTitle}>
         {UI.historyTitle[lang]}
       </h2>
@@ -13,7 +13,7 @@ export default function History({ lang }: { lang: Lang }) {
       <div className={styles.history}>
         {EXPERIENCES.map((e) => (
           <div key={e.id} className={styles.histRow}>
-            <div className={`${styles.histPeriod} ${styles.dot}`}>{e.period}</div>
+            <div className={styles.histPeriod}>{e.period}</div>
             <div>
               <h3 className={styles.histRole}>{e.role[lang]}</h3>
               <div className={styles.histOrg}>
@@ -28,7 +28,7 @@ export default function History({ lang }: { lang: Lang }) {
           </div>
         ))}
         <div className={styles.histRow}>
-          <div className={`${styles.histPeriod} ${styles.dot}`}>{EDUCATION.period}</div>
+          <div className={styles.histPeriod}>{EDUCATION.period}</div>
           <div>
             <h3 className={styles.histRole}>{EDUCATION.degree[lang]}</h3>
             <div className={styles.histOrg}>

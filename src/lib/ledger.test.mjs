@@ -17,3 +17,12 @@ test('printedLine marks a miss', () => {
 test('at most 3 printed lines are kept', () => {
   assert.equal(MAX_PRINTED, 3);
 });
+
+import { ledgerMonth } from './ledger.ts';
+
+test('ledgerMonth prints the first-commit month in each language', () => {
+  assert.equal(ledgerMonth('2026-06', 'en'), 'JUN 2026');
+  assert.equal(ledgerMonth('2026-06', 'th'), 'มิ.ย. 2569');
+  assert.equal(ledgerMonth('2026-09', 'th'), 'ก.ย. 2569');
+  assert.equal(ledgerMonth('bad', 'en'), 'bad');
+});
