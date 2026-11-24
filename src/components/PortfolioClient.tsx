@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useRef, useState, type MouseEvent } from 'react';
+import dynamic from 'next/dynamic';
 import {
   EDUCATION,
   EXPERIENCES,
@@ -15,6 +16,8 @@ import { normalizeLens, selectProjectsForLens, type FocusLens } from '@/lib/lens
 import ArchitectureDiagram from './ArchitectureDiagram';
 import HeroSchematicCanvas, { type GyroStatus } from './HeroSchematicCanvas';
 import styles from './Portfolio.module.css';
+
+const SignBridgeDemo = dynamic(() => import('./SignBridgeDemo'), { ssr: false });
 
 const LENS_ORDER: FocusLens[] = ['all', 'ai', 'fintech', 'systems'];
 
@@ -563,6 +566,8 @@ export default function PortfolioClient() {
                 </span>
               ))}
             </div>
+
+            {activeProject.id === 'signbridge' && <SignBridgeDemo lang={lang} />}
 
             <div>
               <div className={`${styles.drawerBlockTitle} ${styles.mono}`}>
