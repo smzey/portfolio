@@ -63,9 +63,15 @@ export function createSignBridgeClient({
       loadWaiter = null;
     }
   };
-  worker.onerror = (e) => {
-    loadWaiter?.reject(new Error(e.message || 'worker error'));
+  const failAll = (err: Error) => {
+    loadWaiter?.reject(err);
     loadWaiter = null;
+    for (const p of pending.values()) p.reject(err);
+    pending.clear();
+  };
+
+  worker.onerror = (e) => {
+    failAll(new Error(e.message || 'worker error'));
   };
 
   return {
@@ -88,8 +94,7 @@ export function createSignBridgeClient({
       }),
     dispose: () => {
       worker.terminate();
-      for (const p of pending.values()) p.reject(new Error('disposed'));
-      pending.clear();
+      failAll(new Error('disposed'));
     },
   };
 }
