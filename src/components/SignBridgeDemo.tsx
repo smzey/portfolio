@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Lang } from '@/data/portfolio';
 import type { Sample } from '@/lib/signbridge/cnn';
-import { createSignBridgeClient, type SignBridgeClient, type TimedPrediction } from '@/lib/signbridge/client';
+import { createSignBridgeClient, withTimeout, type SignBridgeClient, type TimedPrediction } from '@/lib/signbridge/client';
 import { SIGNBRIDGE_COPY as C, summarizeSamples } from '@/lib/signbridge/copy';
 import SignBridgeWebcam from './SignBridgeWebcam';
 import styles from './SignBridgeDemo.module.css';
@@ -40,7 +40,7 @@ export default function SignBridgeDemo({ lang }: { lang: Lang }) {
     try {
       clientRef.current ??= createSignBridgeClient();
       const client = clientRef.current;
-      const [, res] = await Promise.all([client.load(), fetch('/signbridge/samples.json')]);
+      const [, res] = await Promise.all([client.load(), withTimeout(fetch('/signbridge/samples.json'), 15000)]);
       if (!res.ok) throw new Error(`samples HTTP ${res.status}`);
       const raw = (await res.json()) as Sample[];
       const results: TimedPrediction[] = [];

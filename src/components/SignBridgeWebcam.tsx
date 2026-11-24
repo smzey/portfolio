@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import type { Lang } from '@/data/portfolio';
-import type { SignBridgeClient, TimedPrediction } from '@/lib/signbridge/client';
+import { withTimeout, type SignBridgeClient, type TimedPrediction } from '@/lib/signbridge/client';
 import {
   cropBox,
   handsLocateFile,
@@ -17,6 +17,9 @@ import styles from './SignBridgeDemo.module.css';
 
 const MARGIN = 0.15;
 const MIN_INTERVAL_MS = 100; // ≤ 10 predictions per second
+const SEND_INTERVAL_MS = 66; // ≤ 15 MediaPipe frames per second (phones run rAF at 60–120 Hz)
+const TRACKER_INIT_TIMEOUT_MS = 12000; // WASM + model files are fetched lazily from the CDN
+const MAX_SEND_FAILURES = 10;
 const EASY = [
   { l: 'A', en: 'Fist, thumb along the side', th: 'กำมือ นิ้วโป้งแนบข้าง' },
   { l: 'B', en: 'Flat hand, thumb folded', th: 'แบมือตรง พับนิ้วโป้ง' },
@@ -69,7 +72,13 @@ export default function SignBridgeWebcam({
         const Hands = await loadHandTracker();
         if (cancelled) return;
         hands = new Hands({ locateFile: handsLocateFile });
-        hands.setOptions({ maxNumHands: 1, modelComplexity: 1, minDetectionConfidence: 0.6, minTrackingConfidence: 0.6 });
+        const coarse = window.matchMedia('(pointer: coarse)').matches;
+        hands.setOptions({
+          maxNumHands: 1,
+          modelComplexity: coarse ? 0 : 1, // lighter model on phones; we only need the hand's bounding box
+          minDetectionConfidence: 0.6,
+          minTrackingConfidence: 0.6,
+        });
         hands.onResults((r) => {
           const lm = r.multiHandLandmarks?.[0];
           setHandSeen(!!lm);
@@ -89,6 +98,8 @@ export default function SignBridgeWebcam({
             .catch(() => {})
             .finally(() => (inflight = false));
         });
+        // hands.js alone is not enough: its WASM/model files load here. Fail fast if they're blocked.
+        await withTimeout(hands.initialize(), TRACKER_INIT_TIMEOUT_MS);
       } catch {
         // No tracker → no use for the camera: release it now so the camera light turns off.
         stream.getTracks().forEach((t) => t.stop());
@@ -97,14 +108,23 @@ export default function SignBridgeWebcam({
       }
       if (cancelled) return;
       setState('live');
-      const loop = async () => {
+      let lastSend = 0;
+      let failures = 0;
+      const loop = async (now: number) => {
         if (cancelled) return;
-        if (!busy && video.readyState >= 2 && hands) {
+        if (!busy && now - lastSend >= SEND_INTERVAL_MS && video.readyState >= 2 && hands) {
           busy = true;
+          lastSend = now;
           try {
             await hands.send({ image: video });
+            failures = 0;
           } catch {
-            /* transient frame errors are ignored */
+            // A few bad frames are normal; a run of them means the tracker is broken.
+            if (++failures >= MAX_SEND_FAILURES) {
+              stream?.getTracks().forEach((t) => t.stop());
+              if (!cancelled) setState('tracker-failed');
+              return;
+            }
           }
           busy = false;
         }

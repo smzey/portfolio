@@ -24,3 +24,11 @@ test('every project video has its files, ≤ 2 MB, and a bilingual caption', asy
     assert.deepEqual(checkVideoAssets(p.video, pub), [], p.id);
   }
 });
+
+test('phone number is not on any public web page or client bundle (CV PDF only)', async () => {
+  const { readFileSync } = await import('node:fs');
+  const { PROFILE } = await import('./portfolio.ts');
+  assert.equal('phone' in PROFILE, false);
+  const cv = readFileSync(new URL('../app/cv/page.tsx', import.meta.url), 'utf8');
+  assert.doesNotMatch(cv, /93\s*195\s*6230/);
+});

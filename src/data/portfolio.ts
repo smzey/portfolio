@@ -55,7 +55,6 @@ export const PROFILE = {
   brand: 'phanu.xyz',
   emailPrimary: 'switzersawet@gmail.com',
   emailUniversity: 'phanu_sawet@cmu.ac.th',
-  phone: '+66 93 195 6230',
   githubUrl: 'https://github.com/smzey',
   githubHandle: 'github.com/smzey',
   linkedinUrl: 'https://linkedin.com/in/phanu-sawet',

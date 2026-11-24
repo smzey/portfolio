@@ -18,6 +18,7 @@ export interface HandsResults {
 export interface HandsInstance {
   setOptions(o: Record<string, unknown>): void;
   onResults(cb: (r: HandsResults) => void): void;
+  initialize(): Promise<void>;
   send(input: { image: HTMLVideoElement }): Promise<void>;
   close(): Promise<void>;
 }
