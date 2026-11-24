@@ -214,6 +214,10 @@
   align-items: center;
 }
 
+.heroGrid > * {
+  min-width: 0;
+}
+
 .statusPill {
   display: inline-flex;
   align-items: center;
@@ -274,7 +278,8 @@
 /* Interactive 3D Schematic Instrument Frame */
 .schematicStage {
   position: relative;
-  aspect-ratio: 4 / 3.45;
+  width: 100%;
+  min-width: 0;
   border-radius: 14px;
   border: 1px solid var(--border);
   background: var(--surface);
@@ -290,15 +295,18 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 8px;
   font-size: 10px;
   color: var(--text-subtle);
   letter-spacing: 0.06em;
+  flex-shrink: 0;
 }
 
 .schematicCanvasWrap {
-  flex: 1;
-  min-height: 230px;
+  width: 100%;
+  height: 295px;
   position: relative;
+  flex-shrink: 0;
 }
 
 .schematicFooter {
@@ -307,9 +315,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
+  flex-wrap: wrap;
+  gap: 6px 10px;
   font-size: 10px;
   color: var(--text-subtle);
+  flex-shrink: 0;
 }
 
 /* Metrics Row */
@@ -787,8 +797,8 @@
   .heroGrid {
     grid-template-columns: 1fr;
   }
-  .schematicStage {
-    aspect-ratio: 16 / 9.5;
+  .schematicCanvasWrap {
+    height: 270px;
   }
   .metricsGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -823,6 +833,14 @@
   .statusPill {
     font-size: 9.5px;
     padding: 6px 10px;
+  }
+  .schematicCanvasWrap {
+    height: 248px;
+  }
+  .schematicHeader,
+  .schematicFooter {
+    padding: 9px 12px;
+    font-size: 9.5px;
   }
   .stackGrid {
     grid-template-columns: 1fr;

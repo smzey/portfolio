@@ -86,14 +86,15 @@ export default function HeroSchematicCanvas({ theme }: { theme: 'dark' | 'light'
 
       const cx = w * 0.5;
       const cy = h * 0.5;
-      const radius = Math.min(w, h) * 0.34;
+      const isCompact = w < 400;
+      const radius = Math.min(w * (isCompact ? 0.27 : 0.3), h * 0.31);
 
       // Architectural CAD coordinate crosshair + orbital rings
       ctx.save();
       ctx.strokeStyle = `rgba(${fg}, 0.07)`;
       ctx.lineWidth = 1;
       ctx.beginPath();
-      ctx.arc(cx, cy, radius * 1.18, 0, Math.PI * 2);
+      ctx.arc(cx, cy, radius * 1.16, 0, Math.PI * 2);
       ctx.stroke();
 
       ctx.setLineDash([3, 5]);
@@ -104,14 +105,14 @@ export default function HeroSchematicCanvas({ theme }: { theme: 'dark' | 'light'
 
       // Subtle axis ticks
       ctx.beginPath();
-      ctx.moveTo(cx - radius * 1.32, cy);
-      ctx.lineTo(cx - radius * 1.2, cy);
-      ctx.moveTo(cx + radius * 1.2, cy);
-      ctx.lineTo(cx + radius * 1.32, cy);
-      ctx.moveTo(cx, cy - radius * 1.32);
-      ctx.lineTo(cx, cy - radius * 1.2);
-      ctx.moveTo(cx, cy + radius * 1.2);
-      ctx.lineTo(cx, cy + radius * 1.32);
+      ctx.moveTo(cx - radius * 1.28, cy);
+      ctx.lineTo(cx - radius * 1.18, cy);
+      ctx.moveTo(cx + radius * 1.18, cy);
+      ctx.lineTo(cx + radius * 1.28, cy);
+      ctx.moveTo(cx, cy - radius * 1.28);
+      ctx.lineTo(cx, cy - radius * 1.18);
+      ctx.moveTo(cx, cy + radius * 1.18);
+      ctx.lineTo(cx, cy + radius * 1.28);
       ctx.stroke();
       ctx.restore();
 
@@ -169,8 +170,10 @@ export default function HeroSchematicCanvas({ theme }: { theme: 'dark' | 'light'
         }
       }
 
-      // Draw nodes + technical callouts
-      ctx.font = '500 9.5px ui-monospace, SFMono-Regular, Menlo, monospace';
+      // Draw nodes + technical callouts (edge-safe alignment for mobile & desktop)
+      ctx.font = isCompact
+        ? '500 8.5px ui-monospace, SFMono-Regular, Menlo, monospace'
+        : '500 9.5px ui-monospace, SFMono-Regular, Menlo, monospace';
       for (let i = 0; i < projected.length; i++) {
         const p = projected[i];
         const alpha = Math.max(0.28, Math.min(0.95, 0.58 + p.z * 0.35));
@@ -182,11 +185,17 @@ export default function HeroSchematicCanvas({ theme }: { theme: 'dark' | 'light'
         ctx.fill();
 
         if (p.label && p.z > -0.25) {
-          const labelAlpha = Math.max(0.22, Math.min(0.72, 0.42 + p.z * 0.3));
+          const labelAlpha = Math.max(0.24, Math.min(0.75, 0.45 + p.z * 0.3));
           ctx.fillStyle = `rgba(${fg}, ${labelAlpha.toFixed(3)})`;
-          ctx.fillText(p.label, p.px + 7, p.py + 3);
+          const textW = ctx.measureText(p.label).width;
+          const placeLeft = p.px + 7 + textW > w - 10;
+          ctx.textAlign = placeLeft ? 'right' : 'left';
+          const tx = placeLeft ? Math.max(10 + textW, p.px - 7) : Math.min(w - 10 - textW, p.px + 7);
+          const ty = Math.max(14, Math.min(h - 10, p.py + 3));
+          ctx.fillText(p.label, tx, ty);
         }
       }
+      ctx.textAlign = 'left';
     };
 
     const loop = () => {
@@ -242,6 +251,7 @@ export default function HeroSchematicCanvas({ theme }: { theme: 'dark' | 'light'
         height: '100%',
         display: 'block',
         cursor: 'crosshair',
+        touchAction: 'pan-y',
       }}
     />
   );
