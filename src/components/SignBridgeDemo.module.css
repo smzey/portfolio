@@ -189,3 +189,145 @@
   outline: 2px solid var(--emerald);
   outline-offset: 2px;
 }
+
+/* Mode tabs */
+.tabs {
+  display: inline-flex;
+  gap: 2px;
+  padding: 2px;
+  margin-bottom: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-elevated);
+}
+
+.tab {
+  padding: 5px 12px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-muted);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.tab[aria-selected='true'] {
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 0 0 1px var(--border-strong);
+}
+
+.tab:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* Webcam mode */
+.cam {
+  display: grid;
+  gap: 12px;
+}
+
+.camStage {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #000;
+  aspect-ratio: 4 / 3;
+}
+
+.video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1);
+}
+
+.camOverlay {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+}
+
+.camOverlay .note {
+  color: #e4e4e7;
+}
+
+.camLetter {
+  font-family: var(--font-display), sans-serif;
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--emerald);
+}
+
+.bars {
+  display: grid;
+  gap: 4px;
+}
+
+.barRow {
+  display: grid;
+  grid-template-columns: 18px 1fr 40px;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.barLetter {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.barTrack {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--surface-elevated);
+  overflow: hidden;
+}
+
+.barFill {
+  display: block;
+  height: 100%;
+  background: var(--emerald);
+}
+
+.barPct {
+  text-align: right;
+}
+
+.easy {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.easyTitle {
+  margin-bottom: 4px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-subtle);
+}
+
+.easy ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 2px;
+}
+
+.easy strong {
+  display: inline-block;
+  width: 16px;
+  color: var(--text);
+}

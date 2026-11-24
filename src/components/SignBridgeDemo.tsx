@@ -5,6 +5,7 @@ import type { Lang } from '@/data/portfolio';
 import type { Sample } from '@/lib/signbridge/cnn';
 import { createSignBridgeClient, type SignBridgeClient, type TimedPrediction } from '@/lib/signbridge/client';
 import { SIGNBRIDGE_COPY as C, summarizeSamples } from '@/lib/signbridge/copy';
+import SignBridgeWebcam from './SignBridgeWebcam';
 import styles from './SignBridgeDemo.module.css';
 
 type Status = 'idle' | 'loading' | 'ready' | 'error';
@@ -30,6 +31,8 @@ export default function SignBridgeDemo({ lang }: { lang: Lang }) {
   const [samples, setSamples] = useState<(Sample & { src: string })[]>([]);
   const [preds, setPreds] = useState<TimedPrediction[]>([]);
   const [selected, setSelected] = useState<number | null>(null);
+  const [mode, setMode] = useState<'samples' | 'webcam'>('samples');
+  const backToSamples = useCallback(() => setMode('samples'), []);
   const clientRef = useRef<SignBridgeClient | null>(null);
 
   const start = useCallback(async () => {
@@ -78,10 +81,31 @@ export default function SignBridgeDemo({ lang }: { lang: Lang }) {
     <section className={styles.panel} aria-label={`SignBridge — ${C.tryLive[lang]}`}>
       <div className={styles.head}>
         <div>
-          <div className={styles.title}>{C.samplesMode[lang]}</div>
+          <div className={styles.tabs} role="tablist">
+            <button type="button" role="tab" className={styles.tab} aria-selected={mode === 'samples'} onClick={() => setMode('samples')}>
+              {C.samplesMode[lang]}
+            </button>
+            <button
+              type="button"
+              role="tab"
+              className={styles.tab}
+              aria-selected={mode === 'webcam'}
+              disabled={status !== 'ready'}
+              onClick={() => setMode('webcam')}
+            >
+              {C.webcamMode[lang]}
+            </button>
+          </div>
           <div className={styles.note}>{C.runsInBrowser[lang]}</div>
         </div>
-        <button type="button" className={styles.ghost} onClick={() => setOpen(false)}>
+        <button
+          type="button"
+          className={styles.ghost}
+          onClick={() => {
+            setMode('samples');
+            setOpen(false);
+          }}
+        >
           {C.close[lang]}
         </button>
       </div>
@@ -100,7 +124,11 @@ export default function SignBridgeDemo({ lang }: { lang: Lang }) {
         </p>
       )}
 
-      {status === 'ready' && (
+      {status === 'ready' && mode === 'webcam' && clientRef.current && (
+        <SignBridgeWebcam client={clientRef.current} lang={lang} onLeaveView={backToSamples} />
+      )}
+
+      {status === 'ready' && mode === 'samples' && (
         <>
           <p className={styles.stat}>
             {C.sampleStat[lang]}
