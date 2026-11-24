@@ -826,7 +826,8 @@
   }
   .holder {
     border-right: 0;
-    border-bottom: 2px solid var(--rule);
+    border-bottom: 2px solid var(--rule-strong);
+    background-image: none;
   }
 }
 

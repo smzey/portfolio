@@ -152,7 +152,7 @@ export default function LedgerPage({
                 className={`${styles.entry} ${activeId === p.id ? styles.active : ''}`}
                 onClick={() => onOpen(p.id)}
               >
-                <td className={`${styles.colNo} ${styles.dot} ${styles.entryNo}`}>{ledgerMonth(p.ledger.opened, lang)}</td>
+                <td className={`${styles.colNo} ${lang === 'en' ? styles.dot : ''} ${styles.entryNo}`}>{ledgerMonth(p.ledger.opened, lang)}</td>
                 <td>
                   <button
                     type="button"
