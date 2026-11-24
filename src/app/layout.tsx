@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Bricolage_Grotesque, IBM_Plex_Mono, IBM_Plex_Sans, IBM_Plex_Sans_Thai } from 'next/font/google';
 import './globals.css';
+import { SITE_URL } from '../lib/site.ts';
 
 const bricolage = Bricolage_Grotesque({
   subsets: ['latin'],
@@ -31,6 +32,8 @@ const ibmMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
+  alternates: { canonical: '/' },
   title: 'Phanu Sawet — Full-Stack & On-Device AI Engineer',
   description:
     'Engineering portfolio of Phanu Sawet (CMU CAMT MMIT · Major GPA 3.56 · Head TA for AIoT & multi-term CMU TA). Privacy-preserving local LLMs, zero-cloud CNN/YOLOv8 inference, 358-test TypeScript systems, and logistics optimization. Available for 10-Month Co-op / Internship (Jun 2027 – Mar 2028).',
@@ -39,6 +42,10 @@ export const metadata: Metadata = {
     description:
       'On-device AI, deterministic safety architectures, 358-test full-stack systems, and logistics optimization. Available for 10-Month Co-op / Internship (Jun 2027 – Mar 2028).',
     type: 'website',
+    url: '/',
+  },
+  twitter: {
+    card: 'summary_large_image',
   },
 };
 

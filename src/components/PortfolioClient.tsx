@@ -504,9 +504,6 @@ export default function PortfolioClient() {
                 >
                   {PROFILE.emailUniversity}
                 </button>
-                <a href={`tel:${PROFILE.phone.replace(/\s+/g, '')}`} className={styles.ghostBtn}>
-                  {PROFILE.phone}
-                </a>
                 <a href={PROFILE.cvUrl} download className={styles.ghostBtn}>
                   <span>Download CV (PDF)</span>
                   <IconDownload />

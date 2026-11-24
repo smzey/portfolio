@@ -39,7 +39,7 @@ export interface ExperienceItem {
 export const PROFILE = {
   nameEN: 'Phanu Sawet',
   nameTH: 'ภาณุ สาเวศ',
-  brand: 'phanu.dev',
+  brand: 'phanu.xyz',
   emailPrimary: 'switzersawet@gmail.com',
   emailUniversity: 'phanu_sawet@cmu.ac.th',
   phone: '+66 93 195 6230',
