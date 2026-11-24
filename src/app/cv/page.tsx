@@ -34,8 +34,6 @@ export default function CvPage() {
           <div className={styles.contactLine}>
             <span>Chiang Mai / Bangkok</span>
             <span className={styles.contactSep}>·</span>
-            <span>+66 93 195 6230</span>
-            <span className={styles.contactSep}>·</span>
             <a className={styles.contactLink} href="mailto:switzersawet@gmail.com">
               switzersawet@gmail.com
             </a>

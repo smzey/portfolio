@@ -1,7 +1,9 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useRef, useState, type MouseEvent } from 'react';
+import dynamic from 'next/dynamic';
 import {
+  CODE_ON_REQUEST,
   EDUCATION,
   EXPERIENCES,
   LENS_CONFIG,
@@ -15,6 +17,10 @@ import { normalizeLens, selectProjectsForLens, type FocusLens } from '@/lib/lens
 import ArchitectureDiagram from './ArchitectureDiagram';
 import HeroSchematicCanvas, { type GyroStatus } from './HeroSchematicCanvas';
 import styles from './Portfolio.module.css';
+import ProjectVideo from './ProjectVideo';
+import videoStyles from './ProjectVideo.module.css';
+
+const SignBridgeDemo = dynamic(() => import('./SignBridgeDemo'), { ssr: false });
 
 const LENS_ORDER: FocusLens[] = ['all', 'ai', 'fintech', 'systems'];
 
@@ -343,9 +349,14 @@ export default function PortfolioClient() {
                       <h3 className={styles.projectName}>{project.name}</h3>
                       <p className={styles.projectTagline}>{project.tagline[lang]}</p>
 
-                      <div className={styles.diagramPreview}>
-                        <ArchitectureDiagram id={project.id} />
-                      </div>
+                      {project.video ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={project.video.poster} alt="" loading="lazy" className={videoStyles.poster} />
+                      ) : (
+                        <div className={styles.diagramPreview}>
+                          <ArchitectureDiagram id={project.id} />
+                        </div>
+                      )}
                     </div>
 
                     <div className={styles.projectFooter}>
@@ -504,9 +515,6 @@ export default function PortfolioClient() {
                 >
                   {PROFILE.emailUniversity}
                 </button>
-                <a href={`tel:${PROFILE.phone.replace(/\s+/g, '')}`} className={styles.ghostBtn}>
-                  {PROFILE.phone}
-                </a>
                 <a href={PROFILE.cvUrl} download className={styles.ghostBtn}>
                   <span>Download CV (PDF)</span>
                   <IconDownload />
@@ -567,6 +575,10 @@ export default function PortfolioClient() {
               ))}
             </div>
 
+            {activeProject.video && <ProjectVideo video={activeProject.video} lang={lang} />}
+
+            {activeProject.id === 'signbridge' && <SignBridgeDemo lang={lang} />}
+
             <div>
               <div className={`${styles.drawerBlockTitle} ${styles.mono}`}>
                 {lang === 'en' ? 'SYSTEM ARCHITECTURE' : 'สถาปัตยกรรมระบบ'}
@@ -605,10 +617,17 @@ export default function PortfolioClient() {
             </div>
 
             <div className={styles.ctaRow} style={{ marginTop: 4 }}>
-              {activeProject.repoUrl && (
+              {activeProject.repoUrl ? (
                 <a href={activeProject.repoUrl} target="_blank" rel="noreferrer" className={styles.primaryBtn}>
-                  <span>View Source on GitHub</span>
+                  <span>{lang === 'en' ? 'View Source on GitHub' : 'ดูซอร์สโค้ดบน GitHub'}</span>
                   <IconArrowUpRight />
+                </a>
+              ) : (
+                <a
+                  href={`mailto:${PROFILE.emailPrimary}?subject=${encodeURIComponent(`Source code request: ${activeProject.name}`)}`}
+                  className={styles.ghostBtn}
+                >
+                  <span>{CODE_ON_REQUEST[lang]}</span>
                 </a>
               )}
               <a href={PROFILE.cvUrl} download className={styles.ghostBtn}>

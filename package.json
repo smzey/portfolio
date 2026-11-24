@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "node --test src/lib/lens.test.mjs"
+    "test": "node --test \"src/**/*.test.mjs\"",
+    "pack:signbridge": "node scripts/pack-signbridge.mjs"
   },
   "dependencies": {
     "next": "16.2.6",
