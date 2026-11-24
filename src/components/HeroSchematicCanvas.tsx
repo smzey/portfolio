@@ -1,6 +1,8 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, type MutableRefObject } from 'react';
+
+export type GyroStatus = 'desktop' | 'prompt' | 'active' | 'touch';
 
 interface Node3D {
   x: number;
@@ -8,6 +10,10 @@ interface Node3D {
   z: number;
   label?: string;
 }
+
+type DeviceOrientationStatic = typeof DeviceOrientationEvent & {
+  requestPermission?: () => Promise<'granted' | 'denied'>;
+};
 
 const NODES: Node3D[] = [
   // Inner icosahedral / architectural core
@@ -34,9 +40,33 @@ const EDGES: [number, number][] = [
   [10, 0], [10, 1], [10, 2], [10, 3], [10, 4], [10, 5],
 ];
 
-export default function HeroSchematicCanvas({ theme }: { theme: 'dark' | 'light' }) {
+interface HeroSchematicCanvasProps {
+  theme: 'dark' | 'light';
+  onGyroStatusChange?: (status: GyroStatus) => void;
+  gyroActionRef?: MutableRefObject<(() => Promise<void>) | null>;
+}
+
+export default function HeroSchematicCanvas({
+  theme,
+  onGyroStatusChange,
+  gyroActionRef,
+}: HeroSchematicCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const pointerRef = useRef({ tx: 0, ty: 0, x: 0, y: 0 });
+  const gyroRef = useRef<{
+    active: boolean;
+    baseBeta: number | null;
+    baseGamma: number | null;
+    tx: number;
+    ty: number;
+  }>({ active: false, baseBeta: null, baseGamma: null, tx: 0, ty: 0 });
+  const dragRef = useRef<{ active: boolean; lastX: number; lastY: number; vx: number; vy: number }>({
+    active: false,
+    lastX: 0,
+    lastY: 0,
+    vx: 0,
+    vy: 0,
+  });
   const visibleRef = useRef(true);
 
   useEffect(() => {
@@ -46,6 +76,8 @@ export default function HeroSchematicCanvas({ theme }: { theme: 'dark' | 'light'
     if (!ctx) return;
 
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isCoarsePointer =
+      window.matchMedia('(pointer: coarse)').matches || (navigator.maxTouchPoints ?? 0) > 0;
 
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
@@ -66,6 +98,82 @@ export default function HeroSchematicCanvas({ theme }: { theme: 'dark' | 'light'
       { threshold: 0.05 }
     );
     io.observe(canvas);
+
+    // Gyroscope (DeviceOrientation) handler — auto-calibrates to user's natural holding posture
+    const onOrientation = (ev: DeviceOrientationEvent) => {
+      if (reducedMotion) return;
+      if (ev.gamma == null || ev.beta == null) return;
+
+      if (gyroRef.current.baseGamma === null || gyroRef.current.baseBeta === null) {
+        gyroRef.current.baseGamma = ev.gamma;
+        gyroRef.current.baseBeta = ev.beta;
+      }
+
+      const dGamma = ev.gamma - gyroRef.current.baseGamma;
+      const dBeta = ev.beta - gyroRef.current.baseBeta;
+
+      gyroRef.current.tx = Math.max(-1.35, Math.min(1.35, dGamma / 28));
+      gyroRef.current.ty = Math.max(-1.1, Math.min(1.1, dBeta / 28));
+
+      if (!gyroRef.current.active) {
+        gyroRef.current.active = true;
+        onGyroStatusChange?.('active');
+      }
+    };
+
+    let orientationListening = false;
+    const attachOrientation = () => {
+      if (orientationListening) return;
+      window.addEventListener('deviceorientation', onOrientation, true);
+      orientationListening = true;
+    };
+
+    const hasOrientation = typeof window !== 'undefined' && 'DeviceOrientationEvent' in window;
+    const DOE = hasOrientation ? (window.DeviceOrientationEvent as DeviceOrientationStatic) : null;
+    const needsExplicitPermission = Boolean(DOE && typeof DOE.requestPermission === 'function');
+
+    if (!isCoarsePointer) {
+      onGyroStatusChange?.('desktop');
+    } else if (needsExplicitPermission) {
+      onGyroStatusChange?.('prompt');
+    } else if (hasOrientation && !reducedMotion) {
+      // Android / non-gated mobile browsers: attach immediately; transitions to 'active' on first reading
+      onGyroStatusChange?.('touch');
+      attachOrientation();
+    } else {
+      onGyroStatusChange?.('touch');
+    }
+
+    if (gyroActionRef) {
+      gyroActionRef.current = async () => {
+        if (gyroRef.current.active) {
+          // Recenter neutral posture on tap
+          gyroRef.current.baseBeta = null;
+          gyroRef.current.baseGamma = null;
+          return;
+        }
+        if (DOE && typeof DOE.requestPermission === 'function') {
+          try {
+            const res = await DOE.requestPermission();
+            if (res === 'granted') {
+              gyroRef.current.baseBeta = null;
+              gyroRef.current.baseGamma = null;
+              attachOrientation();
+              gyroRef.current.active = true;
+              onGyroStatusChange?.('active');
+            } else {
+              onGyroStatusChange?.('touch');
+            }
+          } catch {
+            onGyroStatusChange?.('touch');
+          }
+        } else if (hasOrientation) {
+          gyroRef.current.baseBeta = null;
+          gyroRef.current.baseGamma = null;
+          attachOrientation();
+        }
+      };
+    }
 
     let raf = 0;
     let angleY = 0.42;
@@ -89,14 +197,48 @@ export default function HeroSchematicCanvas({ theme }: { theme: 'dark' | 'light'
       const isCompact = w < 400;
       const radius = Math.min(w * (isCompact ? 0.27 : 0.3), h * 0.31);
 
-      // Architectural CAD coordinate crosshair + orbital rings
+      // Combine pointer / gyro targets with smooth spring easing
+      const targetX = gyroRef.current.active ? gyroRef.current.tx : pointerRef.current.tx;
+      const targetY = gyroRef.current.active ? gyroRef.current.ty : pointerRef.current.ty;
+      const ease = gyroRef.current.active ? 0.1 : 0.06;
+
+      pointerRef.current.x += (targetX - pointerRef.current.x) * ease;
+      pointerRef.current.y += (targetY - pointerRef.current.y) * ease;
+
+      // Apply touch-drag rotational momentum
+      if (!dragRef.current.active) {
+        angleY += dragRef.current.vx;
+        angleX = Math.max(-0.85, Math.min(0.85, angleX + dragRef.current.vy));
+        dragRef.current.vx *= 0.92;
+        dragRef.current.vy *= 0.92;
+      }
+
+      // Architectural CAD coordinate crosshair + gyro-responsive orbital rings
       ctx.save();
-      ctx.strokeStyle = `rgba(${fg}, 0.07)`;
+      ctx.strokeStyle = `rgba(${fg}, 0.075)`;
       ctx.lineWidth = 1;
       ctx.beginPath();
       ctx.arc(cx, cy, radius * 1.16, 0, Math.PI * 2);
       ctx.stroke();
 
+      // Subtle tilted gyro-ring ellipse when device tilts
+      if (gyroRef.current.active) {
+        const tiltScaleY = Math.max(0.55, 1 - Math.abs(pointerRef.current.y) * 0.24);
+        ctx.strokeStyle = `rgba(${emerald}, 0.2)`;
+        ctx.beginPath();
+        ctx.ellipse(
+          cx + pointerRef.current.x * 6,
+          cy + pointerRef.current.y * 5,
+          radius * 1.02,
+          radius * 1.02 * tiltScaleY,
+          pointerRef.current.x * 0.25,
+          0,
+          Math.PI * 2
+        );
+        ctx.stroke();
+      }
+
+      ctx.strokeStyle = `rgba(${fg}, 0.07)`;
       ctx.setLineDash([3, 5]);
       ctx.beginPath();
       ctx.arc(cx, cy, radius * 0.72, 0, Math.PI * 2);
@@ -116,12 +258,8 @@ export default function HeroSchematicCanvas({ theme }: { theme: 'dark' | 'light'
       ctx.stroke();
       ctx.restore();
 
-      // Smooth pointer parallax easing
-      pointerRef.current.x += (pointerRef.current.tx - pointerRef.current.x) * 0.06;
-      pointerRef.current.y += (pointerRef.current.ty - pointerRef.current.y) * 0.06;
-
-      const ay = angleY + pointerRef.current.x * 0.55;
-      const ax = angleX + pointerRef.current.y * 0.45;
+      const ay = angleY + pointerRef.current.x * (gyroRef.current.active ? 0.85 : 0.55);
+      const ax = angleX + pointerRef.current.y * (gyroRef.current.active ? 0.65 : 0.45);
       const cosY = Math.cos(ay);
       const sinY = Math.sin(ay);
       const cosX = Math.cos(ax);
@@ -143,7 +281,7 @@ export default function HeroSchematicCanvas({ theme }: { theme: 'dark' | 'light'
         };
       });
 
-      // Draw edges sorted back-to-front
+      // Draw edges
       for (let i = 0; i < EDGES.length; i++) {
         const [aIdx, bIdx] = EDGES[i];
         const a = projected[aIdx];
@@ -158,7 +296,7 @@ export default function HeroSchematicCanvas({ theme }: { theme: 'dark' | 'light'
         ctx.lineTo(b.px, b.py);
         ctx.stroke();
 
-        // Traveling signal pulse on 4 active conduits
+        // Traveling signal pulse on active conduits
         if (!reducedMotion && i % 7 === 0) {
           const p = (t * 0.42 + i * 0.19) % 1;
           const sx = a.px + (b.px - a.px) * p;
@@ -216,7 +354,30 @@ export default function HeroSchematicCanvas({ theme }: { theme: 'dark' | 'light'
       raf = requestAnimationFrame(loop);
     }
 
-    const onMove = (e: PointerEvent) => {
+    const onPointerDown = (e: PointerEvent) => {
+      if (e.pointerType === 'mouse') return;
+      dragRef.current.active = true;
+      dragRef.current.lastX = e.clientX;
+      dragRef.current.lastY = e.clientY;
+      dragRef.current.vx = 0;
+      dragRef.current.vy = 0;
+    };
+
+    const onPointerMove = (e: PointerEvent) => {
+      if (e.pointerType !== 'mouse') {
+        if (!dragRef.current.active) return;
+        const dx = e.clientX - dragRef.current.lastX;
+        const dy = e.clientY - dragRef.current.lastY;
+        dragRef.current.lastX = e.clientX;
+        dragRef.current.lastY = e.clientY;
+        angleY += dx * 0.012;
+        angleX = Math.max(-0.85, Math.min(0.85, angleX + dy * 0.006));
+        dragRef.current.vx = dx * 0.008;
+        dragRef.current.vy = dy * 0.003;
+        if (reducedMotion) drawFrame();
+        return;
+      }
+
       const rect = canvas.getBoundingClientRect();
       const nx = ((e.clientX - rect.left) / Math.max(1, rect.width) - 0.5) * 2;
       const ny = ((e.clientY - rect.top) / Math.max(1, rect.height) - 0.5) * 2;
@@ -224,28 +385,46 @@ export default function HeroSchematicCanvas({ theme }: { theme: 'dark' | 'light'
       pointerRef.current.ty = Math.max(-1, Math.min(1, ny));
       if (reducedMotion) drawFrame();
     };
+
+    const onPointerUp = () => {
+      dragRef.current.active = false;
+    };
+
     const onLeave = () => {
+      dragRef.current.active = false;
       pointerRef.current.tx = 0;
       pointerRef.current.ty = 0;
       if (reducedMotion) drawFrame();
     };
 
-    canvas.addEventListener('pointermove', onMove);
+    canvas.addEventListener('pointerdown', onPointerDown);
+    canvas.addEventListener('pointermove', onPointerMove);
+    canvas.addEventListener('pointerup', onPointerUp);
+    canvas.addEventListener('pointercancel', onPointerUp);
     canvas.addEventListener('pointerleave', onLeave);
 
     return () => {
       cancelAnimationFrame(raf);
       ro.disconnect();
       io.disconnect();
-      canvas.removeEventListener('pointermove', onMove);
+      if (orientationListening) {
+        window.removeEventListener('deviceorientation', onOrientation, true);
+      }
+      if (gyroActionRef) {
+        gyroActionRef.current = null;
+      }
+      canvas.removeEventListener('pointerdown', onPointerDown);
+      canvas.removeEventListener('pointermove', onPointerMove);
+      canvas.removeEventListener('pointerup', onPointerUp);
+      canvas.removeEventListener('pointercancel', onPointerUp);
       canvas.removeEventListener('pointerleave', onLeave);
     };
-  }, [theme]);
+  }, [theme, onGyroStatusChange, gyroActionRef]);
 
   return (
     <canvas
       ref={canvasRef}
-      aria-label="Interactive 3D architectural lattice representing on-device AI and full-stack systems"
+      aria-label="Interactive 3D architectural lattice — move cursor, drag, or tilt phone with gyroscope to orbit"
       style={{
         width: '100%',
         height: '100%',

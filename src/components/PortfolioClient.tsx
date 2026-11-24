@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState, type MouseEvent } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, type MouseEvent } from 'react';
 import {
   EDUCATION,
   EXPERIENCES,
@@ -13,7 +13,7 @@ import {
 } from '@/data/portfolio';
 import { normalizeLens, selectProjectsForLens, type FocusLens } from '@/lib/lens';
 import ArchitectureDiagram from './ArchitectureDiagram';
-import HeroSchematicCanvas from './HeroSchematicCanvas';
+import HeroSchematicCanvas, { type GyroStatus } from './HeroSchematicCanvas';
 import styles from './Portfolio.module.css';
 
 const LENS_ORDER: FocusLens[] = ['all', 'ai', 'fintech', 'systems'];
@@ -56,6 +56,11 @@ export default function PortfolioClient() {
   const [lens, setLens] = useState<FocusLens>('all');
   const [activeProject, setActiveProject] = useState<ProjectCaseStudy | null>(null);
   const [toast, setToast] = useState<string>('');
+  const [gyroStatus, setGyroStatus] = useState<GyroStatus>('desktop');
+  const gyroActionRef = useRef<(() => Promise<void>) | null>(null);
+  const handleGyroStatusChange = useCallback((status: GyroStatus) => {
+    setGyroStatus(status);
+  }, []);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -228,10 +233,36 @@ export default function PortfolioClient() {
               <div className={`${styles.schematicStage} ${styles.arrive3}`}>
                 <div className={`${styles.schematicHeader} ${styles.mono}`}>
                   <span>SYSTEMS TOPOLOGY · LIVE</span>
-                  <span>MOVE CURSOR TO ORBIT</span>
+                  {gyroStatus === 'prompt' ? (
+                    <button
+                      type="button"
+                      className={`${styles.gyroChip} ${styles.mono}`}
+                      onClick={() => void gyroActionRef.current?.()}
+                    >
+                      {lang === 'en' ? 'ENABLE TILT GYRO' : 'เปิดไจโรเอียงจอ'}
+                    </button>
+                  ) : gyroStatus === 'active' ? (
+                    <button
+                      type="button"
+                      className={`${styles.gyroChip} ${styles.gyroChipActive} ${styles.mono}`}
+                      onClick={() => void gyroActionRef.current?.()}
+                      title="Tap to recenter gyroscope baseline"
+                    >
+                      <span className={styles.gyroDot} aria-hidden="true" />
+                      <span>{lang === 'en' ? 'GYRO LIVE · RECENTER' : 'ไจโรทำงาน · รีเซ็ตมุม'}</span>
+                    </button>
+                  ) : gyroStatus === 'touch' ? (
+                    <span>{lang === 'en' ? 'DRAG TO ORBIT' : 'ลากเพื่อหมุน 3D'}</span>
+                  ) : (
+                    <span>MOVE CURSOR TO ORBIT</span>
+                  )}
                 </div>
                 <div className={styles.schematicCanvasWrap}>
-                  <HeroSchematicCanvas theme={theme} />
+                  <HeroSchematicCanvas
+                    theme={theme}
+                    onGyroStatusChange={handleGyroStatusChange}
+                    gyroActionRef={gyroActionRef}
+                  />
                 </div>
                 <div className={`${styles.schematicFooter} ${styles.mono}`}>
                   <span>ON-DEVICE · 0 CLOUD</span>
