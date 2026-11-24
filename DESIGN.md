@@ -207,7 +207,7 @@ Light theme is the passbook by day. Dark theme is the same book under a desk lam
 
 ## Colors
 
-A restrained bank-document palette: one cool navy family for the cover, one pale green paper family, carbon-blue ink, and a single warm red. Every token has a day and a lamp-lit value; the `-dark` keys apply under `prefers-color-scheme: dark` (unless `data-theme="light"`) and under `data-theme="dark"`. Cover ink and cover dim are identical in both themes. Both themes declare `color-scheme: light`, because the reading surface is paper in both.
+A restrained bank-document palette: one cool navy family for the cover, one pale green paper family, carbon-blue ink, and a single warm red. Every token has a day and a lamp-lit value; light is the default for every visitor, whatever their system setting; the `-dark` keys apply only under `data-theme="dark"`, which the visitor turns on with the theme toggle (remembered in localStorage). Never follow `prefers-color-scheme`. Cover ink and cover dim are identical in both themes. Both themes declare `color-scheme: light`, because the reading surface is paper in both.
 
 ### Primary
 - **Carbon-Blue Ink** (`ink` / `ink-dark`): all body text, ledger figures, the filled primary button, the toast, text selection, hand-sample borders and letter tabs. Under the lamp it deepens slightly rather than flipping to a light tone.

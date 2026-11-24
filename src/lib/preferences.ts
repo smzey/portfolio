@@ -4,10 +4,9 @@ export type UiLang = 'en' | 'th';
 export const THEME_KEY = 'phanu-theme';
 export const LANG_KEY = 'phanu-lang';
 
-/** A stored, valid choice wins; otherwise follow the visitor's system setting. */
-export function resolveTheme(stored: string | null, prefersDark: boolean): Theme {
-  if (stored === 'light' || stored === 'dark') return stored;
-  return prefersDark ? 'dark' : 'light';
+/** The visitor's own stored choice wins; otherwise light (paper by day). The system setting is ignored on purpose. */
+export function resolveTheme(stored: string | null): Theme {
+  return stored === 'dark' ? 'dark' : 'light';
 }
 
 export function resolveLang(stored: string | null): UiLang {
