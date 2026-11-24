@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, type MouseEvent } from 'react';
 import {
   EDUCATION,
   EXPERIENCES,
@@ -13,9 +13,42 @@ import {
 } from '@/data/portfolio';
 import { normalizeLens, selectProjectsForLens, type FocusLens } from '@/lib/lens';
 import ArchitectureDiagram from './ArchitectureDiagram';
+import HeroSchematicCanvas from './HeroSchematicCanvas';
 import styles from './Portfolio.module.css';
 
 const LENS_ORDER: FocusLens[] = ['all', 'ai', 'fintech', 'systems'];
+
+function IconArrowRight({ className }: { className?: string }) {
+  return (
+    <svg className={className} width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M3.5 8h9m0 0-3.5-3.5M12.5 8 9 11.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function IconArrowUpRight() {
+  return (
+    <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M5 11 11 5m0 0H6m5 0v5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function IconDownload() {
+  return (
+    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M8 3v7m0 0-3-3m3 3 3-3M3.5 12.5h9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function IconClose() {
+  return (
+    <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M4 4l8 8m0-8-8 8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+    </svg>
+  );
+}
 
 export default function PortfolioClient() {
   const [lang, setLang] = useState<Lang>('en');
@@ -24,19 +57,16 @@ export default function PortfolioClient() {
   const [activeProject, setActiveProject] = useState<ProjectCaseStudy | null>(null);
   const [toast, setToast] = useState<string>('');
 
-  // Read initial ?lens= query parameter on client mount
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const initial = normalizeLens(params.get('lens'));
     if (initial !== 'all') setLens(initial);
   }, []);
 
-  // Sync theme to <html data-theme="...">
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
 
-  // Close drawer on Escape and lock background scroll while open
   useEffect(() => {
     if (!activeProject) return;
     const prevOverflow = document.body.style.overflow;
@@ -79,7 +109,7 @@ export default function PortfolioClient() {
         return;
       }
     } catch {
-      // Fall through to execCommand fallback
+      // Fallback below
     }
     try {
       const ta = document.createElement('textarea');
@@ -96,13 +126,21 @@ export default function PortfolioClient() {
     }
   };
 
+  const handleCardPointerMove = (e: MouseEvent<HTMLButtonElement>) => {
+    const inner = e.currentTarget.firstElementChild as HTMLElement | null;
+    if (!inner) return;
+    const rect = inner.getBoundingClientRect();
+    inner.style.setProperty('--mx', `${e.clientX - rect.left}px`);
+    inner.style.setProperty('--my', `${e.clientY - rect.top}px`);
+  };
+
   return (
     <div className={styles.page}>
       {/* Sticky Minimal Header */}
       <header className={styles.header}>
         <div className={styles.headerInner}>
           <a href="#top" className={styles.brand}>
-            <svg width="15" height="15" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+            <svg className={styles.brandIcon} width="15" height="15" viewBox="0 0 64 64" fill="none" aria-hidden="true">
               <path
                 d="M32 8v48M8 32h48M15 15l34 34M15 49l34-34"
                 stroke="currentColor"
@@ -138,48 +176,71 @@ export default function PortfolioClient() {
               {theme === 'dark' ? 'LIGHT' : 'DARK'}
             </button>
             <a href={PROFILE.cvUrl} download className={styles.primaryBtn}>
-              {lang === 'en' ? 'CV (PDF)' : 'ดาวน์โหลด CV'}
+              <span>{lang === 'en' ? 'CV (PDF)' : 'ดาวน์โหลด CV'}</span>
+              <IconDownload />
             </a>
           </div>
         </div>
       </header>
 
       <main id="top">
-        {/* Hero */}
+        {/* Hero: Editorial Thesis + Live 3D Architectural Lattice */}
         <section className={styles.hero}>
           <div className={styles.container}>
-            <div className={`${styles.statusPill} ${styles.mono}`}>
-              <span className={styles.statusDot} />
-              <span>{PROFILE.availability[lang]}</span>
+            <div className={styles.heroGrid}>
+              <div>
+                <div className={`${styles.statusPill} ${styles.mono} ${styles.arrive1}`}>
+                  <span className={styles.statusDot} />
+                  <span>{PROFILE.availability[lang]}</span>
+                </div>
+
+                <div className={`${styles.heroIdentity} ${styles.mono} ${styles.arrive1}`}>
+                  {PROFILE.nameEN} ({PROFILE.nameTH}) · {PROFILE.location[lang]}
+                </div>
+
+                <h1 className={`${styles.heroTitle} ${styles.arrive2}`}>{PROFILE.heroTitle[lang]}</h1>
+                <p className={`${styles.heroSub} ${styles.arrive3}`}>{PROFILE.heroSubtitle[lang]}</p>
+
+                <div className={`${styles.ctaRow} ${styles.arrive4}`}>
+                  <a href={PROFILE.cvUrl} download className={styles.primaryBtn}>
+                    <span>{lang === 'en' ? 'Download CV (PDF)' : 'ดาวน์โหลดเรซูเม่ (PDF)'}</span>
+                    <IconDownload />
+                  </a>
+                  <button
+                    type="button"
+                    className={styles.ghostBtn}
+                    onClick={() => void safeCopy(PROFILE.emailPrimary, `Copied ${PROFILE.emailPrimary}`)}
+                  >
+                    {lang === 'en' ? 'Copy Email' : 'คัดลอกอีเมล'}
+                  </button>
+                  <a href={PROFILE.githubUrl} target="_blank" rel="noreferrer" className={styles.ghostBtn}>
+                    <span>GitHub</span>
+                    <IconArrowUpRight />
+                  </a>
+                  <a href={PROFILE.linkedinUrl} target="_blank" rel="noreferrer" className={styles.ghostBtn}>
+                    <span>LinkedIn</span>
+                    <IconArrowUpRight />
+                  </a>
+                </div>
+              </div>
+
+              {/* Authored Focal Moment: Interactive 3D Systems Lattice */}
+              <div className={`${styles.schematicStage} ${styles.arrive3}`}>
+                <div className={`${styles.schematicHeader} ${styles.mono}`}>
+                  <span>SYSTEMS TOPOLOGY · LIVE</span>
+                  <span>MOVE CURSOR TO ORBIT</span>
+                </div>
+                <div className={styles.schematicCanvasWrap}>
+                  <HeroSchematicCanvas theme={theme} />
+                </div>
+                <div className={`${styles.schematicFooter} ${styles.mono}`}>
+                  <span>ON-DEVICE · 0 CLOUD</span>
+                  <span>CMU CAMT · MMIT</span>
+                </div>
+              </div>
             </div>
 
-            <div className={`${styles.heroIdentity} ${styles.mono}`}>
-              {PROFILE.nameEN} ({PROFILE.nameTH}) · {PROFILE.location[lang]}
-            </div>
-
-            <h1 className={styles.heroTitle}>{PROFILE.heroTitle[lang]}</h1>
-            <p className={styles.heroSub}>{PROFILE.heroSubtitle[lang]}</p>
-
-            <div className={styles.ctaRow}>
-              <a href={PROFILE.cvUrl} download className={styles.primaryBtn}>
-                {lang === 'en' ? 'Download CV (PDF) ↓' : 'ดาวน์โหลดเรซูเม่ (PDF) ↓'}
-              </a>
-              <button
-                type="button"
-                className={styles.ghostBtn}
-                onClick={() => void safeCopy(PROFILE.emailPrimary, `Copied ${PROFILE.emailPrimary}`)}
-              >
-                {lang === 'en' ? 'Copy Email' : 'คัดลอกอีเมล'}
-              </button>
-              <a href={PROFILE.githubUrl} target="_blank" rel="noreferrer" className={styles.ghostBtn}>
-                GitHub ↗
-              </a>
-              <a href={PROFILE.linkedinUrl} target="_blank" rel="noreferrer" className={styles.ghostBtn}>
-                LinkedIn ↗
-              </a>
-            </div>
-
-            <div className={styles.metricsGrid}>
+            <div className={`${styles.metricsGrid} ${styles.arrive4}`}>
               {PROFILE.metrics.map((m) => (
                 <div key={m.value} className={styles.metricCard}>
                   <div className={`${styles.metricVal} ${styles.mono}`}>{m.value}</div>
@@ -195,21 +256,15 @@ export default function PortfolioClient() {
         <section id="work" className={styles.section}>
           <div className={styles.container}>
             <div className={styles.sectionHeader}>
-              <div>
-                <div className={`${styles.sectionEyebrow} ${styles.mono}`}>
-                  {lang === 'en' ? '01 · SELECTED ENGINEERING WORK' : '01 · ผลงานวิศวกรรมเด่น'}
-                </div>
-                <h2 className={styles.sectionTitle}>
-                  {lang === 'en' ? 'Systems & Architecture Case Studies' : 'กรณีศึกษาสถาปัตยกรรมและระบบที่สร้างจริง'}
-                </h2>
-              </div>
-              <div className={styles.mono} style={{ fontSize: 11, color: 'var(--text-subtle)' }}>
-                {lang === 'en' ? 'CLICK ANY CARD TO INSPECT ARCHITECTURE' : 'คลิกการ์ดเพื่อดูแผนผังสถาปัตยกรรม'}
+              <h2 className={styles.sectionTitle}>
+                {lang === 'en' ? 'Systems & Architecture Case Studies' : 'กรณีศึกษาสถาปัตยกรรมและระบบที่สร้างจริง'}
+              </h2>
+              <div className={`${styles.sectionHint} ${styles.mono}`}>
+                {lang === 'en' ? 'Select any system to inspect full architecture' : 'คลิกการ์ดเพื่อดูรายละเอียดสถาปัตยกรรม'}
               </div>
             </div>
 
-            {/* Focus Lens Switcher */}
-            <div className={styles.lensBar} role="tablist" aria-label="Recruiter focus lens">
+            <div className={styles.lensBar} role="tablist" aria-label="Domain filter">
               {LENS_ORDER.map((key) => {
                 const cfg = LENS_CONFIG[key];
                 const active = lens === key;
@@ -235,41 +290,46 @@ export default function PortfolioClient() {
               </span>
             </div>
 
-            <div className={styles.projectsGrid}>
+            <div className={styles.projectsGrid} key={lens}>
               {orderedProjects.map((project, idx) => (
                 <button
                   key={project.id}
                   type="button"
                   className={styles.projectCard}
+                  style={{ animationDelay: `${Math.min(idx * 45, 220)}ms` }}
+                  onMouseMove={handleCardPointerMove}
                   onClick={() => setActiveProject(project)}
                 >
-                  <div>
-                    <div className={styles.projectCardTop}>
-                      <span className={`${styles.projectIndex} ${styles.mono}`}>
-                        {String(idx + 1).padStart(2, '0')} · {project.category[lang]}
-                      </span>
-                      <span className={`${styles.metricPill} ${styles.mono}`}>{project.metricBadge}</span>
-                    </div>
-
-                    <h3 className={styles.projectName}>{project.name}</h3>
-                    <p className={styles.projectTagline}>{project.tagline[lang]}</p>
-
-                    <div className={styles.diagramPreview}>
-                      <ArchitectureDiagram id={project.id} />
-                    </div>
-                  </div>
-
-                  <div className={styles.projectFooter}>
-                    <div className={styles.tagList}>
-                      {project.stack.slice(0, 4).map((tech) => (
-                        <span key={tech} className={`${styles.tag} ${styles.mono}`}>
-                          {tech}
+                  <div className={styles.projectInner}>
+                    <div>
+                      <div className={styles.projectCardTop}>
+                        <span className={`${styles.projectIndex} ${styles.mono}`}>
+                          {String(idx + 1).padStart(2, '0')} · {project.category[lang]}
                         </span>
-                      ))}
+                        <span className={`${styles.metricPill} ${styles.mono}`}>{project.metricBadge}</span>
+                      </div>
+
+                      <h3 className={styles.projectName}>{project.name}</h3>
+                      <p className={styles.projectTagline}>{project.tagline[lang]}</p>
+
+                      <div className={styles.diagramPreview}>
+                        <ArchitectureDiagram id={project.id} />
+                      </div>
                     </div>
-                    <span className={`${styles.inspectLabel} ${styles.mono}`}>
-                      {lang === 'en' ? 'Inspect →' : 'ดูรายละเอียด →'}
-                    </span>
+
+                    <div className={styles.projectFooter}>
+                      <div className={styles.tagList}>
+                        {project.stack.slice(0, 4).map((tech) => (
+                          <span key={tech} className={`${styles.tag} ${styles.mono}`}>
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                      <span className={`${styles.inspectLabel} ${styles.mono}`}>
+                        <span>{lang === 'en' ? 'Inspect' : 'ดูรายละเอียด'}</span>
+                        <IconArrowRight className={styles.inspectArrow} />
+                      </span>
+                    </div>
                   </div>
                 </button>
               ))}
@@ -281,14 +341,9 @@ export default function PortfolioClient() {
         <section id="experience" className={styles.section}>
           <div className={styles.container}>
             <div className={styles.sectionHeader}>
-              <div>
-                <div className={`${styles.sectionEyebrow} ${styles.mono}`}>
-                  {lang === 'en' ? '02 · TRACK RECORD' : '02 · ประสบการณ์และการศึกษา'}
-                </div>
-                <h2 className={styles.sectionTitle}>
-                  {lang === 'en' ? 'Experience & Education' : 'ประสบการณ์ทำงานและการศึกษา'}
-                </h2>
-              </div>
+              <h2 className={styles.sectionTitle}>
+                {lang === 'en' ? 'Experience & Education' : 'ประสบการณ์ทำงานและการศึกษา'}
+              </h2>
             </div>
 
             <div className={styles.twoCol}>
@@ -319,10 +374,7 @@ export default function PortfolioClient() {
               </div>
 
               <aside className={styles.eduCard}>
-                <div className={`${styles.sectionEyebrow} ${styles.mono}`}>
-                  {lang === 'en' ? 'EDUCATION · CMU CAMT' : 'การศึกษา · มหาวิทยาลัยเชียงใหม่'}
-                </div>
-                <div style={{ fontSize: 16, fontWeight: 600, lineHeight: 1.35 }}>{EDUCATION.degree[lang]}</div>
+                <div style={{ fontSize: 16.5, fontWeight: 600, lineHeight: 1.35 }}>{EDUCATION.degree[lang]}</div>
                 <div style={{ fontSize: 13, color: 'var(--text-muted)' }}>{EDUCATION.school}</div>
                 <div className={styles.mono} style={{ fontSize: 11.5, color: 'var(--text)' }}>
                   {EDUCATION.period} · <strong>{EDUCATION.gpa}</strong>
@@ -336,7 +388,7 @@ export default function PortfolioClient() {
                 </div>
 
                 <div>
-                  <div className={`${styles.sectionEyebrow} ${styles.mono}`} style={{ marginBottom: 8 }}>
+                  <div className={styles.mono} style={{ fontSize: 10, color: 'var(--text-subtle)', marginBottom: 8, letterSpacing: '0.07em' }}>
                     {lang === 'en' ? 'RELEVANT COURSEWORK' : 'รายวิชาที่เกี่ยวข้อง'}
                   </div>
                   <div className={styles.tagList}>
@@ -356,14 +408,9 @@ export default function PortfolioClient() {
         <section id="stack" className={styles.section}>
           <div className={styles.container}>
             <div className={styles.sectionHeader}>
-              <div>
-                <div className={`${styles.sectionEyebrow} ${styles.mono}`}>
-                  {lang === 'en' ? '03 · TECHNICAL CAPABILITIES' : '03 · ทักษะทางเทคนิค'}
-                </div>
-                <h2 className={styles.sectionTitle}>
-                  {lang === 'en' ? 'Engineering Stack' : 'เทคโนโลยีและเครื่องมือที่ใช้จริง'}
-                </h2>
-              </div>
+              <h2 className={styles.sectionTitle}>
+                {lang === 'en' ? 'Engineering Stack' : 'เทคโนโลยีและเครื่องมือที่ใช้จริง'}
+              </h2>
             </div>
 
             <div className={styles.stackGrid}>
@@ -381,20 +428,17 @@ export default function PortfolioClient() {
           </div>
         </section>
 
-        {/* Contact & Shareable Recruiter Links */}
+        {/* Contact */}
         <section id="contact" className={styles.section} style={{ borderBottom: 'none' }}>
           <div className={styles.container}>
             <div className={styles.contactCard}>
               <div>
-                <div className={`${styles.sectionEyebrow} ${styles.mono}`}>
-                  {lang === 'en' ? '04 · GET IN TOUCH' : '04 · ช่องทางติดต่อ'}
-                </div>
-                <h2 className={styles.sectionTitle} style={{ marginTop: 8 }}>
+                <h2 className={styles.sectionTitle}>
                   {lang === 'en'
-                    ? 'Ready for a 10-month WIL 19 engineering internship (Jun 2027 – Mar 2028).'
+                    ? 'Available for a 10-month WIL 19 engineering internship (Jun 2027 – Mar 2028).'
                     : 'พร้อมเข้าร่วมทีมฝึกงานวิศวกรรม WIL 19 ระยะเวลา 10 เดือน (มิ.ย. 2570 – มี.ค. 2571)'}
                 </h2>
-                <p style={{ margin: '10px 0 0', fontSize: 14, color: 'var(--text-muted)', maxWidth: 640 }}>
+                <p style={{ margin: '10px 0 0', fontSize: 14, color: 'var(--text-muted)', maxWidth: '64ch' }}>
                   {lang === 'en'
                     ? 'Open to Full-Stack, On-Device / Applied AI, and Data Systems teams in Bangkok or hybrid/remote.'
                     : 'สนใจตำแหน่ง Full-Stack, On-Device / Applied AI และ Data Systems ในกรุงเทพฯ หรือแบบ Hybrid'}
@@ -420,7 +464,8 @@ export default function PortfolioClient() {
                   {PROFILE.phone}
                 </a>
                 <a href={PROFILE.cvUrl} download className={styles.ghostBtn}>
-                  Download CV (PDF) ↓
+                  <span>Download CV (PDF)</span>
+                  <IconDownload />
                 </a>
               </div>
             </div>
@@ -429,7 +474,9 @@ export default function PortfolioClient() {
               <span>
                 © {new Date().getFullYear()} {PROFILE.nameEN} · CMU CAMT MMIT
               </span>
-              <span>{PROFILE.githubHandle} · {PROFILE.linkedinHandle}</span>
+              <span>
+                {PROFILE.githubHandle} · {PROFILE.linkedinHandle}
+              </span>
             </footer>
           </div>
         </section>
@@ -449,7 +496,7 @@ export default function PortfolioClient() {
           <div className={styles.drawerPanel}>
             <div className={styles.drawerTop}>
               <div>
-                <div className={`${styles.mono}`} style={{ fontSize: 10.5, color: 'var(--text-subtle)' }}>
+                <div className={styles.mono} style={{ fontSize: 10.5, color: 'var(--text-subtle)' }}>
                   {activeProject.index} · {activeProject.category[lang]}
                 </div>
                 <h2 style={{ margin: '6px 0 0', fontSize: 21, fontWeight: 600, letterSpacing: '-0.02em', lineHeight: 1.25 }}>
@@ -460,8 +507,10 @@ export default function PortfolioClient() {
                 type="button"
                 className={`${styles.ghostBtn} ${styles.mono}`}
                 onClick={() => setActiveProject(null)}
+                aria-label="Close case study"
               >
-                ESC ✕
+                <span>ESC</span>
+                <IconClose />
               </button>
             </div>
 
@@ -514,11 +563,13 @@ export default function PortfolioClient() {
             <div className={styles.ctaRow} style={{ marginTop: 4 }}>
               {activeProject.repoUrl && (
                 <a href={activeProject.repoUrl} target="_blank" rel="noreferrer" className={styles.primaryBtn}>
-                  View Source on GitHub ↗
+                  <span>View Source on GitHub</span>
+                  <IconArrowUpRight />
                 </a>
               )}
               <a href={PROFILE.cvUrl} download className={styles.ghostBtn}>
-                Download CV (PDF) ↓
+                <span>Download CV (PDF)</span>
+                <IconDownload />
               </a>
             </div>
           </div>

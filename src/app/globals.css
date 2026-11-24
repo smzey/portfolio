@@ -1,34 +1,38 @@
 :root,
 [data-theme='dark'] {
-  --bg: #09090b;
-  --surface: #111114;
-  --surface-elevated: #17171c;
+  --bg: #08080a;
+  --surface: #101014;
+  --surface-elevated: #16161c;
   --border: rgba(255, 255, 255, 0.09);
-  --border-strong: rgba(255, 255, 255, 0.2);
+  --border-strong: rgba(255, 255, 255, 0.22);
   --text: #fafafa;
   --text-muted: #a1a1aa;
   --text-subtle: #71717a;
   --accent-solid-bg: #fafafa;
-  --accent-solid-fg: #09090b;
+  --accent-solid-fg: #08080a;
   --emerald: #22c55e;
-  --emerald-soft: rgba(34, 197, 94, 0.12);
-  --backdrop: rgba(0, 0, 0, 0.72);
+  --emerald-soft: rgba(34, 197, 94, 0.14);
+  --spotlight: rgba(255, 255, 255, 0.06);
+  --backdrop: rgba(0, 0, 0, 0.74);
+  --focus-ring: rgba(250, 250, 250, 0.45);
 }
 
 [data-theme='light'] {
   --bg: #fafafa;
   --surface: #ffffff;
-  --surface-elevated: #f4f4f5;
+  --surface-elevated: #f3f3f6;
   --border: rgba(9, 9, 11, 0.1);
   --border-strong: rgba(9, 9, 11, 0.24);
   --text: #09090b;
   --text-muted: #52525b;
-  --text-subtle: #71717a;
+  --text-subtle: #6b6b73;
   --accent-solid-bg: #09090b;
   --accent-solid-fg: #fafafa;
   --emerald: #16a34a;
   --emerald-soft: rgba(22, 163, 74, 0.12);
-  --backdrop: rgba(9, 9, 11, 0.48);
+  --spotlight: rgba(9, 9, 11, 0.045);
+  --backdrop: rgba(9, 9, 11, 0.46);
+  --focus-ring: rgba(9, 9, 11, 0.4);
 }
 
 *,
@@ -40,6 +44,8 @@
 html {
   scroll-behavior: smooth;
   overflow-x: clip;
+  scrollbar-color: var(--border-strong) var(--bg);
+  scrollbar-width: thin;
 }
 
 body {
@@ -51,11 +57,13 @@ body {
   text-rendering: optimizeLegibility;
   overflow-x: clip;
   line-height: 1.55;
+  caret-color: var(--emerald);
 }
 
 a {
   color: inherit;
   text-decoration: none;
+  text-underline-offset: 4px;
 }
 
 button {
@@ -63,7 +71,54 @@ button {
   color: inherit;
 }
 
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
 ::selection {
   background: var(--accent-solid-bg);
   color: var(--accent-solid-fg);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 999px;
+}
+
+/* Live traveling pulse along architecture SVG conduits */
+@keyframes signalFlow {
+  0% {
+    stroke-dashoffset: 56;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.signalPath {
+  stroke-dasharray: 10 46;
+  stroke-linecap: round;
+  opacity: 0.78;
+  animation: signalFlow 2.1s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .signalPath {
+    animation: none;
+    stroke-dasharray: none;
+    opacity: 0.3;
+  }
 }

@@ -14,31 +14,29 @@ export default function ArchitectureDiagram({ id }: { id: ProjectCaseStudy['id']
         <rect x="8" y="8" width="624" height="194" rx="10" fill="none" stroke={stroke} strokeOpacity="0.22" strokeDasharray="5 4" />
         <text x="22" y="28" fill={stroke} opacity="0.55" fontSize="10" fontFamily="monospace">100% ON-DEVICE BOUNDARY (ZERO CLOUD DATA EGRESS)</text>
 
-        {/* User UI */}
         <rect x="26" y="72" width="122" height="68" rx="7" fill="none" stroke={stroke} strokeOpacity="0.6" />
         <text x="87" y="101" textAnchor="middle" fill={stroke} fontSize="12" fontWeight="600">Electron / React</text>
         <text x="87" y="119" textAnchor="middle" fill={stroke} opacity="0.6" fontSize="10" fontFamily="monospace">Private Chat UI</text>
 
-        {/* Lane 1: Local LLM */}
         <rect x="204" y="44" width="194" height="58" rx="7" fill="none" stroke={stroke} strokeOpacity="0.45" />
         <text x="301" y="69" textAnchor="middle" fill={stroke} fontSize="11.5" fontWeight="600">Local LLM (Ollama)</text>
         <text x="301" y="86" textAnchor="middle" fill={stroke} opacity="0.6" fontSize="9.5" fontFamily="monospace">Dialogue Only · No Scoring</text>
 
-        {/* Lane 2: Deterministic Rule Engine */}
         <rect x="204" y="122" width="194" height="64" rx="7" fill={stroke} fillOpacity="0.08" stroke={stroke} strokeOpacity="0.9" strokeWidth="1.4" />
         <text x="301" y="147" textAnchor="middle" fill={stroke} fontSize="11.5" fontWeight="700">Deterministic Rule Engine</text>
         <text x="301" y="164" textAnchor="middle" fill={stroke} opacity="0.7" fontSize="9.5" fontFamily="monospace">PHQ-9 · GAD-7 · Crisis Scan</text>
 
-        {/* Output */}
         <rect x="454" y="72" width="160" height="68" rx="7" fill="none" stroke={stroke} strokeOpacity="0.6" />
         <text x="534" y="99" textAnchor="middle" fill={stroke} fontSize="11.5" fontWeight="600">Auditable Triage</text>
         <text x="534" y="117" textAnchor="middle" fill={stroke} opacity="0.65" fontSize="9.5" fontFamily="monospace">Score + Hotline 1323</text>
 
-        {/* Connectors */}
-        <line x1="148" y1="92" x2="202" y2="73" stroke={stroke} strokeOpacity="0.65" markerEnd="url(#arr-j)" />
-        <line x1="148" y1="118" x2="202" y2="152" stroke={stroke} strokeOpacity="0.85" strokeWidth="1.4" markerEnd="url(#arr-j)" />
-        <line x1="398" y1="73" x2="452" y2="95" stroke={stroke} strokeOpacity="0.5" strokeDasharray="3 3" markerEnd="url(#arr-j)" />
-        <line x1="398" y1="154" x2="452" y2="120" stroke={stroke} strokeOpacity="0.9" strokeWidth="1.4" markerEnd="url(#arr-j)" />
+        <line x1="148" y1="92" x2="202" y2="73" stroke={stroke} strokeOpacity="0.35" markerEnd="url(#arr-j)" />
+        <line x1="148" y1="92" x2="202" y2="73" stroke="var(--emerald)" strokeWidth="1.4" className="signalPath" />
+        <line x1="148" y1="118" x2="202" y2="152" stroke={stroke} strokeOpacity="0.55" strokeWidth="1.4" markerEnd="url(#arr-j)" />
+        <line x1="148" y1="118" x2="202" y2="152" stroke="var(--emerald)" strokeWidth="1.6" className="signalPath" />
+        <line x1="398" y1="73" x2="452" y2="95" stroke={stroke} strokeOpacity="0.4" strokeDasharray="3 3" markerEnd="url(#arr-j)" />
+        <line x1="398" y1="154" x2="452" y2="120" stroke={stroke} strokeOpacity="0.6" strokeWidth="1.4" markerEnd="url(#arr-j)" />
+        <line x1="398" y1="154" x2="452" y2="120" stroke="var(--emerald)" strokeWidth="1.6" className="signalPath" />
       </svg>
     );
   }
@@ -51,11 +49,9 @@ export default function ArchitectureDiagram({ id }: { id: ProjectCaseStudy['id']
             <path d="M 0 1 L 10 5 L 0 9 z" fill={stroke} />
           </marker>
         </defs>
-        {/* Offline Training Strip */}
         <rect x="16" y="14" width="608" height="46" rx="7" fill="none" stroke={stroke} strokeOpacity="0.25" strokeDasharray="4 4" />
         <text x="320" y="41" textAnchor="middle" fill={stroke} opacity="0.7" fontSize="10" fontFamily="monospace">OFFLINE TRAINING: Sign MNIST → Python / Keras CNN (94.8% Test) → Exported Weights</text>
 
-        {/* Browser Runtime Pipeline */}
         <rect x="16" y="80" width="130" height="82" rx="7" fill="none" stroke={stroke} strokeOpacity="0.55" />
         <text x="81" y="114" textAnchor="middle" fill={stroke} fontSize="12" fontWeight="600">Webcam Feed</text>
         <text x="81" y="133" textAnchor="middle" fill={stroke} opacity="0.6" fontSize="9.5" fontFamily="monospace">Real-Time Frames</text>
@@ -72,10 +68,13 @@ export default function ArchitectureDiagram({ id }: { id: ProjectCaseStudy['id']
         <text x="574" y="114" textAnchor="middle" fill={stroke} fontSize="12" fontWeight="600">ASL Letter</text>
         <text x="574" y="133" textAnchor="middle" fill={stroke} opacity="0.6" fontSize="9.5" fontFamily="monospace">Live Output</text>
 
-        <line x1="146" y1="121" x2="176" y2="121" stroke={stroke} strokeOpacity="0.7" markerEnd="url(#arr-s)" />
-        <line x1="314" y1="121" x2="344" y2="121" stroke={stroke} strokeOpacity="0.7" markerEnd="url(#arr-s)" />
-        <line x1="492" y1="121" x2="522" y2="121" stroke={stroke} strokeOpacity="0.7" markerEnd="url(#arr-s)" />
-        <line x1="419" y1="60" x2="419" y2="78" stroke={stroke} strokeOpacity="0.65" markerEnd="url(#arr-s)" />
+        <line x1="146" y1="121" x2="176" y2="121" stroke={stroke} strokeOpacity="0.4" markerEnd="url(#arr-s)" />
+        <line x1="146" y1="121" x2="176" y2="121" stroke="var(--emerald)" strokeWidth="1.6" className="signalPath" />
+        <line x1="314" y1="121" x2="344" y2="121" stroke={stroke} strokeOpacity="0.4" markerEnd="url(#arr-s)" />
+        <line x1="314" y1="121" x2="344" y2="121" stroke="var(--emerald)" strokeWidth="1.6" className="signalPath" />
+        <line x1="492" y1="121" x2="522" y2="121" stroke={stroke} strokeOpacity="0.4" markerEnd="url(#arr-s)" />
+        <line x1="492" y1="121" x2="522" y2="121" stroke="var(--emerald)" strokeWidth="1.6" className="signalPath" />
+        <line x1="419" y1="60" x2="419" y2="78" stroke={stroke} strokeOpacity="0.6" markerEnd="url(#arr-s)" />
       </svg>
     );
   }
@@ -88,7 +87,6 @@ export default function ArchitectureDiagram({ id }: { id: ProjectCaseStudy['id']
             <path d="M 0 1 L 10 5 L 0 9 z" fill={stroke} />
           </marker>
         </defs>
-        {/* Two Clients */}
         <rect x="18" y="24" width="144" height="60" rx="7" fill="none" stroke={stroke} strokeOpacity="0.55" />
         <text x="90" y="50" textAnchor="middle" fill={stroke} fontSize="11.5" fontWeight="600">Customer QR Web</text>
         <text x="90" y="67" textAnchor="middle" fill={stroke} opacity="0.6" fontSize="9.5" fontFamily="monospace">Scan → Tap-to-Order</text>
@@ -97,23 +95,24 @@ export default function ArchitectureDiagram({ id }: { id: ProjectCaseStudy['id']
         <text x="90" y="138" textAnchor="middle" fill={stroke} fontSize="11.5" fontWeight="600">Vendor Queue POS</text>
         <text x="90" y="155" textAnchor="middle" fill={stroke} opacity="0.6" fontSize="9.5" fontFamily="monospace">Live Order Tickets</text>
 
-        {/* API Layer */}
         <rect x="218" y="42" width="176" height="112" rx="7" fill="none" stroke={stroke} strokeOpacity="0.7" />
         <text x="306" y="74" textAnchor="middle" fill={stroke} fontSize="12" fontWeight="600">apps/api</text>
         <text x="306" y="94" textAnchor="middle" fill={stroke} opacity="0.65" fontSize="9.5" fontFamily="monospace">REST Contracts + Sync</text>
         <rect x="236" y="110" width="140" height="28" rx="4" fill={stroke} fillOpacity="0.08" />
         <text x="306" y="128" textAnchor="middle" fill={stroke} fontSize="10" fontFamily="monospace" fontWeight="600">186 Integration Tests</text>
 
-        {/* Pure Domain Layer */}
         <rect x="444" y="42" width="178" height="112" rx="7" fill={stroke} fillOpacity="0.08" stroke={stroke} strokeOpacity="0.9" strokeWidth="1.4" />
         <text x="533" y="74" textAnchor="middle" fill={stroke} fontSize="12" fontWeight="700">packages/domain</text>
         <text x="533" y="94" textAnchor="middle" fill={stroke} opacity="0.7" fontSize="9.5" fontFamily="monospace">Pure Order State Machine</text>
         <rect x="462" y="110" width="142" height="28" rx="4" fill={stroke} fillOpacity="0.1" />
         <text x="533" y="128" textAnchor="middle" fill={stroke} fontSize="10" fontFamily="monospace" fontWeight="600">172 Unit Tests</text>
 
-        <line x1="162" y1="54" x2="216" y2="84" stroke={stroke} strokeOpacity="0.7" markerEnd="url(#arr-k)" />
-        <line x1="162" y1="142" x2="216" y2="112" stroke={stroke} strokeOpacity="0.7" markerEnd="url(#arr-k)" />
-        <line x1="394" y1="98" x2="442" y2="98" stroke={stroke} strokeOpacity="0.85" strokeWidth="1.4" markerEnd="url(#arr-k)" />
+        <line x1="162" y1="54" x2="216" y2="84" stroke={stroke} strokeOpacity="0.45" markerEnd="url(#arr-k)" />
+        <line x1="162" y1="54" x2="216" y2="84" stroke="var(--emerald)" strokeWidth="1.5" className="signalPath" />
+        <line x1="162" y1="142" x2="216" y2="112" stroke={stroke} strokeOpacity="0.45" markerEnd="url(#arr-k)" />
+        <line x1="162" y1="142" x2="216" y2="112" stroke="var(--emerald)" strokeWidth="1.5" className="signalPath" />
+        <line x1="394" y1="98" x2="442" y2="98" stroke={stroke} strokeOpacity="0.55" strokeWidth="1.4" markerEnd="url(#arr-k)" />
+        <line x1="394" y1="98" x2="442" y2="98" stroke="var(--emerald)" strokeWidth="1.6" className="signalPath" />
       </svg>
     );
   }
@@ -142,8 +141,10 @@ export default function ArchitectureDiagram({ id }: { id: ProjectCaseStudy['id']
         <text x="547" y="99" textAnchor="middle" fill={stroke} fontSize="12" fontWeight="600">Route Map</text>
         <text x="547" y="118" textAnchor="middle" fill={stroke} opacity="0.6" fontSize="9.5" fontFamily="monospace">React + Vite UI</text>
 
-        <line x1="168" y1="92" x2="216" y2="92" stroke={stroke} strokeOpacity="0.8" markerEnd="url(#arr-f)" />
-        <line x1="422" y1="92" x2="470" y2="92" stroke={stroke} strokeOpacity="0.8" markerEnd="url(#arr-f)" />
+        <line x1="168" y1="92" x2="216" y2="92" stroke={stroke} strokeOpacity="0.45" markerEnd="url(#arr-f)" />
+        <line x1="168" y1="92" x2="216" y2="92" stroke="var(--emerald)" strokeWidth="1.6" className="signalPath" />
+        <line x1="422" y1="92" x2="470" y2="92" stroke={stroke} strokeOpacity="0.45" markerEnd="url(#arr-f)" />
+        <line x1="422" y1="92" x2="470" y2="92" stroke="var(--emerald)" strokeWidth="1.6" className="signalPath" />
       </svg>
     );
   }
@@ -177,16 +178,18 @@ export default function ArchitectureDiagram({ id }: { id: ProjectCaseStudy['id']
         <rect x="450" y="132" width="172" height="44" rx="6" fill="none" stroke={stroke} strokeOpacity="0.45" />
         <text x="536" y="158" textAnchor="middle" fill={stroke} fontSize="10.5" fontFamily="monospace">Gemini Flash / Whisper</text>
 
-        <line x1="188" y1="56" x2="240" y2="88" stroke={stroke} strokeOpacity="0.75" markerEnd="url(#arr-c)" />
-        <line x1="188" y1="146" x2="240" y2="112" stroke={stroke} strokeOpacity="0.75" markerEnd="url(#arr-c)" />
-        <line x1="398" y1="84" x2="448" y2="48" stroke={stroke} strokeOpacity="0.6" markerEnd="url(#arr-c)" />
-        <line x1="398" y1="100" x2="448" y2="100" stroke={stroke} strokeOpacity="0.6" markerEnd="url(#arr-c)" />
-        <line x1="398" y1="116" x2="448" y2="152" stroke={stroke} strokeOpacity="0.6" markerEnd="url(#arr-c)" />
+        <line x1="188" y1="56" x2="240" y2="88" stroke={stroke} strokeOpacity="0.45" markerEnd="url(#arr-c)" />
+        <line x1="188" y1="56" x2="240" y2="88" stroke="var(--emerald)" strokeWidth="1.5" className="signalPath" />
+        <line x1="188" y1="146" x2="240" y2="112" stroke={stroke} strokeOpacity="0.45" markerEnd="url(#arr-c)" />
+        <line x1="188" y1="146" x2="240" y2="112" stroke="var(--emerald)" strokeWidth="1.5" className="signalPath" />
+        <line x1="398" y1="84" x2="448" y2="48" stroke={stroke} strokeOpacity="0.45" markerEnd="url(#arr-c)" />
+        <line x1="398" y1="100" x2="448" y2="100" stroke={stroke} strokeOpacity="0.45" markerEnd="url(#arr-c)" />
+        <line x1="398" y1="100" x2="448" y2="100" stroke="var(--emerald)" strokeWidth="1.5" className="signalPath" />
+        <line x1="398" y1="116" x2="448" y2="152" stroke={stroke} strokeOpacity="0.45" markerEnd="url(#arr-c)" />
       </svg>
     );
   }
 
-  // Anya
   return (
     <svg viewBox="0 0 640 180" width="100%" role="img" aria-label="Anya Thai Medicine-Label OCR and TTS Pipeline" style={{ display: 'block', maxWidth: '100%', height: 'auto' }}>
       <defs>
@@ -206,8 +209,10 @@ export default function ArchitectureDiagram({ id }: { id: ProjectCaseStudy['id']
       <text x="530" y="80" textAnchor="middle" fill={stroke} fontSize="12" fontWeight="600">Thai Speech (TTS)</text>
       <text x="530" y="100" textAnchor="middle" fill={stroke} opacity="0.6" fontSize="9.5" fontFamily="monospace">Clear Spoken Instructions</text>
 
-      <line x1="158" y1="88" x2="204" y2="88" stroke={stroke} strokeOpacity="0.8" markerEnd="url(#arr-a)" />
-      <line x1="390" y1="88" x2="436" y2="88" stroke={stroke} strokeOpacity="0.8" markerEnd="url(#arr-a)" />
+      <line x1="158" y1="88" x2="204" y2="88" stroke={stroke} strokeOpacity="0.45" markerEnd="url(#arr-a)" />
+      <line x1="158" y1="88" x2="204" y2="88" stroke="var(--emerald)" strokeWidth="1.6" className="signalPath" />
+      <line x1="390" y1="88" x2="436" y2="88" stroke={stroke} strokeOpacity="0.45" markerEnd="url(#arr-a)" />
+      <line x1="390" y1="88" x2="436" y2="88" stroke="var(--emerald)" strokeWidth="1.6" className="signalPath" />
     </svg>
   );
 }
