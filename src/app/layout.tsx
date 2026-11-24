@@ -33,7 +33,7 @@ const ibmMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   title: 'Phanu Sawet — Full-Stack & On-Device AI Engineer',
   description:
-    'Engineering portfolio of Phanu Sawet (CMU CAMT MMIT · Major GPA 3.56). Privacy-preserving local LLMs, zero-cloud CNN inference, 358-test TypeScript systems, and logistics optimization. Available for 10-Month Co-op / Internship (Jun 2027 – Mar 2028).',
+    'Engineering portfolio of Phanu Sawet (CMU CAMT MMIT · Major GPA 3.56 · Head TA for AIoT & multi-term CMU TA). Privacy-preserving local LLMs, zero-cloud CNN/YOLOv8 inference, 358-test TypeScript systems, and logistics optimization. Available for 10-Month Co-op / Internship (Jun 2027 – Mar 2028).',
   openGraph: {
     title: 'Phanu Sawet — Full-Stack & On-Device AI Engineer',
     description:

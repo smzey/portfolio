@@ -54,10 +54,10 @@ export default function CvPage() {
           </div>
 
           <p className={styles.summary}>
-            Information-technology undergraduate at Chiang Mai University (Major GPA 3.56) and two-semester Computer Programming
-            Teaching Assistant. I build reliable full-stack applications and privacy-preserving, on-device AI systems — from
-            deterministic local-LLM safety architectures and zero-cloud CNN inference to 358-test TypeScript backends and native
-            macOS tools.
+            Chiang Mai University (CAMT MMIT) undergraduate (Major GPA 3.56), Head Teaching Assistant for AIoT at CMU School of
+            Lifelong Education, and multi-term Programming &amp; Rapid Application TA. I build reliable full-stack applications and
+            privacy-preserving, on-device AI systems — from deterministic local-LLM safety architectures and zero-cloud CNN/YOLOv8
+            inference to 358-test TypeScript backends and native macOS tools.
           </p>
         </header>
 
@@ -80,25 +80,26 @@ export default function CvPage() {
           </div>
         </section>
 
-        {/* Experience */}
+        {/* Experience (Synced 1:1 with LinkedIn) */}
         <section className={styles.section}>
           <h2 className={styles.secTitle}>Experience</h2>
 
           <div className={styles.entry}>
             <div className={styles.entryTop}>
               <div className={styles.entryTitle}>
-                Teaching Assistant — Computer Programming <span className={styles.entryOrg}>· CAMT, Chiang Mai University</span>
+                Head Teaching Assistant (Gen 1) &amp; Teaching Assistant (Gen 2–3) — AIoT Event{' '}
+                <span className={styles.entryOrg}>· CMU School of Lifelong Education</span>
               </div>
-              <div className={styles.entryMeta}>Aug 2025 – May 2026</div>
+              <div className={styles.entryMeta}>Sep 2026 – Present</div>
             </div>
             <ul className={styles.bullets}>
               <li>
-                Lab TA across two consecutive semesters for <strong>Basic (954142)</strong> and{' '}
-                <strong>Advanced Computer Programming</strong> — the two core programming courses in the MMIT curriculum.
+                Led the 1st Generation AIoT cohort as <strong>Head Teaching Assistant</strong> (Sep 2026) and continued teaching the
+                2nd and 3rd Generation cohorts (Oct 2026 – Present) on-site at CMU School of Lifelong Education.
               </li>
               <li>
-                Supported ~32 students per section through live coding labs: debugging student programs in real time, walking
-                through control-flow and algorithmic logic, and coaching first-time programmers 1-on-1.
+                Facilitated hands-on AIoT and edge computer-vision labs covering Python, <strong>YOLOv8</strong> object detection,
+                environment provisioning, and live troubleshooting.
               </li>
             </ul>
           </div>
@@ -106,17 +107,52 @@ export default function CvPage() {
           <div className={styles.entry}>
             <div className={styles.entryTop}>
               <div className={styles.entryTitle}>
-                Freelance Full-Stack Web Developer <span className={styles.entryOrg}>· Baan Bai Mai (BBM) Tutoring School</span>
+                Teaching Assistant — Rapid Application, Advanced &amp; Fundamental Programming{' '}
+                <span className={styles.entryOrg}>· Chiang Mai University</span>
               </div>
-              <div className={styles.entryMeta}>2024</div>
+              <div className={styles.entryMeta}>Jun 2025 – Aug 2026</div>
             </div>
             <ul className={styles.bullets}>
               <li>
-                Contracted to build an internal scheduling and attendance dashboard: a <strong>React</strong> frontend over an{' '}
-                <strong>Express REST API</strong> tracking student schedules, teacher assignments, and per-subject session counts.
+                <strong>Rapid Application (May – Aug 2026 · Remote):</strong> Supported remote lab cohorts across a 4-month
+                contract, mentoring students on rapid full-stack prototyping, debugging, and end-to-end app delivery.
               </li>
               <li>
-                Delivered a production <strong>LINE LIFF</strong> mini-app and companion admin panel for daily school operations.
+                <strong>Fundamental (Jun – Nov 2025) &amp; Advanced Computer Programming (Nov 2025 – Mar 2026 · On-site):</strong>{' '}
+                Lab TA for ~32 students per section, debugging live code, tracing algorithmic logic, and coaching first-time
+                programmers 1-on-1.
+              </li>
+            </ul>
+          </div>
+
+          <div className={styles.entry}>
+            <div className={styles.entryTop}>
+              <div className={styles.entryTitle}>
+                Full Stack Engineer (Freelance){' '}
+                <span className={styles.entryOrg}>· Baan Bai Mai Music House and Dance Co., Ltd.</span>
+              </div>
+              <div className={styles.entryMeta}>Nov 2024 – Feb 2025</div>
+            </div>
+            <ul className={styles.bullets}>
+              <li>
+                Built an internal scheduling and attendance platform (<strong>React</strong> frontend over an{' '}
+                <strong>Express REST API</strong>) tracking student schedules, instructor assignments, and per-subject session
+                counts, alongside a production <strong>LINE LIFF</strong> mini-app and companion admin panel.
+              </li>
+            </ul>
+          </div>
+
+          <div className={styles.entry}>
+            <div className={styles.entryTop}>
+              <div className={styles.entryTitle}>
+                Photographer &amp; Video Editor (Part-time) <span className={styles.entryOrg}>· M&amp;M Studio</span>
+              </div>
+              <div className={styles.entryMeta}>Jan 2023 – Present</div>
+            </div>
+            <ul className={styles.bullets}>
+              <li>
+                3+ years delivering client photography and video post-production on tight turnarounds alongside university
+                coursework and teaching contracts.
               </li>
             </ul>
           </div>
@@ -133,8 +169,8 @@ export default function CvPage() {
             </div>
             <ul className={styles.bullets}>
               <li>
-                Architected a two-sided street-vendor ordering platform (customer QR ordering + live vendor queue) separating pure
-                business invariants in <strong>packages/domain (172 unit tests)</strong> from HTTP/persistence in{' '}
+                Architected a two-sided ordering platform (customer QR ordering + live vendor queue) separating pure business
+                invariants in <strong>packages/domain (172 unit tests)</strong> from HTTP/persistence in{' '}
                 <strong>apps/api (186 integration tests)</strong>.
               </li>
             </ul>
@@ -147,12 +183,9 @@ export default function CvPage() {
             </div>
             <ul className={styles.bullets}>
               <li>
-                Built a <strong>100% on-device local-LLM</strong> companion running PHQ-9 and GAD-7 screening with zero cloud data
-                egress — no conversation ever leaves the machine.
-              </li>
-              <li>
-                <strong>Deterministic safety boundary:</strong> isolated conversation (Ollama LLM) from a rule-based module that
-                executes self-harm lexicon scans, computes clinically validated scores, and routes crisis triggers to hotline 1323.
+                Built a <strong>100% on-device local-LLM</strong> companion running PHQ-9/GAD-7 screening with zero cloud egress and
+                a <strong>deterministic safety boundary</strong> isolating conversation (Ollama) from rule-based self-harm scanning,
+                validated scoring, and crisis hotline 1323 routing.
               </li>
             </ul>
           </div>
@@ -164,9 +197,9 @@ export default function CvPage() {
             </div>
             <ul className={styles.bullets}>
               <li>
-                Trained a compact CNN on Sign Language MNIST to <strong>94.8% held-out test accuracy</strong>, then exported
-                weight tensors to run as a <strong>pure-JavaScript forward pass</strong> in the browser for real-time webcam
-                recognition with zero cloud inference.
+                Trained a compact CNN on Sign Language MNIST to <strong>94.8% held-out test accuracy</strong>, then exported weight
+                tensors to a <strong>pure-JavaScript forward pass</strong> in the browser for real-time webcam inference with zero
+                network calls.
               </li>
             </ul>
           </div>
@@ -178,40 +211,25 @@ export default function CvPage() {
             </div>
             <ul className={styles.bullets}>
               <li>
-                Engineered a native Apple Silicon <strong>macOS SwiftUI app (~8.2K LOC)</strong> paired with a Vercel{' '}
-                <strong>Next.js 16 Mobile PWA</strong> synced bi-directionally via Private GitHub Gist and Obsidian Vault.
-              </li>
-              <li>
-                Built an automated <strong>Canvas LMS 3-step upload &amp; .xlsx pre-flight verifier</strong> alongside a multi-part
-                lecture audio digest pipeline (FFmpeg + Gemini Flash cascade with local Whisper.cpp fallback).
+                Built a native Apple Silicon <strong>macOS SwiftUI app (~8.2K LOC)</strong> paired with a{' '}
+                <strong>Next.js 16 Mobile PWA</strong> synced via Private GitHub Gist and Obsidian Vault, featuring an automated
+                Canvas LMS 3-step .xlsx verifier and a Gemini Flash / Whisper.cpp lecture audio digest pipeline.
               </li>
             </ul>
           </div>
 
           <div className={styles.entry}>
             <div className={styles.entryTop}>
-              <div className={styles.entryTitle}>Farmhouse — Truck-Loading Optimizer &amp; Distribution Map</div>
-              <div className={styles.entryMeta}>React · Vite · Leaflet · Optimization</div>
+              <div className={styles.entryTitle}>
+                Farmhouse (Truck-Loading Optimizer) · Anya (Medicine Reader) · CAMT Grade API
+              </div>
+              <div className={styles.entryMeta}>React · Leaflet · Gemini Vision · Raw PostgreSQL</div>
             </div>
             <ul className={styles.bullets}>
               <li>
-                Solved a bakery distributor brief packing bread baskets into 10-wheel trucks across <strong>40 distribution centers</strong>{' '}
-                using <strong>Best-Fit-Decreasing bin packing</strong> with lat/long proximity constraints to minimize fleet count
-                and empty cargo space.
-              </li>
-            </ul>
-          </div>
-
-          <div className={styles.entry}>
-            <div className={styles.entryTop}>
-              <div className={styles.entryTitle}>Anya (Thai Medicine-Label Reader) &amp; CAMT Grade Calculator</div>
-              <div className={styles.entryMeta}>Python · Gemini Vision · Node.js · PostgreSQL</div>
-            </div>
-            <ul className={styles.bullets}>
-              <li>
-                <strong>Anya:</strong> Audio-and-keyboard-only Vision OCR + Thai TTS reading webcam prescription dosages aloud for
-                blind users. <strong>Grade API:</strong> Rebuilt an Excel tracker as an Express + raw pg PostgreSQL REST API
-                covered by node --test and supertest.
+                <strong>Farmhouse:</strong> Best-Fit-Decreasing bin packing with lat/long proximity across{' '}
+                <strong>40 distribution centers</strong>. <strong>Anya:</strong> Keyboard/audio-only Thai Vision OCR + TTS for blind
+                users. <strong>Grade API:</strong> Express + raw pg PostgreSQL REST API covered by node --test and supertest.
               </li>
             </ul>
           </div>
@@ -226,7 +244,7 @@ export default function CvPage() {
             <div className={styles.skillLabel}>Web &amp; Backend</div>
             <div className={styles.skillVal}>React, Next.js 16, Vite, Node.js, Express, REST APIs, PostgreSQL (raw pg), MySQL, Laravel, LINE LIFF</div>
             <div className={styles.skillLabel}>AI &amp; Data</div>
-            <div className={styles.skillVal}>Keras (CNN), MediaPipe, Local LLMs (Ollama, Qwen), Gemini Vision/Audio API, Whisper.cpp, Hugging Face</div>
+            <div className={styles.skillVal}>YOLOv8, Keras (CNN), MediaPipe, Local LLMs (Ollama, Qwen), Gemini Vision/Audio API, Whisper.cpp, Hugging Face</div>
             <div className={styles.skillLabel}>Systems &amp; Tools</div>
             <div className={styles.skillVal}>SwiftUI, Electron, Docker, Git &amp; GitHub, MCP, Leaflet, node --test, Supertest</div>
             <div className={styles.skillLabel}>Spoken</div>

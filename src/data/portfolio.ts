@@ -61,14 +61,19 @@ export const PROFILE = {
     th: 'วิศวกรซอฟต์แวร์ Full-Stack และ On-Device AI',
   },
   heroSubtitle: {
-    en: 'Chiang Mai University (CAMT MMIT) student and two-semester Programming Teaching Assistant. I design reliable full-stack systems and privacy-preserving, edge-first AI — from deterministic local-LLM guardrails and pure-JS CNN inference to 358-test TypeScript architectures.',
-    th: 'นักศึกษา CAMT (MMIT) มหาวิทยาลัยเชียงใหม่ และผู้ช่วยสอนวิชาเขียนโปรแกรม 2 ภาคการศึกษา เชี่ยวชาญการออกแบบระบบ Full-Stack ที่เสถียรและ AI ประมวลผลบนอุปกรณ์ (On-Device AI) ตั้งแต่ Local-LLM ที่แยกเกณฑ์ความปลอดภัยแบบ Deterministic, CNN รันในเบราว์เซอร์แบบไม่พึ่งคลาวด์ ไปจนถึงระบบ TypeScript ที่ทดสอบอัตโนมัติ 358 เคส',
+    en: 'Chiang Mai University (CAMT MMIT) undergraduate, Head Teaching Assistant for AIoT at CMU School of Lifelong Education, and multi-term Programming & Rapid Application TA. I design reliable full-stack systems and privacy-preserving, edge-first AI — from deterministic local-LLM guardrails and pure-JS CNN inference to 358-test TypeScript architectures.',
+    th: 'นักศึกษา CAMT (MMIT) มหาวิทยาลัยเชียงใหม่, Head TA โครงการ AIoT (CMU School of Lifelong Education) และผู้ช่วยสอนวิชาเขียนโปรแกรมและ Rapid Application ต่อเนื่องหลายภาคการศึกษา เชี่ยวชาญการออกแบบระบบ Full-Stack ที่เสถียรและ On-Device AI ตั้งแต่ Local-LLM แยกชั้นความปลอดภัย, CNN รันในเบราว์เซอร์แบบไม่พึ่งคลาวด์ ไปจนถึงระบบ TypeScript ทดสอบอัตโนมัติ 358 เคส',
   },
   metrics: [
     {
       value: '3.56',
       label: { en: 'Major GPA (Cum. 3.42)', th: 'GPA วิชาเอก (สะสม 3.42)' },
       detail: 'CMU CAMT · MMIT',
+    },
+    {
+      value: '6 Cohorts',
+      label: { en: 'Head TA (AIoT) & CMU TA', th: 'Head TA (AIoT) และ TA มช.' },
+      detail: 'AIoT Gen 1–3 · Rapid App · Prog 1–2',
     },
     {
       value: '358',
@@ -79,11 +84,6 @@ export const PROFILE = {
       value: '94.8%',
       label: { en: 'Edge CNN Accuracy', th: 'ความแม่นยำ Edge CNN' },
       detail: '0 Cloud Calls · Pure JS',
-    },
-    {
-      value: '2 Terms',
-      label: { en: 'Programming TA', th: 'ผู้ช่วยสอนเขียนโปรแกรม' },
-      detail: '~32 Students / Section',
     },
   ],
 };
@@ -376,21 +376,59 @@ export const PROJECTS: ProjectCaseStudy[] = [
 
 export const EXPERIENCES: ExperienceItem[] = [
   {
-    id: 'ta-camt',
-    period: 'AUG 2025 – MAY 2026',
+    id: 'ta-aiot-lifelong',
+    period: 'SEP 2026 – PRESENT',
     role: {
-      en: 'Teaching Assistant — Computer Programming',
-      th: 'ผู้ช่วยสอน (TA) — วิชาการเขียนโปรแกรมคอมพิวเตอร์',
+      en: 'Head Teaching Assistant (Gen 1) & Teaching Assistant (Gen 2–3) — AIoT Event',
+      th: 'หัวหน้าผู้ช่วยสอน (รุ่น 1) และผู้ช่วยสอน (รุ่น 2–3) — โครงการ AIoT',
     },
-    org: 'CAMT, Chiang Mai University',
-    location: 'Chiang Mai, Thailand',
+    org: 'CMU School of Lifelong Education',
+    location: 'Chiang Mai, Thailand · On-site',
     highlights: [
       {
-        en: 'Lab TA for Basic Computer Programming (954142) and Advanced Computer Programming across two consecutive semesters.',
-        th: 'ผู้ช่วยสอนห้องปฏิบัติการวิชา 954142 Basic และ Advanced Computer Programming ต่อเนื่อง 2 ภาคการศึกษา',
+        en: 'Served as Head Teaching Assistant for the 1st Generation cohort (Sep 2026) and continued teaching across the 2nd and 3rd Generation AIoT cohorts (Oct 2026 – Present).',
+        th: 'ดำรงตำแหน่งหัวหน้าผู้ช่วยสอน (Head TA) สำหรับโครงการ AIoT รุ่นที่ 1 (ก.ย. 2569) และผู้ช่วยสอนต่อเนื่องในรุ่นที่ 2 และ 3 (ต.ค. 2569 – ปัจจุบัน)',
       },
       {
-        en: 'Mentored ~32 students per section through hands-on coding labs: live debugging, tracing algorithmic logic, and guiding first-time programmers.',
+        en: 'Facilitated hands-on AIoT and edge computer-vision workshops (Python, YOLOv8 object detection, environment setup, and real-time lab troubleshooting).',
+        th: 'ดูแลแล็บปฏิบัติการ AIoT และ Computer Vision (Python, YOLOv8 Object Detection, ตั้งค่าสภาพแวดล้อม และแก้ปัญหาหน้างานแบบเรียลไทม์)',
+      },
+    ],
+    tags: ['Head TA', 'AIoT', 'YOLOv8', 'Python', 'Technical Leadership'],
+  },
+  {
+    id: 'ta-rapid-app',
+    period: 'MAY 2026 – AUG 2026',
+    role: {
+      en: 'Teaching Assistant — Rapid Application',
+      th: 'ผู้ช่วยสอน (TA) — วิชา Rapid Application',
+    },
+    org: 'Chiang Mai University',
+    location: 'Chiang Mai, Thailand · Remote',
+    highlights: [
+      {
+        en: 'Supported remote Rapid Application labs across a 4-month contract, helping students architect, debug, and ship end-to-end application prototypes.',
+        th: 'เป็นผู้ช่วยสอนออนไลน์ตลอด 4 เดือน แนะนำการออกแบบ ดีบัก และส่งมอบต้นแบบแอปพลิเคชันแบบครบวงจร',
+      },
+    ],
+    tags: ['Rapid Prototyping', 'Full-Stack', 'Remote Mentoring'],
+  },
+  {
+    id: 'ta-cmu-prog',
+    period: 'JUN 2025 – MAR 2026',
+    role: {
+      en: 'Teaching Assistant — Fundamental & Advanced Computer Programming',
+      th: 'ผู้ช่วยสอน (TA) — วิชาการเขียนโปรแกรมพื้นฐานและขั้นสูง',
+    },
+    org: 'Chiang Mai University (CAMT)',
+    location: 'Chiang Mai, Thailand · On-site',
+    highlights: [
+      {
+        en: 'Lab TA across two consecutive semesters: Fundamental Computer Programming (Jun – Nov 2025) and Advanced Computer Programming (Nov 2025 – Mar 2026).',
+        th: 'ผู้ช่วยสอนห้องปฏิบัติการต่อเนื่อง 2 ภาคการศึกษา: Fundamental (มิ.ย. – พ.ย. 2568) และ Advanced Computer Programming (พ.ย. 2568 – มี.ค. 2569)',
+      },
+      {
+        en: 'Mentored ~32 students per section through hands-on coding labs: live debugging, tracing control-flow logic, and coaching first-time programmers 1-on-1.',
         th: 'ดูแลและสอนนักศึกษา ~32 คนต่อกลุ่ม ผ่านแล็บเขียนโค้ดจริง ช่วยดีบักโปรแกรม อธิบายตรรกะอัลกอริทึมแบบตัวต่อตัว',
       },
     ],
@@ -398,45 +436,41 @@ export const EXPERIENCES: ExperienceItem[] = [
   },
   {
     id: 'freelance-bbm',
-    period: '2024',
+    period: 'NOV 2024 – FEB 2025',
     role: {
-      en: 'Freelance Full-Stack Web Developer',
-      th: 'นักพัฒนาเว็บ Full-Stack (ฟรีแลนซ์)',
+      en: 'Full Stack Engineer (Freelance)',
+      th: 'วิศวกร Full-Stack (ฟรีแลนซ์)',
     },
-    org: 'Baan Bai Mai (BBM) Tutoring School',
-    location: 'Client Delivery',
+    org: 'Baan Bai Mai Music House and Dance Co., Ltd.',
+    location: 'Chiang Mai, Thailand · Hybrid',
     highlights: [
       {
-        en: 'Built an internal scheduling and attendance dashboard: React frontend over an Express REST API tracking student schedules, teacher assignments, and per-subject session counts.',
+        en: 'Contracted to build an internal scheduling and attendance dashboard: React frontend over an Express REST API tracking student schedules, instructor assignments, and per-subject session counts.',
         th: 'พัฒนาระบบจัดตารางเรียนและเช็กชื่อภายในด้วย React + Express REST API ติดตามตารางนักเรียน ครูผู้สอน และจำนวนชั่วโมงเรียนรายวิชา',
       },
       {
-        en: 'Delivered a production LINE LIFF mini-app and companion admin panel for school staff.',
-        th: 'ส่งมอบ LINE LIFF Mini-App พร้อมระบบหลังบ้านสำหรับเจ้าหน้าที่โรงเรียนใช้งานจริง',
+        en: 'Delivered a production LINE LIFF mini-app and companion admin panel for daily studio operations.',
+        th: 'ส่งมอบ LINE LIFF Mini-App พร้อมระบบหลังบ้านสำหรับเจ้าหน้าที่ใช้งานจริง',
       },
     ],
     tags: ['React', 'Node.js', 'Express REST API', 'LINE LIFF'],
   },
   {
-    id: 'camt-grade-calc',
-    period: '2025 – 2026',
+    id: 'mm-studio',
+    period: 'JAN 2023 – PRESENT',
     role: {
-      en: 'Independent Systems & Open-Source Builder',
-      th: 'ผู้พัฒนาระบบและโอเพนซอร์สอิสระ',
+      en: 'Photographer & Video Editor (Part-time)',
+      th: 'ช่างภาพและตัดต่อวิดีโอ (พาร์ทไทม์)',
     },
-    org: 'CAMT Grade Calculator · Stock DCA · CMU Projects',
-    location: 'github.com/smzey',
+    org: 'M&M Studio',
+    location: 'Chiang Mai, Thailand · Hybrid',
     highlights: [
       {
-        en: 'Rebuilt a fragile Excel degree-progress tracker into a tested Node.js + Express + raw PostgreSQL REST API (`pg`, zero ORM, `node --test` + `supertest`).',
-        th: 'เปลี่ยนไฟล์ Excel ติดตามหน่วยกิตเป็น REST API ด้วย Node.js + Express + raw PostgreSQL พร้อมชุดทดสอบ `node --test` และ `supertest`',
-      },
-      {
-        en: 'Built a local semiconductor watchlist & DCA signal analyzer (NVDA, AMD, AVGO, TSM, MU) and multiple Laravel/MySQL web platforms.',
-        th: 'พัฒนาเครื่องมือวิเคราะห์สัญญาณหุ้นเซมิคอนดักเตอร์แบบ Local (NVDA, AMD, AVGO, TSM, MU) และเว็บแอป Laravel/MySQL หลายระบบ',
+        en: '3+ years delivering client photography and video post-production on tight turnarounds alongside university engineering coursework and teaching contracts.',
+        th: 'ประสบการณ์กว่า 3 ปีในการถ่ายภาพและตัดต่อวิดีโอให้ลูกค้าภายใต้กำหนดส่งที่เข้มงวด ควบคู่กับการเรียนและงานผู้ช่วยสอน',
       },
     ],
-    tags: ['PostgreSQL', 'Laravel', 'SQL', 'Supertest'],
+    tags: ['Visual Production', 'Client Delivery', 'Video Editing'],
   },
 ];
 
@@ -474,7 +508,7 @@ export const STACK_GROUPS: { title: BilingualText; items: string[] }[] = [
   },
   {
     title: { en: 'AI, ML & Data', th: 'AI, ML และข้อมูล' },
-    items: ['Keras (CNN)', 'MediaPipe', 'Local LLMs (Ollama / Qwen)', 'Gemini Vision & Audio API', 'Whisper.cpp', 'Hugging Face', 'Deterministic Guardrails'],
+    items: ['YOLOv8', 'Keras (CNN)', 'MediaPipe', 'Local LLMs (Ollama / Qwen)', 'Gemini Vision & Audio API', 'Whisper.cpp', 'Hugging Face', 'Deterministic Guardrails'],
   },
   {
     title: { en: 'Systems & Tooling', th: 'ระบบและเครื่องมือ' },

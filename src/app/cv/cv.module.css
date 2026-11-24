@@ -47,12 +47,12 @@
   margin: 0 auto;
   background: #ffffff;
   color: #111827;
-  padding: 14mm 15.5mm 13mm;
+  padding: 12.5mm 15mm 11.5mm;
   box-shadow: 0 20px 60px rgba(17, 24, 39, 0.14);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 13px;
+  gap: 10.5px;
   font-family: var(--font-cv), -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
   font-variant-numeric: tabular-nums;
 }
@@ -121,14 +121,14 @@
 .section {
   display: flex;
   flex-direction: column;
-  gap: 7.5px;
+  gap: 6px;
 }
 
 .secTitle {
   margin: 0;
-  padding-bottom: 3px;
+  padding-bottom: 2.5px;
   border-bottom: 1px solid #cbd5e1;
-  font-size: 10.2px;
+  font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -139,21 +139,21 @@
 .entry {
   display: flex;
   flex-direction: column;
-  gap: 2.5px;
+  gap: 2px;
 }
 
 .entryTop {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  gap: 12px;
+  gap: 10px;
 }
 
 .entryTitle {
-  font-size: 10.8px;
+  font-size: 10.4px;
   font-weight: 700;
   color: #0f172a;
-  line-height: 1.3;
+  line-height: 1.28;
 }
 
 .entryOrg {
@@ -162,35 +162,35 @@
 }
 
 .entrySub {
-  font-size: 9.8px;
+  font-size: 9.5px;
   font-style: italic;
   color: #374151;
-  line-height: 1.38;
+  line-height: 1.35;
 }
 
 .entryMeta {
-  font-size: 9.3px;
+  font-size: 9px;
   font-weight: 500;
   color: #4b5563;
   white-space: nowrap;
 }
 
 .entryMetaStrong {
-  font-size: 9.5px;
+  font-size: 9.2px;
   font-weight: 600;
   color: #111827;
   white-space: nowrap;
 }
 
 .bullets {
-  margin: 2px 0 0;
+  margin: 1.5px 0 0;
   padding-left: 14px;
   list-style-type: disc;
   display: flex;
   flex-direction: column;
-  gap: 3px;
-  font-size: 9.8px;
-  line-height: 1.46;
+  gap: 2.2px;
+  font-size: 9.45px;
+  line-height: 1.42;
   color: #1f2937;
 }
 
@@ -206,11 +206,11 @@
 /* Skills Grid */
 .skillsGrid {
   display: grid;
-  grid-template-columns: 98px 1fr;
-  row-gap: 4px;
+  grid-template-columns: 96px 1fr;
+  row-gap: 3px;
   column-gap: 12px;
-  font-size: 9.8px;
-  line-height: 1.44;
+  font-size: 9.45px;
+  line-height: 1.4;
 }
 
 .skillLabel {
