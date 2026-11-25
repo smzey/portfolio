@@ -2,36 +2,22 @@
 
 import { useRef } from 'react';
 import { EDUCATION, PROFILE, type Lang } from '@/data/portfolio';
-import { EDITION_LABELS, UI } from '@/data/ui';
-import { VISIBLE_EDITIONS, type PassbookEdition } from '@/lib/edition';
+import { UI } from '@/data/ui';
+import type { PassbookEdition } from '@/lib/edition';
 import CoverArtwork, { MonogramMark } from './CoverArtwork';
 import styles from './Passbook.module.css';
-
-const SWATCH_HEX: Record<PassbookEdition, string> = {
-  navy: '#173a52',
-  emerald: '#086934',
-  violet: '#4c2882',
-  gold: '#f0c419',
-  obsidian: '#161b16',
-  marine: '#0f3b68',
-  cobalt: '#103783',
-  sky: '#00679c',
-  frost: '#edf2f7',
-};
 
 export default function PassbookCover({
   lang,
   edition,
   opening,
   onOpen,
-  onChooseEdition,
   onCopyEmail,
 }: {
   lang: Lang;
   edition: PassbookEdition;
   opening: boolean;
   onOpen: () => void;
-  onChooseEdition: (ed: PassbookEdition) => void;
   onCopyEmail: () => void;
 }) {
   const frameRef = useRef<HTMLDivElement>(null);
@@ -125,26 +111,6 @@ export default function PassbookCover({
           <button type="button" className={styles.deskBtnGhost} onClick={onCopyEmail}>
             {UI.copyEmail[lang]}
           </button>
-        </div>
-
-        <div className={styles.swatchRow} role="group" aria-label={UI.coverPaletteLabel[lang]}>
-          <span className={styles.swatchLabel}>{UI.coverPaletteLabel[lang]}</span>
-          {VISIBLE_EDITIONS.map((ed) => (
-            <button
-              key={ed}
-              type="button"
-              className={styles.swatchBtn}
-              aria-pressed={edition === ed}
-              onClick={() => onChooseEdition(ed)}
-            >
-              <span
-                className={styles.swatchPip}
-                style={{ backgroundColor: SWATCH_HEX[ed] }}
-                aria-hidden="true"
-              />
-              <span>{EDITION_LABELS[ed][lang]}</span>
-            </button>
-          ))}
         </div>
       </div>
     </section>

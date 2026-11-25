@@ -174,12 +174,6 @@ export default function PortfolioClient() {
     }
   }, []);
 
-  const chooseEdition = (nextEdition: PassbookEdition) => {
-    setEdition(nextEdition);
-    const nextUrl = buildPassbookUrl(window.location.href, { edition: nextEdition, lens });
-    window.history.replaceState(window.history.state, '', nextUrl);
-  };
-
   const chooseLens = (nextLens: FocusLens) => {
     setLens(nextLens);
     const nextUrl = buildPassbookUrl(window.location.href, { edition, lens: nextLens });
@@ -277,7 +271,6 @@ export default function PortfolioClient() {
               edition={edition}
               opening={opening}
               onOpen={openBook}
-              onChooseEdition={chooseEdition}
               onCopyEmail={() => void copyEmail()}
             />
           </div>
