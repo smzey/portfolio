@@ -19,8 +19,8 @@ const doto = Doto({
   display: 'swap',
 });
 
-// Applies the saved (or system) theme and language before first paint.
-const prefsScript = `try{var t=localStorage.getItem('phanu-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);if(localStorage.getItem('phanu-lang')==='th')document.documentElement.lang='th'}catch(e){}`;
+// Applies saved theme/lang plus silent cover colorway and deep-link open state before first paint.
+const prefsScript = `try{var d=document.documentElement;var t=localStorage.getItem('phanu-theme');if(t==='light'||t==='dark')d.setAttribute('data-theme',t);if(localStorage.getItem('phanu-lang')==='th')d.lang='th';var p=new URLSearchParams(location.search);var m={navy:'navy',default:'navy',emerald:'emerald',kbtg:'emerald',kasikorn:'emerald',kbank:'emerald',violet:'violet',scb:'violet',scbx:'violet',gold:'gold',krungsri:'gold',bay:'gold',obsidian:'obsidian',nvidia:'obsidian',marine:'marine',ptt:'marine',cobalt:'cobalt',bbl:'cobalt',bangkokbank:'cobalt',sky:'sky',ktb:'sky',krungthai:'sky',frost:'frost',ttb:'frost',tmb:'frost'};var c=(p.get('cover')||'').trim().toLowerCase();var l=(p.get('lens')||'').trim().toLowerCase();var ed=m[c]||m[l]||'navy';d.setAttribute('data-edition',ed);var pr=p.get('project');var h=location.hash.toLowerCase();if(/^(jaidee|signbridge|khaidee-v2|farmhouse|cockpit|anya)$/.test(pr||'')||/^#(ledger|history|contact|statement)$/.test(h))d.setAttribute('data-start-open','1')}catch(e){}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
