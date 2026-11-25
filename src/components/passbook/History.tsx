@@ -5,7 +5,7 @@ import styles from './Passbook.module.css';
 /** Work, teaching and education as ruled ledger lines, then the tools as plain prose lists. */
 export default function History({ lang }: { lang: Lang }) {
   return (
-    <section id="history" className={`${styles.section} ${styles.paper} ${styles.leaf}`} aria-labelledby="history-title">
+    <section id="history" className={`${styles.section} ${styles.paper} ${styles.leaf} ${styles.sheetAccent}`} aria-labelledby="history-title">
       <h2 id="history-title" className={styles.sectionTitle}>
         {UI.historyTitle[lang]}
       </h2>

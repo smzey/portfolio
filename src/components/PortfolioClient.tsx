@@ -4,12 +4,14 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { PROFILE, PROJECTS, type Lang } from '@/data/portfolio';
 import { UI, fill } from '@/data/ui';
 import { parseProjectParam, withProjectParam } from '@/lib/deeplink';
+import { buildPassbookUrl, resolveEdition, shouldStartOpen, type PassbookEdition } from '@/lib/edition';
 import { normalizeLens, selectLedgerEntries, type FocusLens } from '@/lib/lens';
 import { LANG_KEY, THEME_KEY, resolveLang, resolveTheme, type Theme } from '@/lib/preferences';
 import BackCover from './passbook/BackCover';
 import History from './passbook/History';
 import HolderPage from './passbook/HolderPage';
 import LedgerPage from './passbook/LedgerPage';
+import PassbookCover from './passbook/PassbookCover';
 import Statement from './passbook/Statement';
 import styles from './passbook/Passbook.module.css';
 
@@ -26,6 +28,8 @@ function store(key: string, value: string) {
 export default function PortfolioClient() {
   const [lang, setLang] = useState<Lang>('en');
   const [theme, setTheme] = useState<Theme>('light');
+  const [edition, setEdition] = useState<PassbookEdition>('navy');
+  const [isOpen, setIsOpen] = useState(false);
   const [lens, setLens] = useState<FocusLens>('all');
   const [activeId, setActiveId] = useState<string | null>(null);
   const [toast, setToast] = useState('');
@@ -33,7 +37,7 @@ export default function PortfolioClient() {
   const lastOpened = useRef<string | null>(null);
   const focusOnOpen = useRef(false);
 
-  // Initial state from storage, system preference and the URL (?lens, ?project).
+  // Initial state from storage and URL (?cover, ?lens, ?project, #hash).
   useEffect(() => {
     let storedTheme: string | null = null;
     let storedLang: string | null = null;
@@ -45,14 +49,29 @@ export default function PortfolioClient() {
     }
     setTheme(resolveTheme(storedTheme));
     setLang(resolveLang(storedLang));
+
     const params = new URLSearchParams(window.location.search);
-    setLens(normalizeLens(params.get('lens')));
+    const initialLens = normalizeLens(params.get('lens'));
+    const initialEdition = resolveEdition(params.get('cover'), params.get('lens'));
+    setLens(initialLens);
+    setEdition(initialEdition);
+    document.documentElement.setAttribute('data-edition', initialEdition);
+
+    const startOpen = shouldStartOpen(window.location.search, window.location.hash, IDS);
+    if (startOpen) setIsOpen(true);
+    document.documentElement.removeAttribute('data-start-open');
+
     const fromUrl = parseProjectParam(window.location.search, IDS);
     if (fromUrl) {
       focusOnOpen.current = true;
       setActiveId(fromUrl);
     }
-    const onPop = () => setActiveId(parseProjectParam(window.location.search, IDS));
+
+    const onPop = () => {
+      const id = parseProjectParam(window.location.search, IDS);
+      setActiveId(id);
+      if (id) setIsOpen(true);
+    };
     window.addEventListener('popstate', onPop);
     return () => window.removeEventListener('popstate', onPop);
   }, []);
@@ -60,6 +79,10 @@ export default function PortfolioClient() {
   useEffect(() => {
     document.documentElement.lang = lang;
   }, [lang]);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-edition', edition);
+  }, [edition]);
 
   // Move focus into a statement when it opens; give it back to its ledger row when it closes.
   useEffect(() => {
@@ -80,8 +103,25 @@ export default function PortfolioClient() {
   const ordered = useMemo(() => selectLedgerEntries(PROJECTS, lens), [lens]);
   const active = PROJECTS.find((p) => p.id === activeId) ?? null;
 
+  const openBook = useCallback(() => {
+    setIsOpen(true);
+    window.requestAnimationFrame(() => {
+      document.getElementById('holder-name')?.focus({ preventScroll: true });
+    });
+  }, []);
+
+  const closeBook = useCallback(() => {
+    lastOpened.current = null;
+    setActiveId(null);
+    setIsOpen(false);
+    const nextUrl = buildPassbookUrl(window.location.href, { edition, lens, clearDeepLink: true });
+    window.history.replaceState({}, '', nextUrl);
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  }, [edition, lens]);
+
   const openProject = useCallback((id: string) => {
     focusOnOpen.current = true;
+    setIsOpen(true);
     setActiveId(id);
     window.history.pushState({ project: id }, '', withProjectParam(window.location.href, id));
   }, []);
@@ -95,12 +135,16 @@ export default function PortfolioClient() {
     }
   }, []);
 
-  const chooseLens = (next: FocusLens) => {
-    setLens(next);
-    const url = new URL(window.location.href);
-    if (next === 'all') url.searchParams.delete('lens');
-    else url.searchParams.set('lens', next);
-    window.history.replaceState(window.history.state, '', url.toString());
+  const chooseEdition = (nextEdition: PassbookEdition) => {
+    setEdition(nextEdition);
+    const nextUrl = buildPassbookUrl(window.location.href, { edition: nextEdition, lens });
+    window.history.replaceState(window.history.state, '', nextUrl);
+  };
+
+  const chooseLens = (nextLens: FocusLens) => {
+    setLens(nextLens);
+    const nextUrl = buildPassbookUrl(window.location.href, { edition, lens: nextLens });
+    window.history.replaceState(window.history.state, '', nextUrl);
   };
 
   const switchLang = () => {
@@ -133,18 +177,39 @@ export default function PortfolioClient() {
 
   return (
     <div className={`${styles.page} ${styles.gutter}`}>
-      <a className={styles.skip} href="#ledger">
-        {UI.skip[lang]}
+      <a className={styles.skip} href={isOpen ? '#ledger' : '#cover-actions'}>
+        {isOpen ? UI.skip[lang] : UI.skipCover[lang]}
       </a>
       <div className={styles.wrap}>
         <header className={styles.bar}>
-          <a className={styles.brand} href="/">
-            {PROFILE.brand}
+          <a
+            className={styles.brand}
+            href="/"
+            onClick={(e) => {
+              if (isOpen) {
+                e.preventDefault();
+                closeBook();
+              }
+            }}
+          >
+            <span className={styles.brandPip} aria-hidden="true" />
+            <span>{PROFILE.brand}</span>
           </a>
           <nav className={styles.nav} aria-label="Primary">
-            <a href="#ledger">{UI.navLedger[lang]}</a>
-            <a href="#history">{UI.navHistory[lang]}</a>
-            <a href="#contact">{UI.navContact[lang]}</a>
+            {isOpen ? (
+              <>
+                <a href="#ledger">{UI.navLedger[lang]}</a>
+                <a href="#history">{UI.navHistory[lang]}</a>
+                <a href="#contact">{UI.navContact[lang]}</a>
+                <button type="button" className={styles.coverBtn} onClick={closeBook}>
+                  {UI.closeBook[lang]}
+                </button>
+              </>
+            ) : (
+              <button type="button" className={styles.coverBtn} onClick={openBook}>
+                {UI.openBook[lang]}
+              </button>
+            )}
             <button
               type="button"
               className={styles.coverBtn}
@@ -167,22 +232,40 @@ export default function PortfolioClient() {
         </header>
 
         <main className={styles.wrap}>
-          <div className={`${styles.spread} ${styles.paper} ${styles.leaf}`}>
-            <HolderPage lang={lang} onCopyEmail={() => void copyEmail()} />
-            <LedgerPage
+          <div hidden={isOpen} data-cover-stage="">
+            <PassbookCover
               lang={lang}
-              projects={ordered}
-              lens={lens}
-              onLens={chooseLens}
-              activeId={activeId}
-              onOpen={openProject}
+              edition={edition}
+              onOpen={openBook}
+              onChooseEdition={chooseEdition}
+              onCopyEmail={() => void copyEmail()}
             />
           </div>
 
-          {active && <Statement ref={statementHeading} project={active} lang={lang} onClose={closeProject} />}
+          <div
+            hidden={!isOpen}
+            data-open-stage=""
+            className={`${styles.openStack} ${isOpen ? styles.bookEnter : ''}`}
+          >
+            <div className={styles.bookJacket}>
+              <div className={`${styles.spread} ${styles.paper}`}>
+                <HolderPage lang={lang} onCopyEmail={() => void copyEmail()} />
+                <LedgerPage
+                  lang={lang}
+                  projects={ordered}
+                  lens={lens}
+                  onLens={chooseLens}
+                  activeId={activeId}
+                  onOpen={openProject}
+                />
+              </div>
+            </div>
 
-          <History lang={lang} />
-          <BackCover lang={lang} onCopyEmail={() => void copyEmail()} />
+            {active && <Statement ref={statementHeading} project={active} lang={lang} onClose={closeProject} />}
+
+            <History lang={lang} />
+            <BackCover lang={lang} onCopyEmail={() => void copyEmail()} />
+          </div>
         </main>
 
         <footer className={styles.footer}>

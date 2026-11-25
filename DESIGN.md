@@ -189,20 +189,20 @@ components:
 
 ## Overview
 
-**Creative North Star: "The Personal Passbook"**
+**Creative North Star: "The Physical Thai Passbook (*สมุดคู่ฝาก*)"**
 
-The site is a Thai bank passbook (สมุดบัญชี) that belongs to one person and never leaves him, the same way the AI he builds never leaves the device. The page ground is the navy cover; every readable surface is a leaf of mint security paper printed with a faint guilloche wave; text is carbon-blue ink; and one vermilion teller-stamp red marks what has been verified and what missed. Projects are not cards: they are printed ledger entries in a ruled table, each dated by the month it was opened, with its proof figure, the condition that figure was measured under, and a count of cloud calls.
+The site is a tactile Thai bank passbook resting on a dark desk mat that belongs to one person and never leaves him, the same way the AI he builds never leaves the device. Visitors arrive at the closed booklet — flat stitched left spine, softly rounded outer right corners (`4px 20px 20px 4px`), peeking stacked mint-paper pages, and original geometric cover artwork — with instant 1-tap open (`Open Passbook / เปิดสมุดบัญชี`) alongside direct `Download CV` and `Copy email` desk actions. Deep links (`?project=`, `#ledger`, `#history`, `#contact`) bypass the closed cover before first paint.
 
-Density is that of a working document, not a brochure. Lines are ruled, figures are right-aligned and printed in a dot-matrix face, prose is set in one humanist sans that carries Thai and Latin as equals. There are no corners, no shadows and no glows. Depth is physical: the leaves are stacked, so the edges of the pages beneath show at the bottom-right of each sheet; the open spread folds into its gutter; and a darker back board, closed off by a double rule, ends the book.
+Nine silent cover colorways (`navy`, `emerald`, `violet`, `gold`, `obsidian`, `marine`, `cobalt`, `sky`, `frost`) adapt the cover, open jacket rim, and back board automatically via silent URL aliases (`?lens=` / `?cover=`) without ever printing target company names in the visible UI. Inside, every readable surface stays mint security paper printed with a faint guilloche wave, carbon-blue ink, and one vermilion teller-stamp red. The left page is the inside-front-cover Account Holder Plate (`A/C 672-1-10052-0`, barcode strip, teller stamp); the right page is a numbered dot-matrix ledger (`01`, `02`… with 2–3 letter transaction codes `AI`, `ML`, `QA`, `OPT`, `SYS`, `OCR`) and a live "Update Passbook / ปรับสมุดบัญชี" SignBridge printer slot.
 
-Light theme is the passbook by day. Dark theme is the same book under a desk lamp: the cover drops to near-black navy and the paper dims to a deeper sage, but the pages stay paper — ink stays dark on light, and the paper keeps `color-scheme: light`. It is the same object in lower light, never an inverted screen.
+Light theme is the passbook on a charcoal desk mat by day. Dark theme is the same book under a desk lamp: the desk and cover dim deeper, the paper dims to sage, and ink stays dark on light paper (`color-scheme: light`) across all nine editions.
 
 **Key Characteristics:**
-- Navy cover as page ground, mint guilloche paper as every reading surface.
-- Ruled ledger lines instead of cards; square corners everywhere.
-- Anuphan for all prose and dates in EN and TH; Doto dot-matrix only for printed ledger figures.
+- Dark desk mat ground (`--desk`), physical rounded outer booklet cover (`4px 20px 20px 4px` closed, `16px` open jacket, `0px` on bound spines), mint guilloche paper inside.
+- Nine silent cover colorways (Day + Lamp-Dark, every ink and dim token verified ≥ 5.0:1 WCAG 2.2 AA), zero third-party logos or company names in visible UI.
+- Inside-front-cover Account Holder Plate + numbered dot-matrix transaction ledger with 2–3 letter transaction codes.
+- Anuphan for all prose and dates in EN and TH; Doto dot-matrix only for printed ledger figures, account numbers, line numbers, and transaction codes.
 - One stamp red, reserved for verified marks, misses and focus.
-- No shadows, no glows; depth by stacked leaves, the gutter fold and cover/paper contrast.
 - Every figure carries its condition; every entry carries its opening month.
 
 ## Colors
