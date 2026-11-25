@@ -1,9 +1,11 @@
-/* Passbook world. Cover = page ground; paper = every readable surface; ruled lines, no cards, no shadows. */
+/* Physical Thai Passbook world: dark desk mat, rounded outer passbook covers, mint guilloche paper inside. */
 
 .page {
   min-height: 100vh;
-  background: var(--cover);
+  background: var(--desk);
   color: var(--ink);
+  display: flex;
+  flex-direction: column;
 }
 
 .gutter {
@@ -12,6 +14,7 @@
 }
 
 .wrap {
+  width: 100%;
   max-width: 1240px;
   margin: 0 auto;
   display: grid;
@@ -34,7 +37,7 @@
   top: 12px;
 }
 
-/* ---------- Cover bar ---------- */
+/* ---------- Desk Utility Bar ---------- */
 .bar {
   display: flex;
   flex-wrap: wrap;
@@ -42,7 +45,7 @@
   justify-content: space-between;
   gap: 8px 20px;
   padding-block: 18px 4px;
-  color: var(--cover-ink);
+  color: var(--desk-ink);
 }
 
 .brand {
@@ -53,6 +56,16 @@
   min-height: 44px;
   display: inline-flex;
   align-items: center;
+  gap: 10px;
+}
+
+.brandPip {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px 5px 5px 2px;
+  background: var(--cover-base);
+  border: 1.5px solid var(--desk-ink);
+  flex-shrink: 0;
 }
 
 .nav {
@@ -63,7 +76,7 @@
 }
 
 .nav a {
-  color: var(--cover-ink);
+  color: var(--desk-ink);
   text-decoration: none;
   font-size: 15px;
   padding: 10px 10px;
@@ -79,15 +92,491 @@
 .coverBtn {
   min-height: 44px;
   padding: 8px 14px;
-  border: 1.5px solid var(--cover-dim);
+  border: 1.5px solid var(--desk-border);
   background: transparent;
-  color: var(--cover-ink);
+  color: var(--desk-ink);
   font-size: 14px;
   font-weight: 600;
+  cursor: pointer;
 }
 
 .coverBtn:hover {
-  border-color: var(--cover-ink);
+  border-color: var(--desk-ink);
+}
+
+/* ---------- Stage 1: Closed Thai Passbook Cover ---------- */
+.coverStage {
+  min-height: calc(100vh - 150px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  padding-block: 12px 32px;
+}
+
+.bookFrame {
+  position: relative;
+  width: min(640px, 100%);
+  padding-right: 9px;
+  padding-bottom: 9px;
+  perspective: 1600px;
+}
+
+/* Peeking stacked mint-paper pages inside the closed passbook */
+.pageBlock {
+  position: absolute;
+  inset: 7px 0 0 14px;
+  border-radius: 0 20px 20px 0;
+  background-color: var(--paper);
+  background-image:
+    var(--guilloche-img),
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0 2px,
+      rgba(111, 138, 120, 0.22) 2px 3px
+    );
+  border: 1px solid var(--rule-strong);
+  box-shadow: 0 26px 52px rgba(0, 0, 0, 0.45), 0 6px 16px rgba(0, 0, 0, 0.28);
+  pointer-events: none;
+  transition: transform 360ms cubic-bezier(0.22, 1, 0.36, 1), filter 360ms ease;
+}
+
+.pageBlockOpening {
+  background-image: var(--guilloche-img);
+  transform: translateX(4px) scale(1.015);
+  filter: brightness(1.04);
+}
+
+.bookClosed {
+  all: unset;
+  box-sizing: border-box;
+  position: relative;
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  width: 100%;
+  min-height: 388px;
+  border-radius: 4px 20px 20px 4px;
+  background: var(--cover-base);
+  color: var(--cover-ink);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  overflow: hidden;
+  cursor: pointer;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: transform;
+  transition:
+    transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 280ms ease,
+    color 220ms ease;
+}
+
+@media (hover: hover) {
+  .bookClosed:hover {
+    transform: rotateX(var(--tilt-x, 0deg)) rotateY(calc(-6deg + var(--tilt-y, 0deg))) translateY(-3px);
+  }
+}
+
+@keyframes coverSwingOpen {
+  0% {
+    transform: rotateY(0deg);
+    opacity: 1;
+  }
+  75% {
+    transform: rotateY(-84deg) translateX(-8px);
+    opacity: 0.94;
+  }
+  100% {
+    transform: rotateY(-96deg) translateX(-14px);
+    opacity: 0;
+  }
+}
+
+.bookOpening {
+  pointer-events: none;
+  animation: coverSwingOpen 380ms cubic-bezier(0.32, 0.08, 0.24, 1) forwards;
+}
+
+.coverSheen {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    circle 300px at var(--mx, 72%) var(--my, 28%),
+    rgba(255, 255, 255, 0.18),
+    transparent 68%
+  );
+  transition: opacity 260ms ease;
+}
+
+@media (hover: hover) {
+  .bookClosed:hover .coverSheen {
+    opacity: 1;
+  }
+}
+
+.bookClosed:focus-visible {
+  outline: 3px solid var(--focus-desk);
+  outline-offset: 4px;
+}
+
+.bar a:focus-visible,
+.bar button:focus-visible,
+.deskControls a:focus-visible,
+.deskControls button:focus-visible {
+  outline: 3px solid var(--focus-desk);
+  outline-offset: 2px;
+}
+
+.spine {
+  position: relative;
+  background: var(--cover-spine);
+  border-right: 1px solid rgba(255, 255, 255, 0.16);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.spine::after {
+  content: '';
+  position: absolute;
+  top: 22px;
+  bottom: 22px;
+  right: 5px;
+  width: 1px;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--cover-spine-ink) 0 6px,
+    transparent 6px 12px
+  );
+  opacity: 0.42;
+}
+
+.coverFace {
+  position: relative;
+  padding: 28px 32px 26px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+  min-width: 0;
+  isolation: isolate;
+}
+
+.coverArt {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.coverTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.coverBrand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.coverTitleWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.coverBookTitle {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--cover-ink);
+}
+
+.coverSeries {
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cover-dim);
+}
+
+.coverBottom {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.coverIdentity {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.coverName {
+  margin: 0;
+  font-size: clamp(32px, 5vw, 48px);
+  line-height: 1.02;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--cover-ink);
+}
+
+.coverNameTh {
+  font-size: clamp(18px, 2.5vw, 22px);
+  font-weight: 600;
+  color: var(--cover-dim);
+}
+
+.coverRole {
+  margin: 4px 0 0;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--cover-ink);
+  max-width: 40ch;
+}
+
+.coverMetaRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 10px 18px;
+  padding-top: 14px;
+  border-top: 1px solid currentColor;
+  border-top-color: color-mix(in srgb, var(--cover-ink) 24%, transparent);
+}
+
+.coverAc {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.coverAcLabel {
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cover-dim);
+}
+
+.coverAcNo {
+  font-family: var(--font-dot), ui-monospace, monospace;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.09em;
+  font-variant-numeric: tabular-nums;
+  color: var(--cover-ink);
+}
+
+.accountNoVal {
+  letter-spacing: -0.09em;
+}
+
+.coverPrompt {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--cover-ink);
+  white-space: nowrap;
+}
+
+/* Desk controls below closed cover */
+.deskControls {
+  width: min(640px, 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.deskActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 12px;
+}
+
+.deskBtnPrimary {
+  min-height: 48px;
+  padding: 12px 22px;
+  border: 2px solid var(--desk-ink);
+  background: var(--desk-ink);
+  color: var(--desk);
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.deskBtnPrimary:hover {
+  background: transparent;
+  color: var(--desk-ink);
+}
+
+.deskBtnGhost {
+  min-height: 48px;
+  padding: 12px 18px;
+  border: 1.5px solid var(--desk-border);
+  background: transparent;
+  color: var(--desk-ink);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.deskBtnGhost:hover {
+  border-color: var(--desk-ink);
+  background: var(--desk-elev);
+}
+
+.swatchRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.swatchLabel {
+  font-size: 13px;
+  color: var(--desk-dim);
+  margin-right: 4px;
+}
+
+.swatchBtn {
+  min-height: 44px;
+  padding: 6px 12px;
+  border: 1.5px solid var(--desk-border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--desk-dim);
+  font-size: 13.5px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+}
+
+.swatchBtn:hover {
+  color: var(--desk-ink);
+  border-color: var(--desk-ink);
+}
+
+.swatchBtn[aria-pressed='true'] {
+  color: var(--desk-ink);
+  border-color: var(--desk-ink);
+  background: var(--desk-elev);
+}
+
+.swatchPip {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  flex-shrink: 0;
+}
+
+/* ---------- Stage 2: Open Thai Passbook ---------- */
+@keyframes bookReveal {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pageUnfoldLeft {
+  from {
+    opacity: 0.45;
+    transform: rotateY(15deg);
+  }
+  to {
+    opacity: 1;
+    transform: rotateY(0deg);
+  }
+}
+
+@keyframes pageUnfoldRight {
+  from {
+    opacity: 0.45;
+    transform: rotateY(-15deg);
+  }
+  to {
+    opacity: 1;
+    transform: rotateY(0deg);
+  }
+}
+
+@keyframes stampDrop {
+  0% {
+    opacity: 0;
+    transform: scale(1.26) rotate(-11deg);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(0.97) rotate(-5.5deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(-6deg);
+  }
+}
+
+.bookEnter {
+  animation: bookReveal 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.bookEnter .holder {
+  transform-origin: right center;
+  animation: pageUnfoldLeft 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.bookEnter .ledgerPage {
+  transform-origin: left center;
+  animation: pageUnfoldRight 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.bookEnter .stamp {
+  animation: stampDrop 340ms cubic-bezier(0.2, 0.9, 0.3, 1.15) 260ms both;
+}
+
+.openStack {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 28px;
+}
+
+/* Colored physical passbook cover jacket framing the open mint-paper spread */
+.bookJacket {
+  background: var(--cover-base);
+  padding: 10px 10px 12px;
+  border-radius: 16px;
+  perspective: 1800px;
+  box-shadow: 0 22px 46px rgba(0, 0, 0, 0.38), 0 4px 12px rgba(0, 0, 0, 0.24);
+  transition: background-color 280ms ease;
 }
 
 /* ---------- Paper ---------- */
@@ -98,12 +587,13 @@
   color: var(--ink);
 }
 
-/* Stacked leaves: depth by overlapping page edges, never by shadow. */
+/* Stacked leaves: physical page stack beneath each sheet */
 .leaf {
   position: relative;
   isolation: isolate;
   margin-right: 10px;
   margin-bottom: 10px;
+  border-radius: 4px 16px 16px 4px;
 }
 
 .leaf::before,
@@ -113,6 +603,7 @@
   z-index: -1;
   background: var(--paper-2);
   border: 1px solid var(--rule);
+  border-radius: 4px 16px 16px 4px;
 }
 
 .leaf::before {
@@ -124,48 +615,106 @@
   background: var(--paper-3);
 }
 
-/* ---------- Spread (first viewport) ---------- */
+.sheetAccent {
+  border-top: 4px solid var(--cover-base);
+}
+
+/* ---------- Spread (Inside Front Cover + Transaction Ledger) ---------- */
 .spread {
   display: grid;
   grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.45fr);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--rule-strong);
 }
 
 .holder {
-  padding: 44px 44px 40px;
+  padding: 36px 40px 36px;
   border-right: 2px solid var(--rule-strong);
   background-image: linear-gradient(to left, var(--paper-3), transparent 28px);
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  gap: 18px;
   min-width: 0;
+}
+
+.plateBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px 14px;
+  padding-bottom: 12px;
+  border-bottom: 1.5px solid var(--rule-strong);
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.accountStrip {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 12px 16px;
+  padding: 12px 14px;
+  background: var(--paper-2);
+  border: 1px solid var(--rule);
+}
+
+.accountCell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.accountLabel {
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.accountValue {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+.accountHint {
+  font-size: 12px;
+  color: var(--ink-2);
 }
 
 .name {
   margin: 0;
-  font-size: clamp(46px, 5.6vw, 78px);
+  font-size: clamp(40px, 4.8vw, 66px);
   line-height: 0.98;
   font-weight: 700;
   letter-spacing: -0.015em;
 }
 
 .nameTh {
-  margin-top: -12px;
-  font-size: clamp(22px, 2.3vw, 30px);
+  margin-top: -10px;
+  font-size: clamp(20px, 2.2vw, 28px);
   font-weight: 600;
   color: var(--ink-2);
 }
 
 .thesis {
   margin: 0;
-  font-size: clamp(22px, 2.1vw, 28px);
+  font-size: clamp(20px, 2vw, 25px);
   line-height: 1.28;
   font-weight: 600;
-  max-width: 17ch;
+  max-width: 20ch;
 }
 
 .intro {
   margin: 0;
-  font-size: 16px;
+  font-size: 15.5px;
   line-height: 1.6;
   color: var(--ink-2);
   max-width: 44ch;
@@ -176,7 +725,7 @@
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   gap: 8px 18px;
-  padding-top: 16px;
+  padding-top: 14px;
   border-top: 1.5px solid var(--rule);
   font-size: 15px;
 }
@@ -207,6 +756,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  cursor: pointer;
 }
 
 .btn:hover {
@@ -224,11 +774,26 @@
   color: var(--paper);
 }
 
+.holderFoot {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 .quietLinks {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px 18px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 18px;
   font-size: 15px;
+}
+
+.quietLinksGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
 }
 
 .quietLinks a {
@@ -242,9 +807,32 @@
   color: var(--ink);
 }
 
+.barcodeBand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--rule-strong);
+  color: var(--ink-2);
+}
+
+.barcodeSvg {
+  width: 140px;
+  height: 22px;
+  flex-shrink: 0;
+  opacity: 0.72;
+}
+
+.holderStamp {
+  font-size: 11.5px;
+  padding: 4px 8px;
+  border-width: 2px;
+}
+
 /* ---------- Ledger page ---------- */
 .ledgerPage {
-  padding: 40px 40px 36px;
+  padding: 36px 38px 34px;
   min-width: 0;
   display: flex;
   flex-direction: column;
@@ -380,9 +968,35 @@
 }
 
 .entryNo {
-  font-size: 16px;
+  font-size: 15px;
   color: var(--ink-2);
   white-space: nowrap;
+}
+
+.lineNum {
+  display: inline-block;
+  margin-right: 6px;
+  color: var(--ink-2);
+}
+
+.entryTop {
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+}
+
+.txCode {
+  display: inline-block;
+  font-family: var(--font-dot), ui-monospace, monospace;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.2;
+  padding: 2px 5px;
+  border: 1px solid var(--rule-strong);
+  background: var(--paper-2);
+  color: var(--ink);
+  vertical-align: 1px;
 }
 
 .entryName {
@@ -723,6 +1337,7 @@
 .back {
   background: var(--cover-deep);
   border-top: 3px double var(--cover-dim);
+  border-radius: 4px 16px 16px 4px;
   color: var(--cover-ink);
   padding: 48px 44px;
   display: grid;
@@ -788,7 +1403,7 @@
 
 .footer {
   padding-block: 18px 32px;
-  color: var(--cover-dim);
+  color: var(--desk-dim);
   font-size: 14px;
   display: flex;
   flex-wrap: wrap;
@@ -814,8 +1429,13 @@
 :global(html[lang='th']) .ledger th,
 :global(html[lang='th']) .stamp,
 :global(html[lang='th']) .blockTitle,
-:global(html[lang='th']) .brand {
+:global(html[lang='th']) .brand,
+:global(html[lang='th']) .coverSeries,
+:global(html[lang='th']) .coverAcLabel,
+:global(html[lang='th']) .plateBar,
+:global(html[lang='th']) .accountLabel {
   letter-spacing: normal;
+  text-transform: none;
 }
 
 @media (max-width: 960px) {
@@ -832,12 +1452,36 @@
 }
 
 @media (max-width: 600px) {
+  .coverStage {
+    min-height: auto;
+    padding-block: 10px 24px;
+    gap: 20px;
+  }
+  .bookClosed {
+    grid-template-columns: 16px minmax(0, 1fr);
+    min-height: 320px;
+    border-radius: 4px 16px 16px 4px;
+  }
+  .pageBlock {
+    border-radius: 0 15px 15px 0;
+  }
+  .coverFace {
+    padding: 20px 20px 18px 18px;
+    gap: 18px;
+  }
+  .bookJacket {
+    padding: 6px;
+    border-radius: 14px;
+  }
+  .accountStrip {
+    grid-template-columns: minmax(0, 1fr);
+  }
   .holder,
   .ledgerPage,
   .statement,
   .section,
   .back {
-    padding: 28px 20px;
+    padding: 24px 18px;
   }
   .histRow {
     grid-template-columns: minmax(0, 1fr);
@@ -888,7 +1532,21 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .printed td {
+  .printed td,
+  .bookEnter,
+  .bookEnter .holder,
+  .bookEnter .ledgerPage,
+  .bookEnter .stamp,
+  .bookOpening {
     animation: none;
+  }
+  .bookClosed,
+  .pageBlock,
+  .coverSheen,
+  .bookJacket {
+    transition: none;
+  }
+  .bookClosed:hover {
+    transform: none;
   }
 }

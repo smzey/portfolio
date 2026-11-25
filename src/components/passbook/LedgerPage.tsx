@@ -123,9 +123,9 @@ export default function LedgerPage({
           <thead>
             <tr>
               <th scope="col" className={styles.colNo}>
-                {UI.colNo[lang]}
+                {UI.colLine[lang]}
               </th>
-              <th scope="col">{UI.colEntry[lang]}</th>
+              <th scope="col">{UI.colCodeEntry[lang]}</th>
               <th scope="col" className={styles.num}>
                 {UI.colProof[lang]}
               </th>
@@ -139,20 +139,28 @@ export default function LedgerPage({
               <tr key={p.key} className={`${styles.printed} ${p.miss ? styles.miss : ''}`}>
                 <td className={`${styles.colNo} ${styles.dot}`}>{p.time}</td>
                 <td className={styles.printedText}>
-                  {fill(UI.printedEntry[lang], { truth: p.truth, read: p.read })}
-                  {p.miss ? ` · ${UI.printedMissTag[lang]}` : ''}
+                  <span className={styles.entryTop}>
+                    <span className={styles.txCode}>{UI.liveCode[lang]}</span>
+                    <span>
+                      {fill(UI.printedEntry[lang], { truth: p.truth, read: p.read })}
+                      {p.miss ? ` · ${UI.printedMissTag[lang]}` : ''}
+                    </span>
+                  </span>
                 </td>
                 <td className={`${styles.num} ${styles.dot} ${styles.proofFig}`}>{p.ms} ms</td>
                 <td className={`${styles.num} ${styles.dot} ${styles.cloud}`}>0</td>
               </tr>
             ))}
-            {projects.map((p) => (
+            {projects.map((p, idx) => (
               <tr
                 key={p.id}
                 className={`${styles.entry} ${activeId === p.id ? styles.active : ''}`}
                 onClick={() => onOpen(p.id)}
               >
-                <td className={`${styles.colNo} ${lang === 'en' ? styles.dot : ''} ${styles.entryNo}`}>{ledgerMonth(p.ledger.opened, lang)}</td>
+                <td className={`${styles.colNo} ${lang === 'en' ? styles.dot : ''} ${styles.entryNo}`}>
+                  <span className={`${styles.dot} ${styles.lineNum}`}>{String(idx + 1).padStart(2, '0')}</span>
+                  {ledgerMonth(p.ledger.opened, lang)}
+                </td>
                 <td>
                   <button
                     type="button"
@@ -166,7 +174,10 @@ export default function LedgerPage({
                       onOpen(p.id);
                     }}
                   >
-                    <span className={styles.entryName}>{shortName(p.name)}</span>
+                    <span className={styles.entryTop}>
+                      <span className={styles.txCode}>{p.ledger.code}</span>
+                      <span className={styles.entryName}>{shortName(p.name)}</span>
+                    </span>
                     <span className={styles.entryCat}>{p.category[lang]}</span>
                   </button>
                 </td>

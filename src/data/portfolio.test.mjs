@@ -52,6 +52,12 @@ test('every ledger line carries its first-commit month (YYYY-MM)', async () => {
   for (const p of PROJECTS) assert.match(p.ledger.opened ?? '', /^20\d\d-(0[1-9]|1[0-2])$/, p.id);
 });
 
+test('PROFILE has formatted accountNo and every ledger line has a 2-3 letter uppercase transaction code', async () => {
+  const { PROFILE, PROJECTS } = await import('./portfolio.ts');
+  assert.equal(PROFILE.accountNo, '672-1-10052-0');
+  for (const p of PROJECTS) assert.match(p.ledger.code ?? '', /^[A-Z]{2,3}$/, p.id);
+});
+
 test('AIoT TA role ended in Oct 2026 (not "present") on the site and the web CV', async () => {
   const { EXPERIENCES, PROFILE } = await import('./portfolio.ts');
   const { readFileSync } = await import('node:fs');
@@ -61,4 +67,16 @@ test('AIoT TA role ended in Oct 2026 (not "present") on the site and the web CV'
   assert.match(PROFILE.intro.en, /former Head Teaching Assistant/);
   const cv = readFileSync(new URL('../app/cv/page.tsx', import.meta.url), 'utf8');
   assert.doesNotMatch(cv, /Sep 2026 – Present|Oct 2026 – Present/);
+});
+
+test('Nov 2026 Advanced Computer Programming TA (2 sections Thai & Inter) is synced on site and web CV', async () => {
+  const { EXPERIENCES } = await import('./portfolio.ts');
+  const { readFileSync } = await import('node:fs');
+  const adv = EXPERIENCES.find((e) => e.id === 'ta-adv-prog-2569');
+  assert.ok(adv, 'ta-adv-prog-2569 missing');
+  assert.equal(adv.period, 'NOV 2026 – PRESENT');
+  assert.match(adv.role.en, /2 Sections: Thai & International/);
+  const cv = readFileSync(new URL('../app/cv/page.tsx', import.meta.url), 'utf8');
+  assert.match(cv, /Advanced Computer Programming \(2 Sections: Thai &amp; International\)/);
+  assert.match(cv, /Nov 2026 – Present/);
 });

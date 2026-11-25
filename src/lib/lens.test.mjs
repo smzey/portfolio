@@ -21,8 +21,17 @@ test('normalizeLens accepts valid lenses case-insensitively', () => {
 test('normalizeLens maps company aliases to the matching focus lens', () => {
   assert.equal(normalizeLens('nvidia'), 'ai');
   assert.equal(normalizeLens('kbtg'), 'fintech');
+  assert.equal(normalizeLens('kbank'), 'fintech');
   assert.equal(normalizeLens('scb'), 'fintech');
   assert.equal(normalizeLens('scbx'), 'fintech');
+  assert.equal(normalizeLens('krungsri'), 'fintech');
+  assert.equal(normalizeLens('bay'), 'fintech');
+  assert.equal(normalizeLens('bbl'), 'fintech');
+  assert.equal(normalizeLens('bangkokbank'), 'fintech');
+  assert.equal(normalizeLens('ktb'), 'fintech');
+  assert.equal(normalizeLens('krungthai'), 'fintech');
+  assert.equal(normalizeLens('ttb'), 'fintech');
+  assert.equal(normalizeLens('tmb'), 'fintech');
   assert.equal(normalizeLens('ptt'), 'systems');
 });
 
@@ -31,6 +40,9 @@ test('normalizeLens falls back cleanly to all for invalid or empty inputs', () =
   assert.equal(normalizeLens(null), 'all');
   assert.equal(normalizeLens(''), 'all');
   assert.equal(normalizeLens('unknown-xyz'), 'all');
+  assert.equal(normalizeLens('constructor'), 'all');
+  assert.equal(normalizeLens('__proto__'), 'all');
+  assert.equal(normalizeLens('toString'), 'all');
 });
 
 test('selectProjectsForLens orders projects by priority for each lens without mutating input', () => {

@@ -16,8 +16,17 @@ const ALIAS_MAP: Record<string, FocusLens> = {
   fullstack: 'fintech',
   kbtg: 'fintech',
   kasikorn: 'fintech',
+  kbank: 'fintech',
   scb: 'fintech',
   scbx: 'fintech',
+  krungsri: 'fintech',
+  bay: 'fintech',
+  bbl: 'fintech',
+  bangkokbank: 'fintech',
+  ktb: 'fintech',
+  krungthai: 'fintech',
+  ttb: 'fintech',
+  tmb: 'fintech',
   systems: 'systems',
   logistics: 'systems',
   ptt: 'systems',
@@ -27,7 +36,7 @@ const ALIAS_MAP: Record<string, FocusLens> = {
 export function normalizeLens(raw?: string | null): FocusLens {
   if (!raw) return 'all';
   const key = raw.trim().toLowerCase();
-  return ALIAS_MAP[key] ?? 'all';
+  return Object.hasOwn(ALIAS_MAP, key) ? ALIAS_MAP[key] : 'all';
 }
 
 export function selectProjectsForLens<T extends LensRanked>(projects: readonly T[], lens: FocusLens): T[] {

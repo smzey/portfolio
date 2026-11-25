@@ -85,6 +85,22 @@ export default function CvPage() {
           <div className={styles.entry}>
             <div className={styles.entryTop}>
               <div className={styles.entryTitle}>
+                Teaching Assistant — Advanced Computer Programming (2 Sections: Thai &amp; International){' '}
+                <span className={styles.entryOrg}>· Chiang Mai University (CAMT)</span>
+              </div>
+              <div className={styles.entryMeta}>Nov 2026 – Present</div>
+            </div>
+            <ul className={styles.bullets}>
+              <li>
+                Returned as on-site Lab TA across <strong>2 sections (Thai and International programs)</strong>, coaching
+                students on live debugging, algorithmic problem solving, and structured programming labs.
+              </li>
+            </ul>
+          </div>
+
+          <div className={styles.entry}>
+            <div className={styles.entryTop}>
+              <div className={styles.entryTitle}>
                 Head Teaching Assistant (Gen 1) &amp; Teaching Assistant (Gen 2–3) — AIoT Event{' '}
                 <span className={styles.entryOrg}>· CMU School of Lifelong Education</span>
               </div>
@@ -92,12 +108,8 @@ export default function CvPage() {
             </div>
             <ul className={styles.bullets}>
               <li>
-                Led the 1st Generation AIoT cohort as <strong>Head Teaching Assistant</strong> (Sep 2026) and continued teaching the
-                2nd and 3rd Generation cohorts (Oct 2026) on-site at CMU School of Lifelong Education.
-              </li>
-              <li>
-                Facilitated hands-on AIoT and edge computer-vision labs covering Python, <strong>YOLOv8</strong> object detection,
-                environment provisioning, and live troubleshooting.
+                Led the 1st Generation AIoT cohort as <strong>Head Teaching Assistant</strong> (Sep 2026) and taught Gen 2–3
+                (Oct 2026) on-site, running Python &amp; <strong>YOLOv8</strong> computer-vision labs and live troubleshooting.
               </li>
             </ul>
           </div>
