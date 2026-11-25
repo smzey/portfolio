@@ -28,7 +28,7 @@ export default function HolderPage({ lang, onCopyEmail }: { lang: Lang; onCopyEm
       <div className={styles.accountStrip}>
         <div className={styles.accountCell}>
           <span className={styles.accountLabel}>{UI.accountNoLabel[lang]}</span>
-          <span className={`${styles.accountValue} ${styles.dot}`}>{PROFILE.accountNo}</span>
+          <span className={`${styles.accountValue} ${styles.dot} ${styles.accountNoVal}`}>{PROFILE.accountNo}</span>
           <span className={styles.accountHint}>{UI.accountNoHint[lang]}</span>
         </div>
         <div className={styles.accountCell}>
@@ -82,7 +82,7 @@ export default function HolderPage({ lang, onCopyEmail }: { lang: Lang; onCopyEm
         </div>
         <div className={styles.barcodeBand} aria-hidden="true">
           <BarcodeStrip />
-          <span className={styles.dot} style={{ fontSize: 12 }}>
+          <span className={`${styles.dot} ${styles.accountNoVal}`} style={{ fontSize: 12 }}>
             {PROFILE.accountNo}
           </span>
         </div>

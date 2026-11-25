@@ -1,5 +1,6 @@
 'use client';
 
+import { useRef } from 'react';
 import { EDUCATION, PROFILE, type Lang } from '@/data/portfolio';
 import { EDITION_LABELS, UI } from '@/data/ui';
 import { VISIBLE_EDITIONS, type PassbookEdition } from '@/lib/edition';
@@ -21,33 +22,64 @@ const SWATCH_HEX: Record<PassbookEdition, string> = {
 export default function PassbookCover({
   lang,
   edition,
+  opening,
   onOpen,
   onChooseEdition,
   onCopyEmail,
 }: {
   lang: Lang;
   edition: PassbookEdition;
+  opening: boolean;
   onOpen: () => void;
   onChooseEdition: (ed: PassbookEdition) => void;
   onCopyEmail: () => void;
 }) {
+  const frameRef = useRef<HTMLDivElement>(null);
+
+  const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType !== 'mouse' || opening) return;
+    const el = frameRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width;
+    const py = (e.clientY - rect.top) / rect.height;
+    el.style.setProperty('--mx', `${(px * 100).toFixed(1)}%`);
+    el.style.setProperty('--my', `${(py * 100).toFixed(1)}%`);
+    el.style.setProperty('--tilt-x', `${((0.5 - py) * 6).toFixed(2)}deg`);
+    el.style.setProperty('--tilt-y', `${((px - 0.5) * 7).toFixed(2)}deg`);
+  };
+
+  const onPointerLeave = () => {
+    const el = frameRef.current;
+    if (!el) return;
+    el.style.setProperty('--tilt-x', '0deg');
+    el.style.setProperty('--tilt-y', '0deg');
+  };
+
   return (
     <section className={styles.coverStage} aria-labelledby="cover-heading">
       <h1 id="cover-heading" className="sr-only">
         {PROFILE.nameEN} — {UI.coverTitle[lang]}
       </h1>
-      <div className={styles.bookFrame}>
-        <div className={styles.pageBlock} aria-hidden="true" />
+      <div
+        ref={frameRef}
+        className={styles.bookFrame}
+        onPointerMove={onPointerMove}
+        onPointerLeave={onPointerLeave}
+      >
+        <div className={`${styles.pageBlock} ${opening ? styles.pageBlockOpening : ''}`} aria-hidden="true" />
         <button
           id="cover-trigger"
           type="button"
-          className={styles.bookClosed}
+          className={`${styles.bookClosed} ${opening ? styles.bookOpening : ''}`}
           onClick={onOpen}
+          disabled={opening}
           aria-label={`${UI.openBook[lang]} — ${PROFILE.nameEN}`}
         >
           <span className={styles.spine} aria-hidden="true" />
           <span className={styles.coverFace}>
             <CoverArtwork edition={edition} />
+            <span className={styles.coverSheen} aria-hidden="true" />
 
             <span className={styles.coverTop}>
               <span className={styles.coverBrand}>

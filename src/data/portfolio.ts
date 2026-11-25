@@ -86,8 +86,8 @@ export const PROFILE = {
     th: 'AI ที่ทำงานบนเครื่องของคุณ และข้อมูลไม่เคยออกจากเครื่อง',
   },
   intro: {
-    en: 'Chiang Mai University (CAMT) student and former Head Teaching Assistant for AIoT. I build on-device AI and full-stack systems, and I publish the misses with the scores.',
-    th: 'นักศึกษา CAMT มหาวิทยาลัยเชียงใหม่ และอดีต Head TA วิชา AIoT สร้าง On-Device AI และระบบ Full-Stack พร้อมแสดงผลที่ผิดควบคู่กับคะแนนเสมอ',
+    en: 'CMU (CAMT) student, current Advanced Programming TA, and former Head Teaching Assistant for AIoT. I build on-device AI and full-stack systems, and publish the misses with the scores.',
+    th: 'นักศึกษา CAMT มหาวิทยาลัยเชียงใหม่ ผู้ช่วยสอนวิชาการเขียนโปรแกรมขั้นสูง และอดีต Head TA วิชา AIoT สร้าง On-Device AI และระบบ Full-Stack พร้อมแสดงผลที่ผิดควบคู่กับคะแนนเสมอ',
   },
   heroTitle: {
     en: 'Full-Stack & On-Device AI Engineer.',
@@ -104,9 +104,9 @@ export const PROFILE = {
       detail: 'CMU CAMT · MMIT',
     },
     {
-      value: '6 Cohorts',
+      value: '8 Cohorts',
       label: { en: 'Head TA (AIoT) & CMU TA', th: 'Head TA (AIoT) และ TA มช.' },
-      detail: 'AIoT Gen 1–3 · Rapid App · Prog 1–2',
+      detail: 'AIoT Gen 1–3 · Rapid App · Prog (Thai & Inter)',
     },
     {
       value: '358',
@@ -416,6 +416,23 @@ export const PROJECTS: ProjectCaseStudy[] = [
 ];
 
 export const EXPERIENCES: ExperienceItem[] = [
+  {
+    id: 'ta-adv-prog-2569',
+    period: 'NOV 2026 – PRESENT',
+    role: {
+      en: 'Teaching Assistant — Advanced Computer Programming (2 Sections: Thai & International)',
+      th: 'ผู้ช่วยสอน (TA) — วิชาการเขียนโปรแกรมขั้นสูง (2 กลุ่มเรียน: ภาคปกติและหลักสูตรนานาชาติ)',
+    },
+    org: 'Chiang Mai University (CAMT)',
+    location: 'Chiang Mai, Thailand · On-site',
+    highlights: [
+      {
+        en: 'Returned as Lab TA for Advanced Computer Programming across 2 sections (Thai and International programs), mentoring students through live debugging, data structures, and algorithmic problem solving.',
+        th: 'ปฏิบัติหน้าที่ผู้ช่วยสอนห้องปฏิบัติการวิชาการเขียนโปรแกรมขั้นสูง 2 กลุ่มเรียน (ภาคปกติและหลักสูตรนานาชาติ) ช่วยดีบักโค้ด อธิบายโครงสร้างข้อมูล และตรรกะอัลกอริทึม',
+      },
+    ],
+    tags: ['Advanced Programming', 'Thai & Inter Sections', 'Debugging', 'Technical Mentoring'],
+  },
   {
     id: 'ta-aiot-lifelong',
     period: 'SEP 2026 – OCT 2026',

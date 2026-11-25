@@ -47,12 +47,12 @@
   margin: 0 auto;
   background: #ffffff;
   color: #111827;
-  padding: 12.5mm 15mm 11.5mm;
+  padding: 11.5mm 14.5mm 10.5mm;
   box-shadow: 0 20px 60px rgba(17, 24, 39, 0.14);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 10.5px;
+  gap: 9px;
   font-family: var(--font-cv), -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
   font-variant-numeric: tabular-nums;
 }

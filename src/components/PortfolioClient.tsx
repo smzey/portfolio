@@ -30,6 +30,7 @@ export default function PortfolioClient() {
   const [theme, setTheme] = useState<Theme>('light');
   const [edition, setEdition] = useState<PassbookEdition>('navy');
   const [isOpen, setIsOpen] = useState(false);
+  const [opening, setOpening] = useState(false);
   const [animateOpen, setAnimateOpen] = useState(false);
   const [lens, setLens] = useState<FocusLens>('all');
   const [activeId, setActiveId] = useState<string | null>(null);
@@ -37,6 +38,7 @@ export default function PortfolioClient() {
   const statementHeading = useRef<HTMLHeadingElement>(null);
   const lastOpened = useRef<string | null>(null);
   const focusOnOpen = useRef(false);
+  const openTimer = useRef<number | null>(null);
 
   // Initial state from storage and URL (?cover, ?lens, ?project, #hash).
   useEffect(() => {
@@ -82,7 +84,10 @@ export default function PortfolioClient() {
       }
     };
     window.addEventListener('popstate', onPop);
-    return () => window.removeEventListener('popstate', onPop);
+    return () => {
+      window.removeEventListener('popstate', onPop);
+      if (openTimer.current !== null) window.clearTimeout(openTimer.current);
+    };
   }, []);
 
   useEffect(() => {
@@ -113,16 +118,36 @@ export default function PortfolioClient() {
   const active = PROJECTS.find((p) => p.id === activeId) ?? null;
 
   const openBook = useCallback(() => {
-    setAnimateOpen(true);
-    setIsOpen(true);
-    window.requestAnimationFrame(() => {
-      document.getElementById('holder-name')?.focus({ preventScroll: true });
-    });
-  }, []);
+    if (isOpen || opening) return;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) {
+      setAnimateOpen(false);
+      setIsOpen(true);
+      window.requestAnimationFrame(() => {
+        document.getElementById('holder-name')?.focus({ preventScroll: true });
+      });
+      return;
+    }
+    setOpening(true);
+    openTimer.current = window.setTimeout(() => {
+      openTimer.current = null;
+      setOpening(false);
+      setAnimateOpen(true);
+      setIsOpen(true);
+      window.requestAnimationFrame(() => {
+        document.getElementById('holder-name')?.focus({ preventScroll: true });
+      });
+    }, 340);
+  }, [isOpen, opening]);
 
   const closeBook = useCallback(() => {
+    if (openTimer.current !== null) {
+      window.clearTimeout(openTimer.current);
+      openTimer.current = null;
+    }
     lastOpened.current = null;
     setActiveId(null);
+    setOpening(false);
     setAnimateOpen(false);
     setIsOpen(false);
     const nextUrl = buildPassbookUrl(window.location.href, { edition, lens, clearDeepLink: true });
@@ -250,6 +275,7 @@ export default function PortfolioClient() {
             <PassbookCover
               lang={lang}
               edition={edition}
+              opening={opening}
               onOpen={openBook}
               onChooseEdition={chooseEdition}
               onCopyEmail={() => void copyEmail()}

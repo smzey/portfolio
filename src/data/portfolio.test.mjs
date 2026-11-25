@@ -68,3 +68,15 @@ test('AIoT TA role ended in Oct 2026 (not "present") on the site and the web CV'
   const cv = readFileSync(new URL('../app/cv/page.tsx', import.meta.url), 'utf8');
   assert.doesNotMatch(cv, /Sep 2026 – Present|Oct 2026 – Present/);
 });
+
+test('Nov 2026 Advanced Computer Programming TA (2 sections Thai & Inter) is synced on site and web CV', async () => {
+  const { EXPERIENCES } = await import('./portfolio.ts');
+  const { readFileSync } = await import('node:fs');
+  const adv = EXPERIENCES.find((e) => e.id === 'ta-adv-prog-2569');
+  assert.ok(adv, 'ta-adv-prog-2569 missing');
+  assert.equal(adv.period, 'NOV 2026 – PRESENT');
+  assert.match(adv.role.en, /2 Sections: Thai & International/);
+  const cv = readFileSync(new URL('../app/cv/page.tsx', import.meta.url), 'utf8');
+  assert.match(cv, /Advanced Computer Programming \(2 Sections: Thai &amp; International\)/);
+  assert.match(cv, /Nov 2026 – Present/);
+});
