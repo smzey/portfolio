@@ -14,8 +14,9 @@ export interface ProjectVideo {
   caption: BilingualText;
 }
 
-/** One printed passbook line: the proof figure, the condition it was measured under, and cloud use. */
+/** One printed passbook line: transaction code, proof figure, measurement condition, cloud use, and opening month. */
 export interface LedgerLine {
+  code: string;
   figure: string;
   condition: BilingualText;
   /** '0' = verified zero cloud calls; 'cloud' = uses a cloud API; 'n/a' = server/web app, no on-device claim. */
@@ -63,6 +64,7 @@ export const CODE_ON_REQUEST: BilingualText = {
 export const PROFILE = {
   nameEN: 'Phanu Sawet',
   nameTH: 'ภาณุ สาเวศ',
+  accountNo: '672-1-10052-0',
   brand: 'phanu.xyz',
   emailPrimary: 'switzersawet@gmail.com',
   emailUniversity: 'phanu_sawet@cmu.ac.th',
@@ -167,7 +169,7 @@ export const PROJECTS: ProjectCaseStudy[] = [
       th: 'ระบบคัดกรองสุขภาพจิต PHQ-9 / GAD-7 ด้วย Local LLM บนเครื่อง 100% แยกชั้นคำนวณคะแนนแบบ Deterministic',
     },
     metricBadge: '0 Cloud Calls · Deterministic Guardrails',
-    ledger: { figure: 'PHQ-9 · GAD-7', condition: { en: 'scored by a deterministic rule engine', th: 'ให้คะแนนด้วย Rule Engine แบบ Deterministic' }, cloud: '0', opened: '2026-06' },
+    ledger: { code: 'AI', figure: 'PHQ-9 · GAD-7', condition: { en: 'scored by a deterministic rule engine', th: 'ให้คะแนนด้วย Rule Engine แบบ Deterministic' }, cloud: '0', opened: '2026-06' },
     category: { en: 'On-Device AI · Safety Architecture', th: 'On-Device AI · ความปลอดภัยระบบ' },
     lensRank: { all: 1, ai: 2, fintech: 2, systems: 5 },
     featuredIn: ['all', 'ai', 'fintech'],
@@ -212,7 +214,7 @@ export const PROJECTS: ProjectCaseStudy[] = [
       th: 'เทรนโมเดล CNN ความแม่นยำ 94.8% แล้วแปลง Weight เป็น Pure JavaScript เพื่อรันจับภาพมือเรียลไทม์บนเบราว์เซอร์',
     },
     metricBadge: '94.8% Test Acc · Pure-JS Forward Pass',
-    ledger: { figure: '94.8%', condition: { en: '7,172 held-out test images', th: 'ชุดทดสอบ 7,172 ภาพ' }, cloud: '0', opened: '2026-07' },
+    ledger: { code: 'ML', figure: '94.8%', condition: { en: '7,172 held-out test images', th: 'ชุดทดสอบ 7,172 ภาพ' }, cloud: '0', opened: '2026-07' },
     category: { en: 'Edge ML · Computer Vision', th: 'Edge ML · คอมพิวเตอร์วิชัน' },
     lensRank: { all: 2, ai: 1, fintech: 5, systems: 4 },
     featuredIn: ['all', 'ai'],
@@ -254,7 +256,7 @@ export const PROJECTS: ProjectCaseStudy[] = [
       th: 'ระบบสั่งอาหารผ่าน QR และจัดการคิวร้านค้าแบบ Monorepo พร้อมชุดทดสอบอัตโนมัติ 358 เคส',
     },
     metricBadge: '358 Automated Tests · Monorepo TS',
-    ledger: { figure: '358 tests', condition: { en: '172 domain + 186 API', th: 'Domain 172 + API 186 เคส' }, cloud: 'n/a', opened: '2026-08' },
+    ledger: { code: 'QA', figure: '358 tests', condition: { en: '172 domain + 186 API', th: 'Domain 172 + API 186 เคส' }, cloud: 'n/a', opened: '2026-08' },
     category: { en: 'Full-Stack · FinTech-Grade Testing', th: 'Full-Stack · วิศวกรรมซอฟต์แวร์' },
     lensRank: { all: 3, ai: 5, fintech: 1, systems: 3 },
     featuredIn: ['all', 'fintech', 'systems'],
@@ -296,7 +298,7 @@ export const PROJECTS: ProjectCaseStudy[] = [
       th: 'ระบบคำนวณการจัดเรียงตะกร้าขนมปังขึ้นรถ 10 ล้อ พร้อมแผนที่เส้นทาง 40 ศูนย์กระจายสินค้า',
     },
     metricBadge: '40 Centers · Best-Fit-Decreasing',
-    ledger: { figure: '40 centers', condition: { en: 'best-fit-decreasing truck packing', th: 'จัดเรียงสินค้าด้วย Best-Fit-Decreasing' }, cloud: 'n/a', opened: '2026-05' },
+    ledger: { code: 'OPT', figure: '40 centers', condition: { en: 'best-fit-decreasing truck packing', th: 'จัดเรียงสินค้าด้วย Best-Fit-Decreasing' }, cloud: 'n/a', opened: '2026-05' },
     category: { en: 'Optimization · Logistics Systems', th: 'อัลกอริทึม · ระบบโลจิสติกส์' },
     lensRank: { all: 4, ai: 6, fintech: 4, systems: 1 },
     featuredIn: ['all', 'systems'],
@@ -338,7 +340,7 @@ export const PROJECTS: ProjectCaseStudy[] = [
       th: 'แอป Native macOS (SwiftUI) + Mobile PWA (Next.js 16) เชื่อมต่อ Obsidian, Mango Canvas API และสรุปเสียงเลกเชอร์ด้วย AI',
     },
     metricBadge: 'SwiftUI + Next.js 16 · Bi-Directional Sync',
-    ledger: { figure: 'macOS + PWA', condition: { en: 'two-way sync, one codebase per platform', th: 'ซิงก์สองทางระหว่าง macOS และ PWA' }, cloud: 'cloud', opened: '2026-09' },
+    ledger: { code: 'SYS', figure: 'macOS + PWA', condition: { en: 'two-way sync, one codebase per platform', th: 'ซิงก์สองทางระหว่าง macOS และ PWA' }, cloud: 'cloud', opened: '2026-09' },
     category: { en: 'Systems Engineering · Cross-Platform', th: 'วิศวกรรมระบบ · Cross-Platform' },
     lensRank: { all: 5, ai: 4, fintech: 3, systems: 2 },
     featuredIn: ['all', 'systems', 'fintech', 'ai'],
@@ -379,7 +381,7 @@ export const PROJECTS: ProjectCaseStudy[] = [
       th: 'ผู้ช่วยอ่านฉลากยาภาษาไทยด้วย Vision OCR และเสียงสังเคราะห์ TTS สำหรับผู้พิการทางสายตา (ควบคุมด้วยเสียงและคีย์บอร์ด)',
     },
     metricBadge: 'Zero-UI Accessibility · Thai Vision OCR',
-    ledger: { figure: 'Thai OCR', condition: { en: 'medicine label to speech, zero-UI', th: 'อ่านฉลากยาเป็นเสียง ไม่ต้องใช้หน้าจอ' }, cloud: 'cloud', opened: '2026-07' },
+    ledger: { code: 'OCR', figure: 'Thai OCR', condition: { en: 'medicine label to speech, zero-UI', th: 'อ่านฉลากยาเป็นเสียง ไม่ต้องใช้หน้าจอ' }, cloud: 'cloud', opened: '2026-07' },
     category: { en: 'Multimodal AI · Accessibility', th: 'Multimodal AI · เทคโนโลยีเพื่อการเข้าถึง' },
     lensRank: { all: 6, ai: 3, fintech: 6, systems: 6 },
     featuredIn: ['all', 'ai'],

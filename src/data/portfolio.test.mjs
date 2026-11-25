@@ -52,6 +52,12 @@ test('every ledger line carries its first-commit month (YYYY-MM)', async () => {
   for (const p of PROJECTS) assert.match(p.ledger.opened ?? '', /^20\d\d-(0[1-9]|1[0-2])$/, p.id);
 });
 
+test('PROFILE has formatted accountNo and every ledger line has a 2-3 letter uppercase transaction code', async () => {
+  const { PROFILE, PROJECTS } = await import('./portfolio.ts');
+  assert.equal(PROFILE.accountNo, '672-1-10052-0');
+  for (const p of PROJECTS) assert.match(p.ledger.code ?? '', /^[A-Z]{2,3}$/, p.id);
+});
+
 test('AIoT TA role ended in Oct 2026 (not "present") on the site and the web CV', async () => {
   const { EXPERIENCES, PROFILE } = await import('./portfolio.ts');
   const { readFileSync } = await import('node:fs');
