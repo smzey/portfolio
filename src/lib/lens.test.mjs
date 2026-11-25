@@ -21,8 +21,17 @@ test('normalizeLens accepts valid lenses case-insensitively', () => {
 test('normalizeLens maps company aliases to the matching focus lens', () => {
   assert.equal(normalizeLens('nvidia'), 'ai');
   assert.equal(normalizeLens('kbtg'), 'fintech');
+  assert.equal(normalizeLens('kbank'), 'fintech');
   assert.equal(normalizeLens('scb'), 'fintech');
   assert.equal(normalizeLens('scbx'), 'fintech');
+  assert.equal(normalizeLens('krungsri'), 'fintech');
+  assert.equal(normalizeLens('bay'), 'fintech');
+  assert.equal(normalizeLens('bbl'), 'fintech');
+  assert.equal(normalizeLens('bangkokbank'), 'fintech');
+  assert.equal(normalizeLens('ktb'), 'fintech');
+  assert.equal(normalizeLens('krungthai'), 'fintech');
+  assert.equal(normalizeLens('ttb'), 'fintech');
+  assert.equal(normalizeLens('tmb'), 'fintech');
   assert.equal(normalizeLens('ptt'), 'systems');
 });
 
