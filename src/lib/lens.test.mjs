@@ -40,6 +40,9 @@ test('normalizeLens falls back cleanly to all for invalid or empty inputs', () =
   assert.equal(normalizeLens(null), 'all');
   assert.equal(normalizeLens(''), 'all');
   assert.equal(normalizeLens('unknown-xyz'), 'all');
+  assert.equal(normalizeLens('constructor'), 'all');
+  assert.equal(normalizeLens('__proto__'), 'all');
+  assert.equal(normalizeLens('toString'), 'all');
 });
 
 test('selectProjectsForLens orders projects by priority for each lens without mutating input', () => {

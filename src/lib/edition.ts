@@ -53,7 +53,8 @@ const OPEN_HASHES = new Set(['#ledger', '#history', '#contact', '#statement']);
 
 function lookupEdition(raw?: string | null): PassbookEdition | null {
   if (!raw) return null;
-  return EDITION_MAP[raw.trim().toLowerCase()] ?? null;
+  const key = raw.trim().toLowerCase();
+  return Object.hasOwn(EDITION_MAP, key) ? EDITION_MAP[key] : null;
 }
 
 /**

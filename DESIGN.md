@@ -1,7 +1,12 @@
 ---
 name: phanu.xyz
-description: A personal passbook — navy cover, mint guilloche paper, carbon-blue ink, one teller-stamp red.
+description: Physical Thai engineering passbook — dark desk mat, 9 silent cover colorways with rounded outer booklet edges, mint guilloche paper, carbon-blue ink, one teller-stamp red.
 colors:
+  desk: "#1c2228"
+  desk-dark: "#0b0e12"
+  desk-ink: "#eaf0f5"
+  desk-dim: "#a5b5c4"
+  focus-desk: "#f0756e"
   ink: "#1b2740"
   ink-dark: "#16213a"
   ink-2: "#44546a"
@@ -14,8 +19,8 @@ colors:
   cover-dark: "#0a1722"
   cover-deep: "#10293b"
   cover-deep-dark: "#06111a"
-  cover-ink: "#e4edf3"
-  cover-dim: "#a9c0cf"
+  cover-ink: "#eaf2f7"
+  cover-dim: "#bfd4e2"
   paper: "#e7f0e8"
   paper-dark: "#bccdc0"
   paper-2: "#dbe8dd"
@@ -218,11 +223,10 @@ A restrained bank-document palette: one cool navy family for the cover, one pale
 ### Tertiary
 - **Guilloche Green** (`guilloche` / `guilloche-dark`): signal routes in architecture diagrams and live-signal accents in the SignBridge demo (live dot, predicted letter, confidence bars). Components read it through the `--emerald` alias.
 
-### Neutral
-- **Passbook Navy** (`cover` / `cover-dark`): the page ground behind every leaf; the header bar and footer sit on it.
-- **Back Board Navy** (`cover-deep` / `cover-deep-dark`): the back cover (contact) only, and the dark text of the back cover's filled button.
-- **Cover Ink** (`cover-ink`) and **Cover Dim** (`cover-dim`): text and outlines printed directly on the cover; dim for footer, notes, resting toggle borders and the back cover's double closing rule.
-- **Mint Security Paper** (`paper`, `paper-2`, `paper-3` and lamp-lit values): paper is every reading surface (with the guilloche texture); paper-2 is the first leaf beneath a sheet and ledger-row hover; paper-3 is the deeper leaf, the gutter fold and the open (active) entry.
+### Neutral & Cover Editions
+- **Desk Mat (`desk` / `desk-dark`):** charcoal ground (`#1c2228` Day / `#0b0e12` Lamp-Dark) holding the physical passbook, utility bar (`desk-ink`, `desk-dim`), desk actions, and footer. Focus rings on the dark desk use `focus-desk` (`#f0756e`, ≥ 5.7:1 contrast).
+- **Nine Silent Cover Colorways (`[data-edition]`):** `navy` (default), `emerald`, `violet`, `gold`, `obsidian`, `marine` (visible neutral swatches), plus URL-only `cobalt`, `sky`, `frost`. Each edition defines Day and Lamp-Dark values for `--cover-base`, `--cover-deep`, `--cover-ink`, `--cover-dim`, `--cover-accent`, `--cover-spine`, and `--cover-spine-ink`, all verified ≥ 5.0:1 WCAG 2.2 AA (light covers `gold` and `frost` use dark cover ink). Zero company names appear in visible UI.
+- **Mint Security Paper** (`paper`, `paper-2`, `paper-3` and lamp-lit values): paper is every reading surface (with the guilloche texture); paper-2 is the first leaf beneath a sheet, the account strip, and ledger-row hover; paper-3 is the deeper leaf, the gutter fold and the open (active) entry.
 - **Faded Ink** (`ink-2` / `ink-2-dark`): secondary text — categories, conditions, column heads, opened dates, dt labels, history dates, notes.
 - **Ruling** (`rule`, `rule-strong` and lamp-lit values): rule is every hairline between rows, around diagrams and around the stacked leaf edges; rule-strong is the spine between the two pages, the heavier line under headers and above the first history row, and the scrollbar thumb.
 - **Fresh Print** (`live` / `live-dark`): background of a line the visitor just printed with SignBridge; the only warm neutral.
@@ -271,22 +275,21 @@ Vertical rhythm inside a page runs on 4 / 8 / 12 / 16–18 / 22 / 28px steps. To
 
 ## Elevation & Depth
 
-No shadows, no glow, no blur on any passbook surface. Depth is built from paper, not light, in three devices:
+No neon glows or glass blur on any passbook surface. Physical depth is built in four devices:
 
-- **Stacked leaves.** The spread, the statement and history each sit on two offset paper layers drawn behind them: a paper-2 sheet offset 5px and a paper-3 sheet offset 10px down and right, each with a 1px rule border, square-cornered. The edges read as the pages beneath in a thick book.
-- **The gutter fold.** The holder page shades from paper-3 at the spine to transparent over 28px, so the spread bends into its binding. This is the one gradient in the system.
-- **The back board.** The back cover is the darker cover-deep board with a 3px double rule in cover dim across its top edge, closing the book.
+- **Desk resting shadow.** Only the closed booklet's page stack (`.pageBlock`) and the open booklet's outer cover jacket (`.bookJacket`) cast a soft, realistic dark shadow onto the desk mat. Interior paper components never use drop shadows.
+- **Stacked leaves.** The closed cover reveals a peeking striped paper block along its outer right/bottom edge; Statement and History sheets sit on two offset paper layers (`paper-2` at 5px, `paper-3` at 10px, 1px rule).
+- **The gutter fold.** The holder page shades from `paper-3` at the spine to transparent over 28px, so the open spread bends into its binding.
+- **The back board.** The back cover uses the active edition's `--cover-deep` board with a 3px double rule in `--cover-dim` across its top edge, closing the book.
 
-An open ledger entry is a slightly deeper paper tone (paper-3). The one positioned overlay, the toast, is a solid ink slip with no shadow.
+An open ledger entry is a slightly deeper paper tone (`paper-3`). The one positioned overlay, the toast, is a solid ink slip with no shadow.
 
 ### Named Rules
-**The Stacked Leaf Rule.** If a surface needs to read as separate or on top, change its material (cover vs paper vs paper-3), rule it, or lay it on offset paper edges; never lift it with a shadow.
-
-**The One Fold Rule.** The only gradient is the gutter fold beside the spine. No other gradient, sheen or vignette belongs on paper or cover.
+**The Physical Booklet Rule.** Outer cover and jacket lift gently off the dark desk mat; interior surfaces separate strictly by material (cover vs paper vs paper-3), hairlines, or stacked page edges — never floating cards.
 
 ## Shapes
 
-Square everything: every sheet, leaf edge, button, toggle, stamp, hand sample, demo panel, video frame and toast has 0px radius. Form is drawn with rules — 1px hairlines between rows and around leaf edges, 1.5px under header rows and details, 2px for the page spine and button borders, 3px for the stamp, a 3px double line for the back cover's top. The only non-orthogonal shape is the teller stamp, rotated −6°.
+Physical outer booklet corners are softly rounded like real Thai bank passbooks (`4px 20px 20px 4px` on the closed cover with a flat bound left spine; `16px` outer jacket around the open spread; `4px 16px 16px 4px` on open leaves and back board). Interior elements — ruled rows, buttons, stamps, hand samples, transaction code tags, demo panels, and toast — stay crisp and square (`0px`), while small colorway switcher swatches use pill radii (`999px`). The only rotated element is the teller stamp (`−6°`).
 
 ## Components
 
@@ -344,9 +347,9 @@ A solid ink slip with paper text (15px / 600, 12px × 18px), fixed bottom-centre
 - **Do** define both a day and a lamp-lit value for every new color token, keeping dark ink on light paper in both.
 
 ### Don't:
-- **Don't** use cards, drop shadows, glows or blur on passbook surfaces.
-- **Don't** add gradients beyond the gutter fold.
-- **Don't** round corners.
+- **Don't** use cards, neon glows, glass blur, or shadows on interior paper surfaces.
+- **Don't** round interior ledger rows, buttons, stamps, or hand tiles (outer booklet corners and swatch pills only).
+- **Don't** print target company names or third-party logos anywhere in the visible UI.
 - **Don't** use Doto for prose, headings, labels or written dates.
 - **Don't** use stamp red as a fill, a heading color or decoration.
 - **Don't** invert the paper to dark in dark theme.

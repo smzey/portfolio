@@ -21,14 +21,14 @@ export default function CoverArtwork({ edition }: { edition: PassbookEdition }) 
     case 'emerald':
       return (
         <svg className={styles.coverArt} viewBox="0 0 640 388" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-          <g opacity="0.22">
-            <polygon points="330,0 440,0 260,388 150,388" fill="#ffffff" />
-            <polygon points="465,0 535,0 355,388 285,388" fill="#b7ebd0" />
-            <polygon points="560,0 640,0 460,388 380,388" fill="#ffffff" opacity="0.55" />
+          <g opacity="0.12">
+            <polygon points="410,0 495,0 375,260 290,260" fill="#ffffff" />
+            <polygon points="510,0 575,0 455,260 390,260" fill="#b7ebd0" />
+            <polygon points="590,0 640,0 535,230 485,230" fill="#ffffff" />
           </g>
-          <g opacity="0.32">
-            <polygon points="430,78 525,78 492,148 397,148" fill="#e06d53" />
-            <polygon points="376,162 470,162 438,228 344,228" fill="#ffffff" opacity="0.55" />
+          <g opacity="0.28">
+            <polygon points="468,62 558,62 528,128 438,128" fill="#e06d53" />
+            <polygon points="424,142 510,142 482,202 396,202" fill="#ffffff" opacity="0.32" />
           </g>
           <path d="M0 112 H640" stroke="#ffffff" strokeOpacity="0.12" strokeWidth="1" />
         </svg>

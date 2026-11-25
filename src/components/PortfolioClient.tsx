@@ -30,6 +30,7 @@ export default function PortfolioClient() {
   const [theme, setTheme] = useState<Theme>('light');
   const [edition, setEdition] = useState<PassbookEdition>('navy');
   const [isOpen, setIsOpen] = useState(false);
+  const [animateOpen, setAnimateOpen] = useState(false);
   const [lens, setLens] = useState<FocusLens>('all');
   const [activeId, setActiveId] = useState<string | null>(null);
   const [toast, setToast] = useState('');
@@ -68,9 +69,17 @@ export default function PortfolioClient() {
     }
 
     const onPop = () => {
+      const nextParams = new URLSearchParams(window.location.search);
+      const nextLens = normalizeLens(nextParams.get('lens'));
+      const nextEdition = resolveEdition(nextParams.get('cover'), nextParams.get('lens'));
       const id = parseProjectParam(window.location.search, IDS);
+      setLens(nextLens);
+      setEdition(nextEdition);
       setActiveId(id);
-      if (id) setIsOpen(true);
+      if (id || shouldStartOpen(window.location.search, window.location.hash, IDS)) {
+        setAnimateOpen(false);
+        setIsOpen(true);
+      }
     };
     window.addEventListener('popstate', onPop);
     return () => window.removeEventListener('popstate', onPop);
@@ -104,6 +113,7 @@ export default function PortfolioClient() {
   const active = PROJECTS.find((p) => p.id === activeId) ?? null;
 
   const openBook = useCallback(() => {
+    setAnimateOpen(true);
     setIsOpen(true);
     window.requestAnimationFrame(() => {
       document.getElementById('holder-name')?.focus({ preventScroll: true });
@@ -113,10 +123,14 @@ export default function PortfolioClient() {
   const closeBook = useCallback(() => {
     lastOpened.current = null;
     setActiveId(null);
+    setAnimateOpen(false);
     setIsOpen(false);
     const nextUrl = buildPassbookUrl(window.location.href, { edition, lens, clearDeepLink: true });
     window.history.replaceState({}, '', nextUrl);
     window.scrollTo({ top: 0, behavior: 'auto' });
+    window.requestAnimationFrame(() => {
+      document.getElementById('cover-trigger')?.focus({ preventScroll: true });
+    });
   }, [edition, lens]);
 
   const openProject = useCallback((id: string) => {
@@ -245,7 +259,7 @@ export default function PortfolioClient() {
           <div
             hidden={!isOpen}
             data-open-stage=""
-            className={`${styles.openStack} ${isOpen ? styles.bookEnter : ''}`}
+            className={`${styles.openStack} ${animateOpen ? styles.bookEnter : ''}`}
           >
             <div className={styles.bookJacket}>
               <div className={`${styles.spread} ${styles.paper}`}>

@@ -42,8 +42,12 @@ test('resolveEdition keeps generic lens slugs on navy so no company cover leaks'
     null,
     undefined,
     'unknown',
+    'constructor',
+    '__proto__',
+    'toString',
   ]) {
     assert.equal(resolveEdition(null, slug), 'navy', String(slug));
+    assert.equal(resolveEdition(slug, null), 'navy', `cover=${String(slug)}`);
   }
 });
 

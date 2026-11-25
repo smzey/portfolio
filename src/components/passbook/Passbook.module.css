@@ -160,8 +160,16 @@
 }
 
 .bookClosed:focus-visible {
-  outline: 3px solid var(--focus);
+  outline: 3px solid var(--focus-desk);
   outline-offset: 4px;
+}
+
+.bar a:focus-visible,
+.bar button:focus-visible,
+.deskControls a:focus-visible,
+.deskControls button:focus-visible {
+  outline: 3px solid var(--focus-desk);
+  outline-offset: 2px;
 }
 
 .spine {
@@ -851,8 +859,7 @@
 .lineNum {
   display: inline-block;
   margin-right: 6px;
-  color: var(--ink);
-  opacity: 0.72;
+  color: var(--ink-2);
 }
 
 .entryTop {

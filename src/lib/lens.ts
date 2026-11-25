@@ -36,7 +36,7 @@ const ALIAS_MAP: Record<string, FocusLens> = {
 export function normalizeLens(raw?: string | null): FocusLens {
   if (!raw) return 'all';
   const key = raw.trim().toLowerCase();
-  return ALIAS_MAP[key] ?? 'all';
+  return Object.hasOwn(ALIAS_MAP, key) ? ALIAS_MAP[key] : 'all';
 }
 
 export function selectProjectsForLens<T extends LensRanked>(projects: readonly T[], lens: FocusLens): T[] {

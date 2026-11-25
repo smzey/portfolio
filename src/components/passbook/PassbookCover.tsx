@@ -39,6 +39,7 @@ export default function PassbookCover({
       <div className={styles.bookFrame}>
         <div className={styles.pageBlock} aria-hidden="true" />
         <button
+          id="cover-trigger"
           type="button"
           className={styles.bookClosed}
           onClick={onOpen}
